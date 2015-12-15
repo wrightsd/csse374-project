@@ -46,3 +46,6 @@ Temporary Items
 #other 
 *.classpath
 .classpath
+*.project
+UMLMakerLaserDinosaurs/src/code/IClass.java
+UMLMakerLaserDinosaurs/.project
