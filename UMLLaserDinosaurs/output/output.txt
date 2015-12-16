@@ -2,6 +2,9 @@ digraph text{
 rankdir=BT;
 Enum [
 shape="record",
-label = "{java.lang.Enum|-name : java.lang.String\l-ordinal : int\l|-name([]) : java.lang.String\l-ordinal([]) : int\l-<init>(java.lang.String, int) : void\l+toString([]) : java.lang.String\l-equals(java.lang.Object) : boolean\l-hashCode([]) : int\l-clone([]) : java.lang.Object\l-compareTo(java.lang.Enum) : int\l-getDeclaringClass([]) : java.lang.Class\l-valueOf(java.lang.Class, java.lang.String) : java.lang.Enum\l-finalize([]) : void\l-readObject(java.io.ObjectInputStream) : void\l-readObjectNoData([]) : void\l-compareTo(java.lang.Object) : int\l}"
+label = "{java.lang.Enum|-name : java.lang.String\l-ordinal : int\l|-name() : java.lang.String\l-ordinal() : int\l-init(java.lang.String, int) : void\l+toString() : java.lang.String\l-equals(java.lang.Object) : boolean\l-hashCode() : int\l-clone() : java.lang.Object\l-compareTo(java.lang.Enum) : int\l-getDeclaringClass() : java.lang.Class\l-valueOf(java.lang.Class, java.lang.String) : java.lang.Enum\l-finalize() : void\l-readObject(java.io.ObjectInputStream) : void\l-readObjectNoData() : void\l-compareTo(java.lang.Object) : int\l}"
 ];
+Enum->Object[arrowhead="onormal", style="solid"];
+Enum->Comparable[arrowhead="onormal", style="dashed"];
+Enum->Serializable[arrowhead="onormal", style="dashed"];
 }

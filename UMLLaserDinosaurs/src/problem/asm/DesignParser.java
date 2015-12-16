@@ -39,10 +39,13 @@ public class DesignParser {
 			completeBuilder.append(fieldBuilder.toString());
 			completeBuilder.append("|");
 			completeBuilder.append(methodBuilder);
-			completeBuilder.append("}\"\n];\n}");
+			completeBuilder.append("}\"\n];\n");
+			completeBuilder.append(arrowBuilder.toString());
+			completeBuilder.append("}");
 
 			FileOutputStream writer = new FileOutputStream("output/output.txt");
 			writer.write(completeBuilder.toString().getBytes());
+			writer.close();
 		}
 	}
 

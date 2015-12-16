@@ -54,10 +54,15 @@ public class ClassMethodVisitor extends ClassVisitor {
 		if (argsToPrint.length() > 2) {
 			argsToPrint = argsToPrint.substring(1, argsToPrint.length() - 1);
 		}
+		else{
+			argsToPrint= "";
+		}
+		//TODO: Will get current class and display a constructor instead
+		if(name.equals("<init>")){
+			name = "init";
+		}
 		builder.append(name + "(" + argsToPrint + ")" + " : " + type + "\\l");
-		// TODO: add this field to your internal representation of the current
-		// class.
-		// What is a good way to know what the current class is?
+		
 		return toDecorate;
 	}
 }
