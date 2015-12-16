@@ -8,12 +8,20 @@ import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 
 public class ClassMethodVisitor extends ClassVisitor {
+	
+	private StringBuilder builder;
+	
 	public ClassMethodVisitor(int api) {
 		super(api);
 	}
 
 	public ClassMethodVisitor(int api, ClassVisitor decorated) {
 		super(api, decorated);
+	}
+	
+	public ClassMethodVisitor(int api, ClassVisitor decorated, StringBuilder builder) {
+		super(api, decorated);
+		this.builder = builder;
 	}
 
 	@Override

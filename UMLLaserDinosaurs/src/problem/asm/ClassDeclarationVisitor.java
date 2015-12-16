@@ -6,8 +6,15 @@ import org.objectweb.asm.ClassVisitor;
 
 public class ClassDeclarationVisitor extends ClassVisitor {
 
+	private StringBuilder builder;
+	
 	public ClassDeclarationVisitor(int arg0) {
 		super(arg0);
+	}
+	
+	public ClassDeclarationVisitor(int arg0, StringBuilder builder) {
+		super(arg0);
+		this.builder = builder;
 	}
 
 	@Override
