@@ -1,0 +1,49 @@
+digraph text{
+rankdir=BT;
+AppLauncher [
+shape="record",
+label = "{AppLauncher|-watcher : WatchService\l-dir : Path\l-stop : boolean\l-processes : List\l-currentEventType : String\l-currentPathString : String\l-observers : ArrayList\l|+AppLauncher(Path) : void\l+run() : void\l-clearEverything() : void\l+stopGracefully() : void\l+isRunning() : boolean\l+getApplicationsCount() : int\l+handleDirectoryEvent(String, Path) : void\l-main(String[]) : void\l+registerObserver(Observer) : void\l+removeObserver(Observer) : void\l+notifyObservers() : void\l+getCurrentEventType() : java.lang.String\l+getCurrentFilePathString() : java.lang.String\l+addProcesses(Process) : void\l}"
+];
+AppLauncher->Thread[arrowhead="onormal", style="solid"];
+AppLauncher->Subject[arrowhead="onormal", style="dashed"];
+BackwardsTextPrinter [
+shape="record",
+label = "{BackwardsTextPrinter|+update(AppLauncher) : void\l}"
+];
+BackwardsTextPrinter->Object[arrowhead="onormal", style="solid"];
+BackwardsTextPrinter->Observer[arrowhead="onormal", style="dashed"];
+FileNamePrinter [
+shape="record",
+label = "{FileNamePrinter|+update(AppLauncher) : void\l}"
+];
+FileNamePrinter->Object[arrowhead="onormal", style="solid"];
+FileNamePrinter->Observer[arrowhead="onormal", style="dashed"];
+Observer [
+shape="record",
+label = "{\<\<interface\>\>\nObserver|-update(AppLauncher) : void\l}"
+];
+Observer->Object[arrowhead="onormal", style="solid"];
+Subject [
+shape="record",
+label = "{\<\<interface\>\>\nSubject|-registerObserver(Observer) : void\l-removeObserver(Observer) : void\l-notifyObservers() : void\l}"
+];
+Subject->Object[arrowhead="onormal", style="solid"];
+TextLoader [
+shape="record",
+label = "{TextLoader|+update(AppLauncher) : void\l}"
+];
+TextLoader->Object[arrowhead="onormal", style="solid"];
+TextLoader->Observer[arrowhead="onormal", style="dashed"];
+WebsiteLoader [
+shape="record",
+label = "{WebsiteLoader|+update(AppLauncher) : void\l}"
+];
+WebsiteLoader->Object[arrowhead="onormal", style="solid"];
+WebsiteLoader->Observer[arrowhead="onormal", style="dashed"];
+WordLoader [
+shape="record",
+label = "{WordLoader|+update(AppLauncher) : void\l}"
+];
+WordLoader->Object[arrowhead="onormal", style="solid"];
+WordLoader->Observer[arrowhead="onormal", style="dashed"];
+}

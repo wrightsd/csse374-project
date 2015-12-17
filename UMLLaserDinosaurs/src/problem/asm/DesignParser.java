@@ -9,7 +9,7 @@ import org.objectweb.asm.Opcodes;
 
 public class DesignParser {
 
-	public static void parse(String[] args) throws IOException {
+	public static void parse(String[] args, String fileName) throws IOException {
 		StringBuilder completeBuilder = new StringBuilder();
 		completeBuilder.append("digraph text{\n");
 		completeBuilder.append("rankdir=BT;\n");
@@ -59,7 +59,7 @@ public class DesignParser {
 		}
 
 		completeBuilder.append("}");
-		FileOutputStream writer = new FileOutputStream("output/output.txt");
+		FileOutputStream writer = new FileOutputStream(fileName);
 		writer.write(completeBuilder.toString().getBytes());
 		writer.close();
 	}

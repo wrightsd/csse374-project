@@ -9,7 +9,7 @@ public class Lab1_3Runner {
 		String[] arguments = { "problem.AppLauncher", "problem.BackwardsTextPrinter", "problem.FileNamePrinter",
 				"problem.Observer", "problem.Subject", "problem.TextLoader", "problem.WebsiteLoader",
 				"problem.WordLoader" };
-		DesignParser.parse(arguments);
+		DesignParser.parse(arguments, "./output/lab1-3_output.txt");
 	}
 
 }
