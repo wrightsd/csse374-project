@@ -1,10 +1,49 @@
 digraph text{
 rankdir=BT;
-Enum [
+AppLauncher [
 shape="record",
-label = "{java.lang.Enum|-name : java.lang.String\l-ordinal : int\l|-name() : java.lang.String\l-ordinal() : int\l-init(java.lang.String, int) : void\l+toString() : java.lang.String\l-equals(java.lang.Object) : boolean\l-hashCode() : int\l-clone() : java.lang.Object\l-compareTo(java.lang.Enum) : int\l-getDeclaringClass() : java.lang.Class\l-valueOf(java.lang.Class, java.lang.String) : java.lang.Enum\l-finalize() : void\l-readObject(java.io.ObjectInputStream) : void\l-readObjectNoData() : void\l-compareTo(java.lang.Object) : int\l}"
+label = "{problem.AppLauncher|-watcher : java.nio.file.WatchService\l-dir : java.nio.file.Path\l-stop : boolean\l-processes : java.util.List\l-currentEventType : java.lang.String\l-currentPathString : java.lang.String\l-observers : java.util.ArrayList\l|-init(java.nio.file.Path) : void\l+run() : void\l-clearEverything() : void\l+stopGracefully() : void\l+isRunning() : boolean\l+getApplicationsCount() : int\l+handleDirectoryEvent(java.lang.String, java.nio.file.Path) : void\l-main(java.lang.String[]) : void\l+registerObserver(problem.Observer) : void\l+removeObserver(problem.Observer) : void\l+notifyObservers() : void\l+getCurrentEventType() : java.lang.String\l+getCurrentFilePathString() : java.lang.String\l+addProcesses(java.lang.Process) : void\l}"
 ];
-Enum->Object[arrowhead="onormal", style="solid"];
-Enum->Comparable[arrowhead="onormal", style="dashed"];
-Enum->Serializable[arrowhead="onormal", style="dashed"];
+AppLauncher->Thread[arrowhead="onormal", style="solid"];
+AppLauncher->Subject[arrowhead="onormal", style="dashed"];
+BackwardsTextPrinter [
+shape="record",
+label = "{problem.BackwardsTextPrinter|+init() : void\l+update(problem.AppLauncher) : void\l}"
+];
+BackwardsTextPrinter->Object[arrowhead="onormal", style="solid"];
+BackwardsTextPrinter->Observer[arrowhead="onormal", style="dashed"];
+FileNamePrinter [
+shape="record",
+label = "{problem.FileNamePrinter|+init() : void\l+update(problem.AppLauncher) : void\l}"
+];
+FileNamePrinter->Object[arrowhead="onormal", style="solid"];
+FileNamePrinter->Observer[arrowhead="onormal", style="dashed"];
+Observer [
+shape="record",
+label = "{problem.Observer|-update(problem.AppLauncher) : void\l}"
+];
+Observer->Object[arrowhead="onormal", style="solid"];
+Subject [
+shape="record",
+label = "{problem.Subject|-registerObserver(problem.Observer) : void\l-removeObserver(problem.Observer) : void\l-notifyObservers() : void\l}"
+];
+Subject->Object[arrowhead="onormal", style="solid"];
+TextLoader [
+shape="record",
+label = "{problem.TextLoader|+init() : void\l+update(problem.AppLauncher) : void\l}"
+];
+TextLoader->Object[arrowhead="onormal", style="solid"];
+TextLoader->Observer[arrowhead="onormal", style="dashed"];
+WebsiteLoader [
+shape="record",
+label = "{problem.WebsiteLoader|+init() : void\l+update(problem.AppLauncher) : void\l}"
+];
+WebsiteLoader->Object[arrowhead="onormal", style="solid"];
+WebsiteLoader->Observer[arrowhead="onormal", style="dashed"];
+WordLoader [
+shape="record",
+label = "{problem.WordLoader|+init() : void\l+update(problem.AppLauncher) : void\l}"
+];
+WordLoader->Object[arrowhead="onormal", style="solid"];
+WordLoader->Observer[arrowhead="onormal", style="dashed"];
 }
