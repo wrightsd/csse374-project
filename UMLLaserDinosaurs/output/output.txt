@@ -2,47 +2,47 @@ digraph text{
 rankdir=BT;
 AppLauncher [
 shape="record",
-label = "{problem.AppLauncher|-watcher : java.nio.file.WatchService\l-dir : java.nio.file.Path\l-stop : boolean\l-processes : java.util.List\l-currentEventType : java.lang.String\l-currentPathString : java.lang.String\l-observers : java.util.ArrayList\l|-init(java.nio.file.Path) : void\l+run() : void\l-clearEverything() : void\l+stopGracefully() : void\l+isRunning() : boolean\l+getApplicationsCount() : int\l+handleDirectoryEvent(java.lang.String, java.nio.file.Path) : void\l-main(java.lang.String[]) : void\l+registerObserver(problem.Observer) : void\l+removeObserver(problem.Observer) : void\l+notifyObservers() : void\l+getCurrentEventType() : java.lang.String\l+getCurrentFilePathString() : java.lang.String\l+addProcesses(java.lang.Process) : void\l}"
+label = "{AppLauncher|-watcher : WatchService\l-dir : Path\l-stop : boolean\l-processes : List\l-currentEventType : String\l-currentPathString : String\l-observers : ArrayList\l|+AppLauncher(Path) : void\l+run() : void\l-clearEverything() : void\l+stopGracefully() : void\l+isRunning() : boolean\l+getApplicationsCount() : int\l+handleDirectoryEvent(String, Path) : void\l-main(String[]) : void\l+registerObserver(Observer) : void\l+removeObserver(Observer) : void\l+notifyObservers() : void\l+getCurrentEventType() : java.lang.String\l+getCurrentFilePathString() : java.lang.String\l+addProcesses(Process) : void\l}"
 ];
 AppLauncher->Thread[arrowhead="onormal", style="solid"];
 AppLauncher->Subject[arrowhead="onormal", style="dashed"];
 BackwardsTextPrinter [
 shape="record",
-label = "{problem.BackwardsTextPrinter|+init() : void\l+update(problem.AppLauncher) : void\l}"
+label = "{BackwardsTextPrinter|+update(AppLauncher) : void\l}"
 ];
 BackwardsTextPrinter->Object[arrowhead="onormal", style="solid"];
 BackwardsTextPrinter->Observer[arrowhead="onormal", style="dashed"];
 FileNamePrinter [
 shape="record",
-label = "{problem.FileNamePrinter|+init() : void\l+update(problem.AppLauncher) : void\l}"
+label = "{FileNamePrinter|+update(AppLauncher) : void\l}"
 ];
 FileNamePrinter->Object[arrowhead="onormal", style="solid"];
 FileNamePrinter->Observer[arrowhead="onormal", style="dashed"];
 Observer [
 shape="record",
-label = "{\<\<interface\>\>\nproblem.Observer|-update(problem.AppLauncher) : void\l}"
+label = "{\<\<interface\>\>\nObserver|-update(AppLauncher) : void\l}"
 ];
 Observer->Object[arrowhead="onormal", style="solid"];
 Subject [
 shape="record",
-label = "{\<\<interface\>\>\nproblem.Subject|-registerObserver(problem.Observer) : void\l-removeObserver(problem.Observer) : void\l-notifyObservers() : void\l}"
+label = "{\<\<interface\>\>\nSubject|-registerObserver(Observer) : void\l-removeObserver(Observer) : void\l-notifyObservers() : void\l}"
 ];
 Subject->Object[arrowhead="onormal", style="solid"];
 TextLoader [
 shape="record",
-label = "{problem.TextLoader|+init() : void\l+update(problem.AppLauncher) : void\l}"
+label = "{TextLoader|+update(AppLauncher) : void\l}"
 ];
 TextLoader->Object[arrowhead="onormal", style="solid"];
 TextLoader->Observer[arrowhead="onormal", style="dashed"];
 WebsiteLoader [
 shape="record",
-label = "{problem.WebsiteLoader|+init() : void\l+update(problem.AppLauncher) : void\l}"
+label = "{WebsiteLoader|+update(AppLauncher) : void\l}"
 ];
 WebsiteLoader->Object[arrowhead="onormal", style="solid"];
 WebsiteLoader->Observer[arrowhead="onormal", style="dashed"];
 WordLoader [
 shape="record",
-label = "{problem.WordLoader|+init() : void\l+update(problem.AppLauncher) : void\l}"
+label = "{WordLoader|+update(AppLauncher) : void\l}"
 ];
 WordLoader->Object[arrowhead="onormal", style="solid"];
 WordLoader->Observer[arrowhead="onormal", style="dashed"];

@@ -29,7 +29,7 @@ public class DesignParser {
 			completeBuilder.append(classNameToWrite + " [\nshape=\"record\",\n");
 			completeBuilder.append("label = \"{");
 			
-			ClassVisitor interfaceVisitor = new InterfaceCheckVisitor(Opcodes.ASM5,declVisitor,interfaceBuilder);
+			ClassVisitor interfaceVisitor = new InterfaceAbstractCheckVisitor(Opcodes.ASM5,declVisitor,interfaceBuilder);
 			// DECORATE declaration visitor with field visitor
 			ClassVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, interfaceVisitor, fieldBuilder);
 			// DECORATE field visitor with method visitor
@@ -43,13 +43,16 @@ public class DesignParser {
 			if(interfaceBuilder.toString().length() > 0){
 				completeBuilder.append(interfaceBuilder.toString());
 			}
-			completeBuilder.append(className + "|");
+			completeBuilder.append(classNameToWrite + "|");
 			if (fieldBuilder.toString().length() > 0) {
 				completeBuilder.append(fieldBuilder.toString());
 				completeBuilder.append("|");
 			}
 			if (methodBuilder.toString().length() > 0) {
-				completeBuilder.append(methodBuilder);
+				//Remove default constructors from UML
+				String methods = methodBuilder.toString().replaceAll("[+]init[(][)] : void\\\\l", "");
+				methods = methods.replaceAll("init[(]", classNameToWrite+"(");
+				completeBuilder.append(methods);
 			}
 			completeBuilder.append("}\"\n];\n");
 			completeBuilder.append(arrowBuilder.toString());

@@ -32,7 +32,8 @@ public class ClassMethodVisitor extends ClassVisitor {
 		Type[] argTypes = Type.getArgumentTypes(desc);
 		String[] classNames = new String[argTypes.length];
 		for (int i = 0; i < argTypes.length; i++) {
-			classNames[i] = argTypes[i].getClassName();
+			String[] classNameSplitArray = argTypes[i].getClassName().split("[.]");
+			classNames[i] = classNameSplitArray[classNameSplitArray.length - 1];
 		}
 		// TODO: create an internal representation of the current method and
 		// pass it to the methods below

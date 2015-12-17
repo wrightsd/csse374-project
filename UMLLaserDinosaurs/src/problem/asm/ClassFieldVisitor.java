@@ -24,7 +24,8 @@ public class ClassFieldVisitor extends ClassVisitor {
 
 	public FieldVisitor visitField(int access, String name, String desc, String signature, Object value) {
 		FieldVisitor toDecorate = super.visitField(access, name, desc, signature, value);
-		String type = Type.getType(desc).getClassName();
+		String[] typeSplitArray = Type.getType(desc).getClassName().split("[.]");
+		String type = typeSplitArray[typeSplitArray.length-1];
 		// TODO: delete the line below
 		if (access == Opcodes.ACC_PUBLIC) {
 			builder.append("+");
