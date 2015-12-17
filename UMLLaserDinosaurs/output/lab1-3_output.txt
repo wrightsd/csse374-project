@@ -2,7 +2,7 @@ digraph text{
 rankdir=BT;
 AppLauncher [
 shape="record",
-label = "{AppLauncher|-watcher : WatchService\l-dir : Path\l-stop : boolean\l-processes : List\l-currentEventType : String\l-currentPathString : String\l-observers : ArrayList\l|+AppLauncher(Path) : void\l+run() : void\l-clearEverything() : void\l+stopGracefully() : void\l+isRunning() : boolean\l+getApplicationsCount() : int\l+handleDirectoryEvent(String, Path) : void\l-main(String[]) : void\l+registerObserver(Observer) : void\l+removeObserver(Observer) : void\l+notifyObservers() : void\l+getCurrentEventType() : java.lang.String\l+getCurrentFilePathString() : java.lang.String\l+addProcesses(Process) : void\l}"
+label = "{AppLauncher|-watcher : WatchService\l-dir : Path\l-stop : boolean\l-processes : List\l-currentEventType : String\l-currentPathString : String\l-observers : ArrayList\l|+AppLauncher(Path) : void\l+run() : void\l#clearEverything() : void\l+stopGracefully() : void\l+isRunning() : boolean\l+getApplicationsCount() : int\l+handleDirectoryEvent(String, Path) : void\l-main(String[]) : void\l+registerObserver(Observer) : void\l+removeObserver(Observer) : void\l+notifyObservers() : void\l+getCurrentEventType() : java.lang.String\l+getCurrentFilePathString() : java.lang.String\l+addProcesses(Process) : void\l}"
 ];
 AppLauncher->Thread[arrowhead="onormal", style="solid"];
 AppLauncher->Subject[arrowhead="onormal", style="dashed"];

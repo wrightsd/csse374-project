@@ -48,22 +48,23 @@ public class ClassMethodVisitor extends ClassVisitor {
 		// TODO: delete the line below
 		if (access == Opcodes.ACC_PUBLIC) {
 			builder.append("+");
-		} else { // For now, assume that it is private if it is not public
+		} else if (access == Opcodes.ACC_PROTECTED) {
+			builder.append("#");
+		} else { // method is private
 			builder.append("-");
 		}
 		String argsToPrint = Arrays.toString(classNames);
 		if (argsToPrint.length() > 2) {
 			argsToPrint = argsToPrint.substring(1, argsToPrint.length() - 1);
+		} else {
+			argsToPrint = "";
 		}
-		else{
-			argsToPrint= "";
-		}
-		//TODO: Will get current class and display a constructor instead
-		if(name.equals("<init>")){
+		// TODO: Will get current class and display a constructor instead
+		if (name.equals("<init>")) {
 			name = "init";
 		}
 		builder.append(name + "(" + argsToPrint + ")" + " : " + type + "\\l");
-		
+
 		return toDecorate;
 	}
 }

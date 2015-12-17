@@ -29,7 +29,9 @@ public class ClassFieldVisitor extends ClassVisitor {
 		// TODO: delete the line below
 		if (access == Opcodes.ACC_PUBLIC) {
 			builder.append("+");
-		} else { // For now, assume that it is private if it is not public
+		} else if (access == Opcodes.ACC_PROTECTED) {
+			builder.append("#");
+		} else { // field is private
 			builder.append("-");
 		}
 		builder.append(name + " : " + type + "\\l");
