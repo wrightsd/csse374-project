@@ -18,10 +18,9 @@ public class InterfaceAbstractCheckVisitor extends ClassVisitor {
 
 	@Override
 	public void visit(int version, int access, String name, String signature, String superName, String[] interfaces) {
-		//To be implemented in a later milestone
-		// if ((access & Opcodes.ACC_ABSTRACT) != 0) {
-		// builder.append("\\<\\<abstract\\>\\>\\n");
-		// }
+		if ((access & Opcodes.ACC_ABSTRACT) != 0) {
+			builder.append("\\<\\<abstract\\>\\>\\n");
+		}
 		if ((access & Opcodes.ACC_INTERFACE) != 0) {
 			builder.append("\\<\\<interface\\>\\>\\n");
 		}
