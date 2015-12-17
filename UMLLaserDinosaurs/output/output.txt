@@ -20,12 +20,12 @@ FileNamePrinter->Object[arrowhead="onormal", style="solid"];
 FileNamePrinter->Observer[arrowhead="onormal", style="dashed"];
 Observer [
 shape="record",
-label = "{problem.Observer|-update(problem.AppLauncher) : void\l}"
+label = "{\<\<interface\>\>\nproblem.Observer|-update(problem.AppLauncher) : void\l}"
 ];
 Observer->Object[arrowhead="onormal", style="solid"];
 Subject [
 shape="record",
-label = "{problem.Subject|-registerObserver(problem.Observer) : void\l-removeObserver(problem.Observer) : void\l-notifyObservers() : void\l}"
+label = "{\<\<interface\>\>\nproblem.Subject|-registerObserver(problem.Observer) : void\l-removeObserver(problem.Observer) : void\l-notifyObservers() : void\l}"
 ];
 Subject->Object[arrowhead="onormal", style="solid"];
 TextLoader [

@@ -18,6 +18,7 @@ public class DesignParser {
 			StringBuilder methodBuilder = new StringBuilder();
 			StringBuilder fieldBuilder = new StringBuilder();
 			StringBuilder arrowBuilder = new StringBuilder();
+			StringBuilder interfaceBuilder = new StringBuilder();
 			// ASM's ClassReader does the heavy lifting of parsing the compiled
 			// Java class
 			ClassReader reader = new ClassReader(className);
@@ -26,9 +27,11 @@ public class DesignParser {
 			String[] classNameToWriteArray = className.split("[.]");
 			String classNameToWrite = classNameToWriteArray[classNameToWriteArray.length - 1];
 			completeBuilder.append(classNameToWrite + " [\nshape=\"record\",\n");
-			completeBuilder.append("label = \"{" + className + "|");
+			completeBuilder.append("label = \"{");
+			
+			ClassVisitor interfaceVisitor = new InterfaceCheckVisitor(Opcodes.ASM5,declVisitor,interfaceBuilder);
 			// DECORATE declaration visitor with field visitor
-			ClassVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, declVisitor, fieldBuilder);
+			ClassVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, interfaceVisitor, fieldBuilder);
 			// DECORATE field visitor with method visitor
 			ClassVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, fieldVisitor, methodBuilder);
 			// TODO: add more DECORATORS here in later milestones to accomplish
@@ -37,6 +40,10 @@ public class DesignParser {
 			// Tell the Reader to use our (heavily decorated) ClassVisitor to
 			// visit the class
 			reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
+			if(interfaceBuilder.toString().length() > 0){
+				completeBuilder.append(interfaceBuilder.toString());
+			}
+			completeBuilder.append(className + "|");
 			if (fieldBuilder.toString().length() > 0) {
 				completeBuilder.append(fieldBuilder.toString());
 				completeBuilder.append("|");
