@@ -7,12 +7,12 @@ label = "{ClassDeclarationVisitor|-builder : StringBuilder\l|+ClassDeclarationVi
 ClassDeclarationVisitor->ClassVisitor[arrowhead="onormal", style="solid"];
 ClassFieldVisitor [
 shape="record",
-label = "{ClassFieldVisitor|-builder : StringBuilder\l|+ClassFieldVisitor(int) : void\l+ClassFieldVisitor(int, ClassVisitor) : void\l+ClassFieldVisitor(int, ClassVisitor, StringBuilder) : void\l+visitField(int, String, String, String, Object) : org.objectweb.asm.FieldVisitor\l}"
+label = "{ClassFieldVisitor|-builder : StringBuilder\l|+ClassFieldVisitor(int) : void\l+ClassFieldVisitor(int, StringBuilder) : void\l+ClassFieldVisitor(int, ClassVisitor) : void\l+ClassFieldVisitor(int, ClassVisitor, StringBuilder) : void\l+visitField(int, String, String, String, Object) : org.objectweb.asm.FieldVisitor\l}"
 ];
 ClassFieldVisitor->ClassVisitor[arrowhead="onormal", style="solid"];
 ClassMethodVisitor [
 shape="record",
-label = "{ClassMethodVisitor|-builder : StringBuilder\l|+ClassMethodVisitor(int) : void\l+ClassMethodVisitor(int, ClassVisitor) : void\l+ClassMethodVisitor(int, ClassVisitor, StringBuilder) : void\l+visitMethod(int, String, String, String, String[]) : org.objectweb.asm.MethodVisitor\l}"
+label = "{ClassMethodVisitor|-builder : StringBuilder\l|+ClassMethodVisitor(int) : void\l+ClassMethodVisitor(int, StringBuilder) : void\l+ClassMethodVisitor(int, ClassVisitor) : void\l+ClassMethodVisitor(int, ClassVisitor, StringBuilder) : void\l+visitMethod(int, String, String, String, String[]) : org.objectweb.asm.MethodVisitor\l}"
 ];
 ClassMethodVisitor->ClassVisitor[arrowhead="onormal", style="solid"];
 DesignParser [

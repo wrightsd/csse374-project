@@ -16,6 +16,11 @@ public class ClassMethodVisitor extends ClassVisitor {
 		super(api);
 	}
 
+	public ClassMethodVisitor(int api, StringBuilder builder) {
+		super(api);
+		this.builder = builder;
+	}
+
 	public ClassMethodVisitor(int api, ClassVisitor decorated) {
 		super(api, decorated);
 	}
@@ -44,7 +49,9 @@ public class ClassMethodVisitor extends ClassVisitor {
 		// current class
 		// What is a good way for the code to remember what the current class
 		// is?
-		String type = Type.getReturnType(desc).getClassName();
+		String[] typeArray = Type.getReturnType(desc).getClassName().split("[.]");
+		String type = typeArray[typeArray.length-1];
+		
 		// TODO: delete the line below
 		if (access == Opcodes.ACC_PUBLIC) {
 			builder.append("+");
@@ -56,6 +63,7 @@ public class ClassMethodVisitor extends ClassVisitor {
 		String argsToPrint = Arrays.toString(classNames);
 		if (argsToPrint.length() > 2) {
 			argsToPrint = argsToPrint.substring(1, argsToPrint.length() - 1);
+		
 		} else {
 			argsToPrint = "";
 		}

@@ -11,10 +11,16 @@ public class InterfaceAbstractCheckVisitor extends ClassVisitor {
 		super(api);
 	}
 
+	public InterfaceAbstractCheckVisitor(int api, StringBuilder builder) {
+		super(api);
+		this.builder = builder;
+	}
+	
 	public InterfaceAbstractCheckVisitor(int api, ClassVisitor previousVisitor, StringBuilder builder) {
 		super(api, previousVisitor);
 		this.builder = builder;
 	}
+
 
 	@Override
 	public void visit(int version, int access, String name, String signature, String superName, String[] interfaces) {

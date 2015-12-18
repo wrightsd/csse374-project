@@ -8,15 +8,20 @@ import org.objectweb.asm.Type;
 public class ClassFieldVisitor extends ClassVisitor {
 
 	private StringBuilder builder;
-	
+
 	public ClassFieldVisitor(int api) {
 		super(api);
+	}
+
+	public ClassFieldVisitor(int api, StringBuilder builder) {
+		super(api);
+		this.builder = builder;
 	}
 
 	public ClassFieldVisitor(int api, ClassVisitor decorated) {
 		super(api, decorated);
 	}
-	
+
 	public ClassFieldVisitor(int api, ClassVisitor decorated, StringBuilder builder) {
 		super(api, decorated);
 		this.builder = builder;
@@ -25,7 +30,7 @@ public class ClassFieldVisitor extends ClassVisitor {
 	public FieldVisitor visitField(int access, String name, String desc, String signature, Object value) {
 		FieldVisitor toDecorate = super.visitField(access, name, desc, signature, value);
 		String[] typeSplitArray = Type.getType(desc).getClassName().split("[.]");
-		String type = typeSplitArray[typeSplitArray.length-1];
+		String type = typeSplitArray[typeSplitArray.length - 1];
 		// TODO: delete the line below
 		if (access == Opcodes.ACC_PUBLIC) {
 			builder.append("+");
