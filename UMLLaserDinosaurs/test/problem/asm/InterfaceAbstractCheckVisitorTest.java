@@ -20,7 +20,6 @@ public class InterfaceAbstractCheckVisitorTest {
 		ClassReader reader = new ClassReader("problem.asm.TestInterface");
 		ClassVisitor testIACheckVisitor = new InterfaceAbstractCheckVisitor(Opcodes.ASM5, testBuilder);
 		reader.accept(testIACheckVisitor, ClassReader.EXPAND_FRAMES);
-		System.out.println(testBuilder.toString());
 	}
 
 	@Test
