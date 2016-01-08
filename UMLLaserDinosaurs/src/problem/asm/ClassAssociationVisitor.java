@@ -1,5 +1,6 @@
 package problem.asm;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.objectweb.asm.ClassVisitor;
@@ -32,7 +33,10 @@ public class ClassAssociationVisitor extends ClassVisitor {
 	@Override
 	public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
 		MethodVisitor toDecorate = super.visitMethod(access, name, desc, signature, exceptions);
-		MethodVisitor mine = new MethodAssociationVisitor(Opcodes.ASM5, toDecorate);
+		ArrayList<String> associatesList = new ArrayList<String>();
+		ArrayList<String> usesList = new ArrayList<String>();
+		MethodVisitor mine = new MethodAssociationVisitor(Opcodes.ASM5, toDecorate, builder, associatesList,usesList);
+		
 		return mine;
 	}
 

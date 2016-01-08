@@ -19,6 +19,7 @@ public class DesignParser {
 			StringBuilder fieldBuilder = new StringBuilder();
 			StringBuilder arrowBuilder = new StringBuilder();
 			StringBuilder interfaceBuilder = new StringBuilder();
+			StringBuilder associationBuilder = new StringBuilder();
 			// ASM's ClassReader does the heavy lifting of parsing the compiled
 			// Java class
 			ClassReader reader = new ClassReader(className);
@@ -41,7 +42,7 @@ public class DesignParser {
 
 			// Tell the Reader to use our (heavily decorated) ClassVisitor to
 			// visit the class
-			reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
+			reader.accept(associationVisitor, ClassReader.EXPAND_FRAMES);
 			if(interfaceBuilder.toString().length() > 0){
 				completeBuilder.append(interfaceBuilder.toString());
 			}
@@ -58,6 +59,7 @@ public class DesignParser {
 			}
 			completeBuilder.append("}\"\n];\n");
 			completeBuilder.append(arrowBuilder.toString());
+			completeBuilder.append(associationBuilder.toString());
 		}
 
 		completeBuilder.append("}");
