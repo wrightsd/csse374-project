@@ -1,0 +1,26 @@
+digraph text{
+rankdir=BT;
+TestClass2 [
+shape="record",
+label = "{TestClass2|-testing : ArrayList\l-t : TestClass\l|+TestClass2(String) : void\l+functionsOne(String, TestClassSuper) : void\l+makeNewOne() : void\l}"
+];
+AnotherTestClass [
+shape="record",
+label = "{AnotherTestClass|+given1 : String\l|+AnotherTestClass(int, TestClass) : void\l+doTest(TestClass) : void\l}"
+];
+TestClass [
+shape="record",
+label = "{TestClass|-testField1 : int\l+testField2 : String\l#testField3 : char[]\l|+TestClass(int) : void\l#testMethod1() : void\l-testMethod2(int) : String\l}"
+];
+TestClass->TestClassSuper[arrowhead="onormal", style="solid"];
+TestClass->TestInterface[arrowhead="onormal", style="dashed"];
+TestClassSuper [
+shape="record",
+label = "{TestClassSuper|}"
+];
+TestClass2->TestClass[arrowhead="ovee", style="dashed"];
+TestClass2->AnotherTestClass[arrowhead="ovee", style="dashed"];
+AnotherTestClass->TestClass[arrowhead="ovee", style="dashed"];
+AnotherTestClass->TestClass2[arrowhead="ovee", style="dashed"];
+TestClass2->String[arrowhead="ovee", style="solid"];
+}
