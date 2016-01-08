@@ -22,6 +22,12 @@ public class ClassAssociationVisitor extends ClassVisitor {
 		this.associatesList = associatesList;
 	}
 
+	public ClassAssociationVisitor(int api, ArrayList<String> associatesList, ArrayList<String> usesList) {
+		super(api);
+		this.usesList = usesList;
+		this.associatesList = associatesList;
+	}
+
 	public FieldVisitor visitField(int access, String name, String desc, String signature, Object value) {
 		FieldVisitor toDecorate = super.visitField(access, name, desc, signature, value);
 		//System.out.println(signature);

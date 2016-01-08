@@ -31,15 +31,16 @@ public class ClassDeclarationVisitor extends ClassVisitor {
 		if (superName != null) {
 
 			boolean superValid = true;
+			superName = superName.replaceAll("/", ".");
 			for (String blacklisted : BlacklistHolder.getInstance()) {
 				if (blacklisted.equals(superName)) {
 					superValid = false;
 					break;
 				}
 			}
-			if (!superValid) {
+			if (superValid) {
 				builder.append(classNameToWrite + "->");
-				String[] superClassNameToWriteArray = superName.split("/");
+				String[] superClassNameToWriteArray = superName.split("[.]");
 				String superClassNameToWrite = superClassNameToWriteArray[superClassNameToWriteArray.length - 1];
 				builder.append(superClassNameToWrite + "[arrowhead=\"onormal\", style=\"solid\"];\n");
 			}
@@ -47,6 +48,7 @@ public class ClassDeclarationVisitor extends ClassVisitor {
 
 		for (String s : interfaces) {
 			boolean interfaceValid = true;
+			s = s.replaceAll("/", ".");
 			for (String blacklisted : BlacklistHolder.getInstance()) {
 				if (blacklisted.equals(s)) {
 					interfaceValid = false;
@@ -55,7 +57,7 @@ public class ClassDeclarationVisitor extends ClassVisitor {
 			}
 			if (interfaceValid) {
 				builder.append(classNameToWrite + "->");
-				String[] interfaceNameToWriteArray = s.split("/");
+				String[] interfaceNameToWriteArray = s.split("[.]");
 				String interfaceNameToWrite = interfaceNameToWriteArray[interfaceNameToWriteArray.length - 1];
 				builder.append(interfaceNameToWrite + "[arrowhead=\"onormal\", style=\"dashed\"];\n");
 			}

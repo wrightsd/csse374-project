@@ -13,6 +13,8 @@ public class DesignParser {
 	public static String currentClass;
 	private static ArrayList<String> classSet;
 	private static String[] myArgs;
+	private static ArrayList<String> usesList;
+	private static ArrayList<String> associatesList;
 
 	public static void parse(String[] args, String fileName) throws IOException {
 		myArgs = args;
@@ -21,8 +23,8 @@ public class DesignParser {
 		completeBuilder.append("digraph text{\n");
 		completeBuilder.append("rankdir=BT;\n");
 
-		ArrayList<String> associatesList = new ArrayList<String>();
-		ArrayList<String> usesList = new ArrayList<String>();
+		associatesList = new ArrayList<String>();
+		usesList = new ArrayList<String>();
 		StringBuilder associationBuilder = new StringBuilder();
 
 		for (String className : args) {
@@ -99,11 +101,13 @@ public class DesignParser {
 	public static ArrayList<String> getInstance() {
 		if (classSet == null) {
 			classSet = new ArrayList<String>();
-			for (String s : myArgs) {
-				classSet.add(s);
+			if(myArgs != null){
+				for (String s : myArgs) {
+					classSet.add(s);
+				}
 			}
 		}
 		return classSet;
 	}
-	
+
 }

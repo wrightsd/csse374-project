@@ -4,14 +4,17 @@ ClassDeclarationVisitor [
 shape="record",
 label = "{ClassDeclarationVisitor|-builder : StringBuilder\l|+ClassDeclarationVisitor(int) : void\l+ClassDeclarationVisitor(int, StringBuilder) : void\l+ClassDeclarationVisitor(int, ClassVisitor, StringBuilder) : void\l+visit(int, int, String, String, String, String[]) : void\l}"
 ];
+ClassDeclarationVisitor->ClassVisitor[arrowhead="onormal", style="solid"];
 ClassFieldVisitor [
 shape="record",
 label = "{ClassFieldVisitor|-builder : StringBuilder\l|+ClassFieldVisitor(int) : void\l+ClassFieldVisitor(int, StringBuilder) : void\l+ClassFieldVisitor(int, ClassVisitor) : void\l+ClassFieldVisitor(int, ClassVisitor, StringBuilder) : void\l+visitField(int, String, String, String, Object) : FieldVisitor\l}"
 ];
+ClassFieldVisitor->ClassVisitor[arrowhead="onormal", style="solid"];
 ClassMethodVisitor [
 shape="record",
 label = "{ClassMethodVisitor|-builder : StringBuilder\l|+ClassMethodVisitor(int) : void\l+ClassMethodVisitor(int, StringBuilder) : void\l+ClassMethodVisitor(int, ClassVisitor) : void\l+ClassMethodVisitor(int, ClassVisitor, StringBuilder) : void\l+visitMethod(int, String, String, String, String[]) : MethodVisitor\l}"
 ];
+ClassMethodVisitor->ClassVisitor[arrowhead="onormal", style="solid"];
 DesignParser [
 shape="record",
 label = "{DesignParser|-currentClass : String\l-classSet : ArrayList\l-myArgs : String[]\l|-parse(String[], String) : void\l-drawUsesArrows(ArrayList, ArrayList, StringBuilder) : void\l-getInstance() : ArrayList\l}"
@@ -20,14 +23,17 @@ InterfaceAbstractCheckVisitor [
 shape="record",
 label = "{InterfaceAbstractCheckVisitor|-builder : StringBuilder\l|+InterfaceAbstractCheckVisitor(int) : void\l+InterfaceAbstractCheckVisitor(int, StringBuilder) : void\l+InterfaceAbstractCheckVisitor(int, ClassVisitor, StringBuilder) : void\l+visit(int, int, String, String, String, String[]) : void\l}"
 ];
+InterfaceAbstractCheckVisitor->ClassVisitor[arrowhead="onormal", style="solid"];
 MethodAssociationVisitor [
 shape="record",
 label = "{MethodAssociationVisitor|-builder : StringBuilder\l-associatesList : ArrayList\l-usesList : ArrayList\l|+MethodAssociationVisitor(int, MethodVisitor, ArrayList, ArrayList) : void\l+visitMethodInsn(int, String, String, String, boolean) : void\l+visitFieldInsn(int, String, String, String) : void\l+visitTypeInsn(int, String) : void\l+visitVarInsn(int, int) : void\l}"
 ];
+MethodAssociationVisitor->MethodVisitor[arrowhead="onormal", style="solid"];
 ClassAssociationVisitor [
 shape="record",
-label = "{ClassAssociationVisitor|-builder : StringBuilder\l-associatesList : ArrayList\l-usesList : ArrayList\l|+ClassAssociationVisitor(int, ClassVisitor, ArrayList, ArrayList) : void\l+visitField(int, String, String, String, Object) : FieldVisitor\l+visitMethod(int, String, String, String, String[]) : MethodVisitor\l-compileAggregation(String) : void\l}"
+label = "{ClassAssociationVisitor|-builder : StringBuilder\l-associatesList : ArrayList\l-usesList : ArrayList\l|+ClassAssociationVisitor(int, ClassVisitor, ArrayList, ArrayList) : void\l+ClassAssociationVisitor(int, ArrayList, ArrayList) : void\l+visitField(int, String, String, String, Object) : FieldVisitor\l+visitMethod(int, String, String, String, String[]) : MethodVisitor\l-compileAggregation(String) : void\l}"
 ];
+ClassAssociationVisitor->ClassVisitor[arrowhead="onormal", style="solid"];
 DesignParser->ClassDeclarationVisitor[arrowhead="ovee", style="dashed"];
 DesignParser->InterfaceAbstractCheckVisitor[arrowhead="ovee", style="dashed"];
 DesignParser->ClassFieldVisitor[arrowhead="ovee", style="dashed"];

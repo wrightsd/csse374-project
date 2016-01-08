@@ -1,6 +1,6 @@
 package problem.asm;
 
-public class TestClass implements TestInterface {
+public class TestClass extends TestClassSuper implements TestInterface {
 
 	private int testField1 = 0;
 	public String testField2 = "";

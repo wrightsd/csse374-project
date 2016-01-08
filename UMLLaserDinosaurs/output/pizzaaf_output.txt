@@ -18,6 +18,7 @@ NYPizzaStore [
 shape="record",
 label = "{NYPizzaStore|#createPizza(String) : Pizza\l}"
 ];
+NYPizzaStore->PizzaStore[arrowhead="onormal", style="solid"];
 Dough [
 shape="record",
 label = "{\<\<abstract\>\>\n\<\<interface\>\>\nDough|-toString() : String\l}"

@@ -20,12 +20,13 @@ public class ClassDeclarationVisitorTest {
 		ClassReader reader = new ClassReader("problem.asm.TestClass");
 		ClassVisitor testDeclVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, testBuilder);
 		reader.accept(testDeclVisitor, ClassReader.EXPAND_FRAMES);
+		System.out.println(testBuilder.toString());
 	}
 
 	@Test
 	public void testExtends() {
 		String[] lines = testBuilder.toString().split("\\n");
-		assertTrue(lines[0].contains("Object"));
+		assertTrue(lines[0].contains("TestClassSuper"));
 		assertTrue(lines[0].contains("solid"));
 	}
 
