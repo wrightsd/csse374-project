@@ -11,31 +11,19 @@ import org.objectweb.asm.Type;
 public class ClassAssociationVisitor extends ClassVisitor {
 	
 	private StringBuilder builder;
+	private ArrayList<String> associatesList;
+	private ArrayList<String> usesList;
 
-	public ClassAssociationVisitor(int api) {
-		super(api);
-	}
-
-	public ClassAssociationVisitor(int api, StringBuilder builder) {
-		super(api);
-		this.builder = builder;
-	}
-
-	public ClassAssociationVisitor(int api, ClassVisitor decorated) {
+	public ClassAssociationVisitor(int api, ClassVisitor decorated, ArrayList<String> usesList, ArrayList<String> associatesList) {
 		super(api, decorated);
-	}
-
-	public ClassAssociationVisitor(int api, ClassVisitor decorated, StringBuilder builder) {
-		super(api, decorated);
-		this.builder = builder;
+		this.usesList = usesList;
+		this.associatesList = associatesList;
 	}
 
 	@Override
 	public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
 		MethodVisitor toDecorate = super.visitMethod(access, name, desc, signature, exceptions);
-		ArrayList<String> associatesList = new ArrayList<String>();
-		ArrayList<String> usesList = new ArrayList<String>();
-		MethodVisitor mine = new MethodAssociationVisitor(Opcodes.ASM5, toDecorate, builder, associatesList,usesList);
+		MethodVisitor mine = new MethodAssociationVisitor(Opcodes.ASM5, toDecorate, associatesList, usesList);
 		
 		return mine;
 	}

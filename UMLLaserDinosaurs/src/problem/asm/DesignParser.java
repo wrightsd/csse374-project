@@ -2,6 +2,7 @@ package problem.asm;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
@@ -15,6 +16,9 @@ public class DesignParser {
 		StringBuilder completeBuilder = new StringBuilder();
 		completeBuilder.append("digraph text{\n");
 		completeBuilder.append("rankdir=BT;\n");
+		
+		ArrayList<String> associatesList = new ArrayList<String>();
+		ArrayList<String> usesList = new ArrayList<String>();
 
 		for (String className : args) {
 			currentClass = className;
@@ -41,7 +45,7 @@ public class DesignParser {
 			// TODO: add more DECORATORS here in later milestones to accomplish
 			// specific tasks
 			
-			ClassVisitor associationVisitor = new ClassAssociationVisitor(Opcodes.ASM5, methodVisitor, associationBuilder);
+			ClassVisitor associationVisitor = new ClassAssociationVisitor(Opcodes.ASM5, methodVisitor, usesList, associatesList );
 
 			// Tell the Reader to use our (heavily decorated) ClassVisitor to
 			// visit the class

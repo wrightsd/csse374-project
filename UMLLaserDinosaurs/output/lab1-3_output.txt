@@ -1,9 +1,9 @@
 digraph text{
 rankdir=BT;
-WordLoader [
+WebsiteLoader [
 shape="record",
-label = "{WordLoader|+update(AppLauncher) : void\l}"
+label = "{WebsiteLoader|+update(AppLauncher) : void\l}"
 ];
-WordLoader->Object[arrowhead="onormal", style="solid"];
-WordLoader->Observer[arrowhead="onormal", style="dashed"];
+WebsiteLoader->Object[arrowhead="onormal", style="solid"];
+WebsiteLoader->Observer[arrowhead="onormal", style="dashed"];
 }

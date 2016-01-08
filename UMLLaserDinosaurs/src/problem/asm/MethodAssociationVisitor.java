@@ -12,35 +12,39 @@ public class MethodAssociationVisitor extends MethodVisitor {
 	private ArrayList<String> associatesList;
 	private ArrayList<String> usesList;
 
-	public MethodAssociationVisitor(int api, MethodVisitor decorated, StringBuilder builder,
-			ArrayList<String> associatesList, ArrayList<String> usesList) {
+	public MethodAssociationVisitor(int api, MethodVisitor decorated, ArrayList<String> associatesList, ArrayList<String> usesList) {
 		super(api, decorated);
-		this.builder = builder;
 		this.associatesList = associatesList;
 		this.usesList = usesList;
 	}
 
 	@Override
 	public void visitMethodInsn(int opcode, String owner, String name, String desc, boolean itf) {
-		String ownerCheck = owner.replaceAll("\\\\", "[.]");
-		if(name.equals("<init>") || ownerCheck.equals(DesignParser.currentClass)){
-			String[] parameterReturnSplit = desc.split("[)]");
-			String returnString = parameterReturnSplit[1];
+		String[] ownerStringArray = owner.split("/");
+		owner = ownerStringArray[ownerStringArray.length-1];
+		
+		String[] parameterReturnSplit = desc.split("[)]");
+		String returnString = parameterReturnSplit[1];
+		if (returnString.charAt(0) == 'L') {
 			String returnStringName = Type.getType(returnString).getClassName();
-			System.out.println(name + " " + returnStringName);
+			if(!usesList.contains(owner+":"+returnStringName)){
+				usesList.add(owner+":"+returnStringName);
+			}
+		}
 
-			String parameterString = parameterReturnSplit[0].substring(1);
-			if (!parameterString.equals("")) {
-				String[] parameters = parameterString.split("\\[");
-				for (int i = 1; i < parameters.length; i++) {
-					System.out.println(name + " " + Type.getType(parameters[i]).getClassName());
+		String parameterString = parameterReturnSplit[0].substring(1);
+		if (!parameterString.equals("")) {
+			String[] parameters = parameterString.split("\\[");
+			for (int i = 1; i < parameters.length; i++) {
+				if(parameters[i].charAt(0) == 'L'){
+					String parameterStringName = Type.getType(parameters[i]).getClassName();
+					if(!usesList.contains(owner+":"+parameterStringName)){
+						usesList.add(owner+":"+parameterStringName);
+					}
 				}
 			}
 		}
-		
 
-		// System.out.println(Type.getType(desc).getClass().getComponentType());
-		// System.out.println(owner + " -- " +name);
 	}
 
 	@Override
