@@ -21,14 +21,20 @@ public class MethodAssociationVisitor extends MethodVisitor {
 	@Override
 	public void visitMethodInsn(int opcode, String owner, String name, String desc, boolean itf) {
 		String[] ownerStringArray = owner.split("/");
+		if(ownerStringArray.length>0){
 		owner = ownerStringArray[ownerStringArray.length-1];
+		}
 		
 		String[] parameterReturnSplit = desc.split("[)]");
 		String returnString = parameterReturnSplit[1];
 		if (returnString.charAt(0) == 'L') {
 			String returnStringName = Type.getType(returnString).getClassName();
-			if(!usesList.contains(owner+":"+returnStringName)){
-				usesList.add(owner+":"+returnStringName);
+			String[] returnStringArray = returnStringName.split("[.]");
+			if(returnStringArray.length>0){
+			returnStringName = returnStringArray[returnStringArray.length-1];
+			}
+			if(!usesList.contains(owner+"->"+returnStringName)){
+				usesList.add(owner+"->"+returnStringName);
 			}
 		}
 
@@ -38,8 +44,12 @@ public class MethodAssociationVisitor extends MethodVisitor {
 			for (int i = 1; i < parameters.length; i++) {
 				if(parameters[i].charAt(0) == 'L'){
 					String parameterStringName = Type.getType(parameters[i]).getClassName();
-					if(!usesList.contains(owner+":"+parameterStringName)){
-						usesList.add(owner+":"+parameterStringName);
+					String[] parameterStringArray = parameterStringName.split("[.]");
+					if(parameterStringArray.length>0){
+					parameterStringName = parameterStringArray[parameterStringArray.length-1];
+					}
+					if(!usesList.contains(owner+"->"+parameterStringName)){
+						usesList.add(owner+"->"+parameterStringName);
 					}
 				}
 			}

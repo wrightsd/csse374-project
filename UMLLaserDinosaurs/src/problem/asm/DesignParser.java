@@ -66,6 +66,7 @@ public class DesignParser {
 			}
 			completeBuilder.append("}\"\n];\n");
 			completeBuilder.append(arrowBuilder.toString());
+			drawUsesArrows(usesList,associatesList,associationBuilder);
 			completeBuilder.append(associationBuilder.toString());
 		}
 
@@ -73,6 +74,19 @@ public class DesignParser {
 		FileOutputStream writer = new FileOutputStream(fileName);
 		writer.write(completeBuilder.toString().getBytes());
 		writer.close();
+	}
+	
+	private static void drawUsesArrows(ArrayList<String> usesList, ArrayList<String> associatesList, StringBuilder builder){
+		for(String s:usesList){
+			builder.append(s);
+			builder.append("[arrowhead=\"ovee\", style=\"solid\"];");
+			builder.append("\n");
+		}
+		for(String s:associatesList){
+			builder.append(s);
+			builder.append("[arrowhead=\"ovee\", style=\"dashed\"];");
+			builder.append("\n");
+		}
 	}
 
 }
