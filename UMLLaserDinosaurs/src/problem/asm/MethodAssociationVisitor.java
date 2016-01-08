@@ -42,6 +42,16 @@ public class MethodAssociationVisitor extends MethodVisitor {
 		String returnString = parameterReturnSplit[1];
 		if (returnString.charAt(0) == 'L') {
 			String returnStringName = Type.getType(returnString).getClassName();
+			boolean returnValid = false;
+			for (String s : DesignParser.getInstance()) {
+				if (s.equals(returnStringName)) {
+					returnValid = true;
+					break;
+				}
+			}
+			if (!returnValid) {
+				return;
+			}
 			String[] returnStringArray = returnStringName.split("[.]");
 			if (returnStringArray.length > 0) {
 				returnStringName = returnStringArray[returnStringArray.length - 1];
@@ -64,6 +74,16 @@ public class MethodAssociationVisitor extends MethodVisitor {
 			for (int i = 0; i < parameters.length; i++) {
 				if (parameters[i].charAt(0) == 'L') {
 					String parameterStringName = Type.getType(parameters[i]).getClassName();
+					boolean parameterValid = false;
+					for (String s : DesignParser.getInstance()) {
+						if (s.equals(parameterStringName)) {
+							parameterValid = true;
+							break;
+						}
+					}
+					if (!parameterValid) {
+						return;
+					}
 					String[] parameterStringArray = parameterStringName.split("[.]");
 					if (parameterStringArray.length > 0) {
 						parameterStringName = parameterStringArray[parameterStringArray.length - 1];
@@ -105,6 +125,16 @@ public class MethodAssociationVisitor extends MethodVisitor {
 
 		if (desc.charAt(0) == 'L') {
 			String descStringName = Type.getType(desc).getClassName();
+			boolean descValid = false;
+			for (String s : DesignParser.getInstance()) {
+				if (s.equals(descStringName)) {
+					descValid = true;
+					break;
+				}
+			}
+			if (!descValid) {
+				return;
+			}
 			String[] descStringArray = descStringName.split("[.]");
 			if (descStringArray.length > 0) {
 				descStringName = descStringArray[descStringArray.length - 1];
@@ -132,6 +162,17 @@ public class MethodAssociationVisitor extends MethodVisitor {
 		}
 
 		String stringName = type;
+		String typeCheck = type.replaceAll("/",".");
+		boolean typeValid = false;
+		for (String s : DesignParser.getInstance()) {
+			if (s.equals(typeCheck)) {
+				typeValid = true;
+				break;
+			}
+		}
+		if (!typeValid) {
+			return;
+		}
 		String[] stringArray = stringName.split("/");
 		if (stringArray.length > 0) {
 			stringName = stringArray[stringArray.length - 1];
@@ -152,5 +193,4 @@ public class MethodAssociationVisitor extends MethodVisitor {
 	public void visitVarInsn(int opcode, int var) {
 		// Unused
 	}
-
 }

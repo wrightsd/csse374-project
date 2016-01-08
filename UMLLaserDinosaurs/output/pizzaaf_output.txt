@@ -4,114 +4,83 @@ PizzaIngredientFactory [
 shape="record",
 label = "{\<\<abstract\>\>\n\<\<interface\>\>\nPizzaIngredientFactory|-createDough() : Dough\l-createSauce() : Sauce\l-createCheese() : Cheese\l-createVeggies() : Veggies[]\l-createPepperoni() : Pepperoni\l-createClam() : Clams\l}"
 ];
-PizzaIngredientFactory->Object[arrowhead="onormal", style="solid"];
 NYPizzaIngredientFactory [
 shape="record",
 label = "{NYPizzaIngredientFactory|+createDough() : Dough\l+createSauce() : Sauce\l+createCheese() : Cheese\l+createVeggies() : Veggies[]\l+createPepperoni() : Pepperoni\l+createClam() : Clams\l}"
 ];
-NYPizzaIngredientFactory->Object[arrowhead="onormal", style="solid"];
 NYPizzaIngredientFactory->PizzaIngredientFactory[arrowhead="onormal", style="dashed"];
 ChicagoPizzaIngredientFactory [
 shape="record",
 label = "{ChicagoPizzaIngredientFactory|+createDough() : Dough\l+createSauce() : Sauce\l+createCheese() : Cheese\l+createVeggies() : Veggies[]\l+createPepperoni() : Pepperoni\l+createClam() : Clams\l}"
 ];
-ChicagoPizzaIngredientFactory->Object[arrowhead="onormal", style="solid"];
 ChicagoPizzaIngredientFactory->PizzaIngredientFactory[arrowhead="onormal", style="dashed"];
 NYPizzaStore [
 shape="record",
 label = "{NYPizzaStore|#createPizza(String) : Pizza\l}"
 ];
-NYPizzaStore->PizzaStore[arrowhead="onormal", style="solid"];
 Dough [
 shape="record",
 label = "{\<\<abstract\>\>\n\<\<interface\>\>\nDough|-toString() : String\l}"
 ];
-Dough->Object[arrowhead="onormal", style="solid"];
 Sauce [
 shape="record",
 label = "{\<\<abstract\>\>\n\<\<interface\>\>\nSauce|-toString() : String\l}"
 ];
-Sauce->Object[arrowhead="onormal", style="solid"];
 Cheese [
 shape="record",
 label = "{\<\<abstract\>\>\n\<\<interface\>\>\nCheese|-toString() : String\l}"
 ];
-Cheese->Object[arrowhead="onormal", style="solid"];
 Clams [
 shape="record",
 label = "{\<\<abstract\>\>\n\<\<interface\>\>\nClams|-toString() : String\l}"
 ];
-Clams->Object[arrowhead="onormal", style="solid"];
 ThinCrustDough [
 shape="record",
 label = "{ThinCrustDough|+toString() : String\l}"
 ];
-ThinCrustDough->Object[arrowhead="onormal", style="solid"];
 ThinCrustDough->Dough[arrowhead="onormal", style="dashed"];
 ThickCrustDough [
 shape="record",
 label = "{ThickCrustDough|+toString() : String\l}"
 ];
-ThickCrustDough->Object[arrowhead="onormal", style="solid"];
 ThickCrustDough->Dough[arrowhead="onormal", style="dashed"];
 PlumTomatoSauce [
 shape="record",
 label = "{PlumTomatoSauce|+toString() : String\l}"
 ];
-PlumTomatoSauce->Object[arrowhead="onormal", style="solid"];
 PlumTomatoSauce->Sauce[arrowhead="onormal", style="dashed"];
 MarinaraSauce [
 shape="record",
 label = "{MarinaraSauce|+toString() : String\l}"
 ];
-MarinaraSauce->Object[arrowhead="onormal", style="solid"];
 MarinaraSauce->Sauce[arrowhead="onormal", style="dashed"];
 MozzarellaCheese [
 shape="record",
 label = "{MozzarellaCheese|+toString() : String\l}"
 ];
-MozzarellaCheese->Object[arrowhead="onormal", style="solid"];
 MozzarellaCheese->Cheese[arrowhead="onormal", style="dashed"];
 ReggianoCheese [
 shape="record",
 label = "{ReggianoCheese|+toString() : String\l}"
 ];
-ReggianoCheese->Object[arrowhead="onormal", style="solid"];
 ReggianoCheese->Cheese[arrowhead="onormal", style="dashed"];
 FrozenClams [
 shape="record",
 label = "{FrozenClams|+toString() : String\l}"
 ];
-FrozenClams->Object[arrowhead="onormal", style="solid"];
 FrozenClams->Clams[arrowhead="onormal", style="dashed"];
 FreshClams [
 shape="record",
 label = "{FreshClams|+toString() : String\l}"
 ];
-FreshClams->Object[arrowhead="onormal", style="solid"];
 FreshClams->Clams[arrowhead="onormal", style="dashed"];
 NYPizzaIngredientFactory->ThinCrustDough[arrowhead="ovee", style="dashed"];
 NYPizzaIngredientFactory->MarinaraSauce[arrowhead="ovee", style="dashed"];
 NYPizzaIngredientFactory->ReggianoCheese[arrowhead="ovee", style="dashed"];
-NYPizzaIngredientFactory->Veggies[arrowhead="ovee", style="dashed"];
-NYPizzaIngredientFactory->Garlic[arrowhead="ovee", style="dashed"];
-NYPizzaIngredientFactory->Onion[arrowhead="ovee", style="dashed"];
-NYPizzaIngredientFactory->Mushroom[arrowhead="ovee", style="dashed"];
-NYPizzaIngredientFactory->RedPepper[arrowhead="ovee", style="dashed"];
-NYPizzaIngredientFactory->SlicedPepperoni[arrowhead="ovee", style="dashed"];
 NYPizzaIngredientFactory->FreshClams[arrowhead="ovee", style="dashed"];
 ChicagoPizzaIngredientFactory->ThickCrustDough[arrowhead="ovee", style="dashed"];
 ChicagoPizzaIngredientFactory->PlumTomatoSauce[arrowhead="ovee", style="dashed"];
 ChicagoPizzaIngredientFactory->MozzarellaCheese[arrowhead="ovee", style="dashed"];
-ChicagoPizzaIngredientFactory->Veggies[arrowhead="ovee", style="dashed"];
-ChicagoPizzaIngredientFactory->BlackOlives[arrowhead="ovee", style="dashed"];
-ChicagoPizzaIngredientFactory->Spinach[arrowhead="ovee", style="dashed"];
-ChicagoPizzaIngredientFactory->Eggplant[arrowhead="ovee", style="dashed"];
-ChicagoPizzaIngredientFactory->SlicedPepperoni[arrowhead="ovee", style="dashed"];
 ChicagoPizzaIngredientFactory->FrozenClams[arrowhead="ovee", style="dashed"];
 NYPizzaStore->NYPizzaIngredientFactory[arrowhead="ovee", style="dashed"];
-NYPizzaStore->CheesePizza[arrowhead="ovee", style="dashed"];
-NYPizzaStore->VeggiePizza[arrowhead="ovee", style="dashed"];
-NYPizzaStore->ClamPizza[arrowhead="ovee", style="dashed"];
-NYPizzaStore->PepperoniPizza[arrowhead="ovee", style="dashed"];
 }
