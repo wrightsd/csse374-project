@@ -12,7 +12,8 @@ public class MethodAssociationVisitor extends MethodVisitor {
 	private ArrayList<String> associatesList;
 	private ArrayList<String> usesList;
 
-	public MethodAssociationVisitor(int api, MethodVisitor decorated, ArrayList<String> associatesList, ArrayList<String> usesList) {
+	public MethodAssociationVisitor(int api, MethodVisitor decorated, ArrayList<String> associatesList,
+			ArrayList<String> usesList) {
 		super(api, decorated);
 		this.associatesList = associatesList;
 		this.usesList = usesList;
@@ -20,36 +21,63 @@ public class MethodAssociationVisitor extends MethodVisitor {
 
 	@Override
 	public void visitMethodInsn(int opcode, String owner, String name, String desc, boolean itf) {
-		String[] ownerStringArray = owner.split("/");
-		if(ownerStringArray.length>0){
-		owner = ownerStringArray[ownerStringArray.length-1];
+		owner = owner.replaceAll("/", ".");
+		// if owner is not in designparser list then just return
+		boolean ownerValid = false;
+		for (String s : DesignParser.getInstance()) {
+			if (s.equals(owner)) {
+				ownerValid = true;
+				break;
+			}
 		}
-		
+		if (!ownerValid) {
+			return;
+		}
+		String[] ownerStringArray = owner.split("[.]");
+		if (ownerStringArray.length > 0) {
+			owner = ownerStringArray[ownerStringArray.length - 1];
+		}
+
 		String[] parameterReturnSplit = desc.split("[)]");
 		String returnString = parameterReturnSplit[1];
 		if (returnString.charAt(0) == 'L') {
 			String returnStringName = Type.getType(returnString).getClassName();
 			String[] returnStringArray = returnStringName.split("[.]");
-			if(returnStringArray.length>0){
-			returnStringName = returnStringArray[returnStringArray.length-1];
+			if (returnStringArray.length > 0) {
+				returnStringName = returnStringArray[returnStringArray.length - 1];
 			}
-			if(!usesList.contains(owner+"->"+returnStringName)){
-				usesList.add(owner+"->"+returnStringName);
+			boolean contains = false;
+			System.out.println(Arrays.toString(usesList.toArray()));
+			for (String s : usesList) {
+				if (s.equals(owner + "->" + returnStringName)) {
+					contains = true;
+					break;
+				}
+			}
+			if (!contains) {
+				usesList.add(owner + "->" + returnStringName);
 			}
 		}
 
 		String parameterString = parameterReturnSplit[0].substring(1);
 		if (!parameterString.equals("")) {
 			String[] parameters = parameterString.split("\\[");
-			for (int i = 1; i < parameters.length; i++) {
-				if(parameters[i].charAt(0) == 'L'){
+			for (int i = 0; i < parameters.length; i++) {
+				if (parameters[i].charAt(0) == 'L') {
 					String parameterStringName = Type.getType(parameters[i]).getClassName();
 					String[] parameterStringArray = parameterStringName.split("[.]");
-					if(parameterStringArray.length>0){
-					parameterStringName = parameterStringArray[parameterStringArray.length-1];
+					if (parameterStringArray.length > 0) {
+						parameterStringName = parameterStringArray[parameterStringArray.length - 1];
 					}
-					if(!usesList.contains(owner+"->"+parameterStringName)){
-						usesList.add(owner+"->"+parameterStringName);
+					boolean contains = false;
+					for (String s : usesList) {
+						if (s.equals(owner + "->" + parameterStringName)) {
+							contains = true;
+							break;
+						}
+					}
+					if (!contains) {
+						usesList.add(owner + "->" + parameterStringName);
 					}
 				}
 			}
@@ -59,10 +87,42 @@ public class MethodAssociationVisitor extends MethodVisitor {
 
 	@Override
 	public void visitFieldInsn(int opcode, String owner, String name, String desc) {
-		// System.out.println("visitFieldInsn " + name + " " +
-		// Type.getType(desc).getClassName());
-		// System.out.println(desc);
-		// System.out.println("owner: " + owner + ", name: " + name);
+		owner = owner.replaceAll("/", ".");
+		// if owner is not in designparser list then just return
+		boolean ownerValid = false;
+		for (String s : DesignParser.getInstance()) {
+			if (s.equals(owner)) {
+				ownerValid = true;
+				break;
+			}
+		}
+		if (!ownerValid) {
+			return;
+		}
+		String[] ownerStringArray = owner.split("[.]");
+		if (ownerStringArray.length > 0) {
+			owner = ownerStringArray[ownerStringArray.length - 1];
+		}
+
+		if (desc.charAt(0) == 'L') {
+			String descStringName = Type.getType(desc).getClassName();
+			String[] descStringArray = descStringName.split("[.]");
+			if (descStringArray.length > 0) {
+				descStringName = descStringArray[descStringArray.length - 1];
+			}
+			boolean contains = false;
+			System.out.println(Arrays.toString(usesList.toArray()));
+			for (String s : usesList) {
+				if (s.equals(owner + "->" + descStringName)) {
+					contains = true;
+					break;
+				}
+			}
+			if (!contains) {
+				usesList.add(owner + "->" + descStringName);
+			}
+		}
+
 	}
 
 	@Override

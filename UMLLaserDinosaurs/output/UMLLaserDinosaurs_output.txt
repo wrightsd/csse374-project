@@ -2,7 +2,7 @@ digraph text{
 rankdir=BT;
 ClassDeclarationVisitor [
 shape="record",
-label = "{ClassDeclarationVisitor|-builder : StringBuilder\l|+ClassDeclarationVisitor(int) : void\l+ClassDeclarationVisitor(int, StringBuilder) : void\l+visit(int, int, String, String, String, String[]) : void\l}"
+label = "{ClassDeclarationVisitor|-builder : StringBuilder\l|+ClassDeclarationVisitor(int) : void\l+ClassDeclarationVisitor(int, StringBuilder) : void\l+ClassDeclarationVisitor(int, ClassVisitor, StringBuilder) : void\l+visit(int, int, String, String, String, String[]) : void\l}"
 ];
 ClassDeclarationVisitor->ClassVisitor[arrowhead="onormal", style="solid"];
 ClassFieldVisitor [
@@ -17,7 +17,7 @@ label = "{ClassMethodVisitor|-builder : StringBuilder\l|+ClassMethodVisitor(int)
 ClassMethodVisitor->ClassVisitor[arrowhead="onormal", style="solid"];
 DesignParser [
 shape="record",
-label = "{DesignParser|-parse(String[], String) : void\l}"
+label = "{DesignParser|-currentClass : String\l-classSet : ArrayList\l-myArgs : String[]\l|-parse(String[], String) : void\l-drawUsesArrows(ArrayList, ArrayList, StringBuilder) : void\l-getInstance() : ArrayList\l}"
 ];
 DesignParser->Object[arrowhead="onormal", style="solid"];
 InterfaceAbstractCheckVisitor [
@@ -25,4 +25,5 @@ shape="record",
 label = "{InterfaceAbstractCheckVisitor|-builder : StringBuilder\l|+InterfaceAbstractCheckVisitor(int) : void\l+InterfaceAbstractCheckVisitor(int, StringBuilder) : void\l+InterfaceAbstractCheckVisitor(int, ClassVisitor, StringBuilder) : void\l+visit(int, int, String, String, String, String[]) : void\l}"
 ];
 InterfaceAbstractCheckVisitor->ClassVisitor[arrowhead="onormal", style="solid"];
+DesignParser->ArrayList[arrowhead="ovee", style="dashed"];
 }
