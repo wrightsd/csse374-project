@@ -125,7 +125,27 @@ public class MethodAssociationVisitor extends MethodVisitor {
 
 	@Override
 	public void visitTypeInsn(int opcode, String type) {
-		// System.out.println("visitTypeInsn " + type);
+		String owner = DesignParser.currentClass;
+		String[] ownerStringArray = owner.split("[.]");
+		if (ownerStringArray.length > 0) {
+			owner = ownerStringArray[ownerStringArray.length - 1];
+		}
+
+		String stringName = type;
+		String[] stringArray = stringName.split("/");
+		if (stringArray.length > 0) {
+			stringName = stringArray[stringArray.length - 1];
+		}
+		boolean contains = false;
+		for (String s : usesList) {
+			if (s.equals(owner + "->" + stringName)) {
+				contains = true;
+				break;
+			}
+		}
+		if (!contains) {
+			usesList.add(owner + "->" + stringName);
+		}
 	}
 
 	@Override

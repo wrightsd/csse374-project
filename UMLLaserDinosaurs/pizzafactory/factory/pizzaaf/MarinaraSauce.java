@@ -1,4 +1,4 @@
-package headfirst.factory.pizzaaf;
+package factory.pizzaaf;
 
 public class MarinaraSauce implements Sauce {
 	public String toString() {

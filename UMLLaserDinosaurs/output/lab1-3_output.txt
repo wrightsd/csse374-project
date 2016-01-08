@@ -46,8 +46,11 @@ label = "{WordLoader|+update(AppLauncher) : void\l}"
 ];
 WordLoader->Object[arrowhead="onormal", style="solid"];
 WordLoader->Observer[arrowhead="onormal", style="dashed"];
-AppLauncher->String[arrowhead="ovee", style="dashed"];
 AppLauncher->Path[arrowhead="ovee", style="dashed"];
+AppLauncher->List[arrowhead="ovee", style="dashed"];
+AppLauncher->WatchService[arrowhead="ovee", style="dashed"];
+AppLauncher->String[arrowhead="ovee", style="dashed"];
+AppLauncher->ArrayList[arrowhead="ovee", style="dashed"];
 Observer->AppLauncher[arrowhead="ovee", style="dashed"];
 AppLauncher->Process[arrowhead="ovee", style="dashed"];
 }
