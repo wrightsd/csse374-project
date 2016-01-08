@@ -1,4 +1,4 @@
-package headfirst.factory.pizzas;
+package factory.pizzas;
 
 import java.util.ArrayList;
 

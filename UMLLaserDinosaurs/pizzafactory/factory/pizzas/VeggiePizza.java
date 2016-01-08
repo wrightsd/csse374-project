@@ -1,4 +1,4 @@
-package headfirst.factory.pizzas;
+package factory.pizzas;
 
 public class VeggiePizza extends Pizza {
 	public VeggiePizza() {

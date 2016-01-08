@@ -1,4 +1,4 @@
-package headfirst.factory.pizzafm;
+package factory.pizzafm;
 
 public class ChicagoPizzaStore extends PizzaStore {
 

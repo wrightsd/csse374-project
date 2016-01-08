@@ -1,4 +1,4 @@
-package headfirst.factory.pizzafm;
+package factory.pizzafm;
 
 public abstract class PizzaStore {
  
