@@ -17,8 +17,14 @@ public class ClassDeclarationVisitor extends ClassVisitor {
 		this.builder = builder;
 	}
 
+	public ClassDeclarationVisitor(int asm5, ClassVisitor visitor, StringBuilder builder) {
+		super(asm5, visitor);
+		this.builder = builder;
+	}
+
 	@Override
 	public void visit(int version, int access, String name, String signature, String superName, String[] interfaces) {
+		
 		String[] classNameToWriteArray = name.split("/");
 		String classNameToWrite = classNameToWriteArray[classNameToWriteArray.length-1];
 		

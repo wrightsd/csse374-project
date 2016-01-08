@@ -8,6 +8,8 @@ import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Opcodes;
 
 public class DesignParser {
+	
+	public static String currentClass;
 
 	public static void parse(String[] args, String fileName) throws IOException {
 		StringBuilder completeBuilder = new StringBuilder();
@@ -15,6 +17,7 @@ public class DesignParser {
 		completeBuilder.append("rankdir=BT;\n");
 
 		for (String className : args) {
+			currentClass = className;
 			StringBuilder methodBuilder = new StringBuilder();
 			StringBuilder fieldBuilder = new StringBuilder();
 			StringBuilder arrowBuilder = new StringBuilder();
