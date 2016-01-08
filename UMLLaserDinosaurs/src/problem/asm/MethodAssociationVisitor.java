@@ -47,7 +47,6 @@ public class MethodAssociationVisitor extends MethodVisitor {
 				returnStringName = returnStringArray[returnStringArray.length - 1];
 			}
 			boolean contains = false;
-			System.out.println(Arrays.toString(usesList.toArray()));
 			for (String s : usesList) {
 				if (s.equals(owner + "->" + returnStringName)) {
 					contains = true;
@@ -111,7 +110,6 @@ public class MethodAssociationVisitor extends MethodVisitor {
 				descStringName = descStringArray[descStringArray.length - 1];
 			}
 			boolean contains = false;
-			System.out.println(Arrays.toString(usesList.toArray()));
 			for (String s : usesList) {
 				if (s.equals(owner + "->" + descStringName)) {
 					contains = true;

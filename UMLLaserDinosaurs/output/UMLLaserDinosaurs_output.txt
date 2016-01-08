@@ -25,5 +25,22 @@ shape="record",
 label = "{InterfaceAbstractCheckVisitor|-builder : StringBuilder\l|+InterfaceAbstractCheckVisitor(int) : void\l+InterfaceAbstractCheckVisitor(int, StringBuilder) : void\l+InterfaceAbstractCheckVisitor(int, ClassVisitor, StringBuilder) : void\l+visit(int, int, String, String, String, String[]) : void\l}"
 ];
 InterfaceAbstractCheckVisitor->ClassVisitor[arrowhead="onormal", style="solid"];
+MethodAssociationVisitor [
+shape="record",
+label = "{MethodAssociationVisitor|-builder : StringBuilder\l-associatesList : ArrayList\l-usesList : ArrayList\l|+MethodAssociationVisitor(int, MethodVisitor, ArrayList, ArrayList) : void\l+visitMethodInsn(int, String, String, String, boolean) : void\l+visitFieldInsn(int, String, String, String) : void\l+visitTypeInsn(int, String) : void\l+visitVarInsn(int, int) : void\l}"
+];
+MethodAssociationVisitor->MethodVisitor[arrowhead="onormal", style="solid"];
+ClassAssociationVisitor [
+shape="record",
+label = "{ClassAssociationVisitor|-builder : StringBuilder\l-associatesList : ArrayList\l-usesList : ArrayList\l|+ClassAssociationVisitor(int, ClassVisitor, ArrayList, ArrayList) : void\l+visitMethod(int, String, String, String, String[]) : MethodVisitor\l}"
+];
+ClassAssociationVisitor->ClassVisitor[arrowhead="onormal", style="solid"];
+ClassDeclarationVisitor->StringBuilder[arrowhead="ovee", style="dashed"];
+ClassFieldVisitor->StringBuilder[arrowhead="ovee", style="dashed"];
+ClassMethodVisitor->StringBuilder[arrowhead="ovee", style="dashed"];
+DesignParser->String[arrowhead="ovee", style="dashed"];
 DesignParser->ArrayList[arrowhead="ovee", style="dashed"];
+InterfaceAbstractCheckVisitor->StringBuilder[arrowhead="ovee", style="dashed"];
+MethodAssociationVisitor->ArrayList[arrowhead="ovee", style="dashed"];
+ClassAssociationVisitor->ArrayList[arrowhead="ovee", style="dashed"];
 }
