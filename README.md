@@ -31,3 +31,5 @@ Milestone 2:
 Instructions:
 
 Right now, we have created a separate runner class for each of the UML diagrams that need to be made.  To run the program, simply run the Lab1_3Runner class to generate the UML for the Lab1_3 or the UMLLaserDinosaursRunner class to generate a UML diagram for the project itself.  As the project currently stands, there is no way to pass a single file or java class to create a UML diagram, but this could be added in a later milestone without needing to modify any existing classes significantly.  Important note:  To run the lab1_3Runner, you must ensure that you have a java project with lab1_3 included in the run configuration.  Also, you may need to manually change the names of the files specified in the runner to match your local files because they are currently hard-coded to our version, which is included in the repository.
+
+For testing purposes, run the JUnit tests individually.  When the tests are all run at the same time errors sometime occur with synchronous evaluation reading a file before it gets fully written, making the JUnit test fail, whereas when all tests are ran individually they passed every time.
