@@ -10,47 +10,43 @@ BackwardsTextPrinter [
 shape="record",
 label = "{BackwardsTextPrinter|+update(AppLauncher) : void\l}"
 ];
-BackwardsTextPrinter->Object[arrowhead="onormal", style="solid"];
 BackwardsTextPrinter->Observer[arrowhead="onormal", style="dashed"];
 FileNamePrinter [
 shape="record",
 label = "{FileNamePrinter|+update(AppLauncher) : void\l}"
 ];
-FileNamePrinter->Object[arrowhead="onormal", style="solid"];
 FileNamePrinter->Observer[arrowhead="onormal", style="dashed"];
 Observer [
 shape="record",
 label = "{\<\<abstract\>\>\n\<\<interface\>\>\nObserver|-update(AppLauncher) : void\l}"
 ];
-Observer->Object[arrowhead="onormal", style="solid"];
 Subject [
 shape="record",
 label = "{\<\<abstract\>\>\n\<\<interface\>\>\nSubject|-registerObserver(Observer) : void\l-removeObserver(Observer) : void\l-notifyObservers() : void\l}"
 ];
-Subject->Object[arrowhead="onormal", style="solid"];
 TextLoader [
 shape="record",
 label = "{TextLoader|+update(AppLauncher) : void\l}"
 ];
-TextLoader->Object[arrowhead="onormal", style="solid"];
 TextLoader->Observer[arrowhead="onormal", style="dashed"];
 WebsiteLoader [
 shape="record",
 label = "{WebsiteLoader|+update(AppLauncher) : void\l}"
 ];
-WebsiteLoader->Object[arrowhead="onormal", style="solid"];
 WebsiteLoader->Observer[arrowhead="onormal", style="dashed"];
 WordLoader [
 shape="record",
 label = "{WordLoader|+update(AppLauncher) : void\l}"
 ];
-WordLoader->Object[arrowhead="onormal", style="solid"];
 WordLoader->Observer[arrowhead="onormal", style="dashed"];
-AppLauncher->Path[arrowhead="ovee", style="dashed"];
-AppLauncher->List[arrowhead="ovee", style="dashed"];
-AppLauncher->WatchService[arrowhead="ovee", style="dashed"];
-AppLauncher->String[arrowhead="ovee", style="dashed"];
-AppLauncher->ArrayList[arrowhead="ovee", style="dashed"];
+AppLauncher->TextLoader[arrowhead="ovee", style="dashed"];
+AppLauncher->WebsiteLoader[arrowhead="ovee", style="dashed"];
+AppLauncher->WordLoader[arrowhead="ovee", style="dashed"];
+AppLauncher->FileNamePrinter[arrowhead="ovee", style="dashed"];
+AppLauncher->BackwardsTextPrinter[arrowhead="ovee", style="dashed"];
+AppLauncher->AppLauncher[arrowhead="ovee", style="dashed"];
+AppLauncher->Observer[arrowhead="ovee", style="dashed"];
 Observer->AppLauncher[arrowhead="ovee", style="dashed"];
-AppLauncher->Process[arrowhead="ovee", style="dashed"];
+AppLauncher->Process[arrowhead="ovee", style="solid"];
+AppLauncher->Observer[arrowhead="ovee", style="solid"];
 }

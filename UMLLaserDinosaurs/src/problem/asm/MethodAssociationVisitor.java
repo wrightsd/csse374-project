@@ -24,7 +24,7 @@ public class MethodAssociationVisitor extends MethodVisitor {
 		owner = owner.replaceAll("/", ".");
 		// if owner is not in designparser list then just return
 		boolean ownerValid = false;
-		for (String s : DesignParser.getInstance()) {
+		for (String s : UMLMaker.getInstance()) {
 			if (s.equals(owner)) {
 				ownerValid = true;
 				break;
@@ -43,7 +43,7 @@ public class MethodAssociationVisitor extends MethodVisitor {
 		if (returnString.charAt(0) == 'L') {
 			String returnStringName = Type.getType(returnString).getClassName();
 			boolean returnValid = false;
-			for (String s : DesignParser.getInstance()) {
+			for (String s : UMLMaker.getInstance()) {
 				if (s.equals(returnStringName)) {
 					returnValid = true;
 					break;
@@ -75,7 +75,7 @@ public class MethodAssociationVisitor extends MethodVisitor {
 				if (parameters[i].charAt(0) == 'L') {
 					String parameterStringName = Type.getType(parameters[i]).getClassName();
 					boolean parameterValid = false;
-					for (String s : DesignParser.getInstance()) {
+					for (String s : UMLMaker.getInstance()) {
 						if (s.equals(parameterStringName)) {
 							parameterValid = true;
 							break;
@@ -109,7 +109,7 @@ public class MethodAssociationVisitor extends MethodVisitor {
 		owner = owner.replaceAll("/", ".");
 		// if owner is not in designparser list then just return
 		boolean ownerValid = false;
-		for (String s : DesignParser.getInstance()) {
+		for (String s : UMLMaker.getInstance()) {
 			if (s.equals(owner)) {
 				ownerValid = true;
 				break;
@@ -126,7 +126,7 @@ public class MethodAssociationVisitor extends MethodVisitor {
 		if (desc.charAt(0) == 'L') {
 			String descStringName = Type.getType(desc).getClassName();
 			boolean descValid = false;
-			for (String s : DesignParser.getInstance()) {
+			for (String s : UMLMaker.getInstance()) {
 				if (s.equals(descStringName)) {
 					descValid = true;
 					break;
@@ -155,7 +155,7 @@ public class MethodAssociationVisitor extends MethodVisitor {
 
 	@Override
 	public void visitTypeInsn(int opcode, String type) {
-		String owner = DesignParser.currentClass;
+		String owner = UMLMaker.currentClass;
 		String[] ownerStringArray = owner.split("[.]");
 		if (ownerStringArray.length > 0) {
 			owner = ownerStringArray[ownerStringArray.length - 1];
@@ -164,7 +164,7 @@ public class MethodAssociationVisitor extends MethodVisitor {
 		String stringName = type;
 		String typeCheck = type.replaceAll("/",".");
 		boolean typeValid = false;
-		for (String s : DesignParser.getInstance()) {
+		for (String s : UMLMaker.getInstance()) {
 			if (s.equals(typeCheck)) {
 				typeValid = true;
 				break;

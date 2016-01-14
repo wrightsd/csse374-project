@@ -71,7 +71,7 @@ public class ClassAssociationVisitor extends ClassVisitor {
 			String typeClass = Type.getType(str).getClassName();
 			String[] typeClassSplit = typeClass.split("[.]");
 			typeClass = typeClassSplit[typeClassSplit.length - 1];
-			String owner = DesignParser.currentClass;
+			String owner = UMLMaker.currentClass;
 			String[] ownerSplit = owner.split("[.]");
 			owner = ownerSplit[ownerSplit.length - 1];
 			

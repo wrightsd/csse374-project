@@ -17,7 +17,7 @@ label = "{ClassMethodVisitor|-builder : StringBuilder\l|+ClassMethodVisitor(int)
 ClassMethodVisitor->ClassVisitor[arrowhead="onormal", style="solid"];
 DesignParser [
 shape="record",
-label = "{DesignParser|-currentClass : String\l-classSet : ArrayList\l-myArgs : String[]\l|-parse(String[], String) : void\l-drawUsesArrows(ArrayList, ArrayList, StringBuilder) : void\l-getInstance() : ArrayList\l}"
+label = "{DesignParser|-parse(String[], String) : void\l}"
 ];
 InterfaceAbstractCheckVisitor [
 shape="record",
@@ -34,13 +34,22 @@ shape="record",
 label = "{ClassAssociationVisitor|-builder : StringBuilder\l-associatesList : ArrayList\l-usesList : ArrayList\l|+ClassAssociationVisitor(int, ClassVisitor, ArrayList, ArrayList) : void\l+ClassAssociationVisitor(int, ArrayList, ArrayList) : void\l+visitField(int, String, String, String, Object) : FieldVisitor\l+visitMethod(int, String, String, String, String[]) : MethodVisitor\l-compileAggregation(String) : void\l}"
 ];
 ClassAssociationVisitor->ClassVisitor[arrowhead="onormal", style="solid"];
-DesignParser->ClassDeclarationVisitor[arrowhead="ovee", style="dashed"];
-DesignParser->InterfaceAbstractCheckVisitor[arrowhead="ovee", style="dashed"];
-DesignParser->ClassFieldVisitor[arrowhead="ovee", style="dashed"];
-DesignParser->ClassMethodVisitor[arrowhead="ovee", style="dashed"];
-DesignParser->ClassAssociationVisitor[arrowhead="ovee", style="dashed"];
+UMLMaker [
+shape="record",
+label = "{UMLMaker|-currentClass : String\l-classSet : ArrayList\l-myArgs : String[]\l-usesList : ArrayList\l-associatesList : ArrayList\l|-generateDiagramText(String[]) : StringBuilder\l-drawUsesArrows(ArrayList, ArrayList, StringBuilder) : void\l-getInstance() : ArrayList\l}"
+];
+UMLMaker->DiagramMaker[arrowhead="onormal", style="solid"];
+DiagramMaker [
+shape="record",
+label = "{\<\<abstract\>\>\nDiagramMaker|-generateDiagramText(String[]) : StringBuilder\l}"
+];
 ClassAssociationVisitor->MethodAssociationVisitor[arrowhead="ovee", style="dashed"];
-DesignParser->String[arrowhead="ovee", style="solid"];
+UMLMaker->ClassDeclarationVisitor[arrowhead="ovee", style="dashed"];
+UMLMaker->InterfaceAbstractCheckVisitor[arrowhead="ovee", style="dashed"];
+UMLMaker->ClassFieldVisitor[arrowhead="ovee", style="dashed"];
+UMLMaker->ClassMethodVisitor[arrowhead="ovee", style="dashed"];
+UMLMaker->ClassAssociationVisitor[arrowhead="ovee", style="dashed"];
 MethodAssociationVisitor->String[arrowhead="ovee", style="solid"];
 ClassAssociationVisitor->String[arrowhead="ovee", style="solid"];
+UMLMaker->String[arrowhead="ovee", style="solid"];
 }
