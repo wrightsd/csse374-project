@@ -18,5 +18,9 @@ TestClassSuper [
 shape="record",
 label = "{TestClassSuper|}"
 ];
+TestClass2->TestClass[arrowhead="ovee", style="dashed"];
+TestClass2->AnotherTestClass[arrowhead="ovee", style="dashed"];
+AnotherTestClass->TestClass[arrowhead="ovee", style="dashed"];
+AnotherTestClass->TestClass2[arrowhead="ovee", style="dashed"];
 TestClass2->String[arrowhead="ovee", style="solid"];
 }

@@ -68,6 +68,7 @@ UMLMaker->ClassFieldVisitor[arrowhead="ovee", style="dashed"];
 UMLMaker->ClassMethodVisitor[arrowhead="ovee", style="dashed"];
 UMLMaker->ClassAssociationVisitor[arrowhead="ovee", style="dashed"];
 DesignParser->String[arrowhead="ovee", style="solid"];
+DesignParser->DiagramMaker[arrowhead="ovee", style="solid"];
 MethodAssociationVisitor->String[arrowhead="ovee", style="solid"];
 ClassAssociationVisitor->String[arrowhead="ovee", style="solid"];
 UMLMaker->String[arrowhead="ovee", style="solid"];

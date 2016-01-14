@@ -155,7 +155,7 @@ public class MethodAssociationVisitor extends MethodVisitor {
 
 	@Override
 	public void visitTypeInsn(int opcode, String type) {
-		String owner = UMLMaker.currentClass;
+		String owner = DesignParser.getCurrentClass();
 		String[] ownerStringArray = owner.split("[.]");
 		if (ownerStringArray.length > 0) {
 			owner = ownerStringArray[ownerStringArray.length - 1];

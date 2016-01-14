@@ -9,11 +9,11 @@ import org.objectweb.asm.Opcodes;
 
 public class UMLMaker implements DiagramMaker {
 	
-	public static String currentClass;
-	private static ArrayList<String> classSet;
-	private static String[] myArgs;
-	private static ArrayList<String> usesList;
-	private static ArrayList<String> associatesList;
+	private String currentClass;
+	private ArrayList<String> classSet;
+	private String[] myArgs;
+	private ArrayList<String> usesList;
+	private ArrayList<String> associatesList;
 
 	@Override
 	public StringBuilder generateDiagramText(String[] args) throws IOException {

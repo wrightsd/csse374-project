@@ -2,12 +2,15 @@ package problem.asm;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.FieldVisitor;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
+import org.objectweb.asm.signature.SignatureReader;
+import org.objectweb.asm.signature.SignatureVisitor;
 
 public class ClassAssociationVisitor extends ClassVisitor {
 
@@ -30,7 +33,6 @@ public class ClassAssociationVisitor extends ClassVisitor {
 
 	public FieldVisitor visitField(int access, String name, String desc, String signature, Object value) {
 		FieldVisitor toDecorate = super.visitField(access, name, desc, signature, value);
-		//System.out.println(signature);
 		compileAggregation(signature);
 		return toDecorate;
 	}
@@ -38,7 +40,6 @@ public class ClassAssociationVisitor extends ClassVisitor {
 	@Override
 	public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
 		MethodVisitor toDecorate = super.visitMethod(access, name, desc, signature, exceptions);
-		//System.out.println(signature);
 		compileAggregation(signature);
 		MethodVisitor mine = new MethodAssociationVisitor(Opcodes.ASM5, toDecorate, associatesList, usesList);
 		return mine;
@@ -46,45 +47,37 @@ public class ClassAssociationVisitor extends ClassVisitor {
 
 	// TODO: Fix for nested aggregation
 	private void compileAggregation(String signature) {
-		if (null == signature) {
-			return;
-		}
-		ArrayList<String> types = new ArrayList<String>();
-		boolean type = false;
-		String aggregateType = "";
-		for (int i = 0; i < signature.length(); i++) {
-			if (type) {
-				if (signature.charAt(i) == '>') {
-					types.add(aggregateType);
-					type = false;
-				} else {
-					aggregateType += signature.charAt(i);
-				}
-			} else {
-				if (signature.charAt(i) == '<') {
-					aggregateType = "";
-					type = true;
-				}
-			}
-		}
+		if (signature != null) {
+			ArrayList<String> types = new ArrayList<String>();
+			SignatureReader sigRead = new SignatureReader(signature);
+			SignatureVisitor sigVis = new SignatureVisitor(Opcodes.ASM5) {
 
-		for (String str : types) {
-			String typeClass = Type.getType(str).getClassName();
-			String[] typeClassSplit = typeClass.split("[.]");
-			typeClass = typeClassSplit[typeClassSplit.length - 1];
-			String owner = DesignParser.getCurrentClass();
-			String[] ownerSplit = owner.split("[.]");
-			owner = ownerSplit[ownerSplit.length - 1];
-			
-			String toAdd = owner + "->" + typeClass;
-			boolean add = true;
-			for (String s : associatesList) {
-				if (s.equals(toAdd)) {
-					add = false;
+				@Override
+				public void visitClassType(String type) {
+					types.add(type);
 				}
-			}
-			if (add) {
-				associatesList.add(toAdd);
+
+			};
+			sigRead.acceptType(sigVis);
+
+			types.remove(0);
+			for (String str : types) {
+				String[] typeClassSplit = str.split("/");
+				str = typeClassSplit[typeClassSplit.length - 1];
+				String owner = DesignParser.getCurrentClass();
+				String[] ownerSplit = owner.split("[.]");
+				owner = ownerSplit[ownerSplit.length - 1];
+
+				String toAdd = owner + "->" + str;
+				boolean add = true;
+				for (String s : associatesList) {
+					if (s.equals(toAdd)) {
+						add = false;
+					}
+				}
+				if (add) {
+					associatesList.add(toAdd);
+				}
 			}
 		}
 	}
