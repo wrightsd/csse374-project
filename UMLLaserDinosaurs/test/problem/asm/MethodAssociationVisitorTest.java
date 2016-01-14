@@ -16,7 +16,7 @@ public class MethodAssociationVisitorTest {
 	public void setUp() throws IOException, NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
 		String[] argumentStringArray = {"problem.asm.TestClass2", "problem.asm.AnotherTestClass","problem.asm.TestClass","problem.asm.TestClassSuper"};
 		
-		DesignParser.parse(argumentStringArray,  "./test/problem/asm/test2Output.txt");;
+		DesignParser.parse(argumentStringArray,  "./test/problem/asm/test2Output.txt", "uml");
 		
 		FileInputStream file = new FileInputStream("./test/problem/asm/test2Output.txt");
 		int i = file.read();
@@ -24,6 +24,7 @@ public class MethodAssociationVisitorTest {
 			contents += (char) i;
 			i = file.read();
 		}
+		file.close();
 		
 	}
 	

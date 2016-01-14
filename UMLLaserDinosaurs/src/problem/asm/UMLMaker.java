@@ -15,6 +15,7 @@ public class UMLMaker implements DiagramMaker {
 	private static ArrayList<String> usesList;
 	private static ArrayList<String> associatesList;
 
+	@Override
 	public StringBuilder generateDiagramText(String[] args) throws IOException {
 		myArgs = args;
 
@@ -96,7 +97,8 @@ public class UMLMaker implements DiagramMaker {
 		}
 	}
 
-	public static ArrayList<String> getInstance() {
+	@Override
+	public ArrayList<String> getArguments() {
 		if (classSet == null) {
 			classSet = new ArrayList<String>();
 			if(myArgs != null){
@@ -106,6 +108,11 @@ public class UMLMaker implements DiagramMaker {
 			}
 		}
 		return classSet;
+	}
+
+	@Override
+	public String getCurrentClass() {
+		return currentClass;
 	}
 
 }

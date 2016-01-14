@@ -17,7 +17,7 @@ label = "{ClassMethodVisitor|-builder : StringBuilder\l|+ClassMethodVisitor(int)
 ClassMethodVisitor->ClassVisitor[arrowhead="onormal", style="solid"];
 DesignParser [
 shape="record",
-label = "{DesignParser|-parse(String[], String) : void\l}"
+label = "{DesignParser|-diagramMap : HashMap\l-maker : DiagramMaker\l|-parse(String[], String, String) : void\l-setUpHashMap() : void\l-addDiagramType(String, DiagramMaker) : void\l-getCurrentClass() : String\l-getArguments() : ArrayList\l}"
 ];
 InterfaceAbstractCheckVisitor [
 shape="record",
@@ -36,20 +36,43 @@ label = "{ClassAssociationVisitor|-builder : StringBuilder\l-associatesList : Ar
 ClassAssociationVisitor->ClassVisitor[arrowhead="onormal", style="solid"];
 UMLMaker [
 shape="record",
-label = "{UMLMaker|-currentClass : String\l-classSet : ArrayList\l-myArgs : String[]\l-usesList : ArrayList\l-associatesList : ArrayList\l|-generateDiagramText(String[]) : StringBuilder\l-drawUsesArrows(ArrayList, ArrayList, StringBuilder) : void\l-getInstance() : ArrayList\l}"
+label = "{UMLMaker|-currentClass : String\l-classSet : ArrayList\l-myArgs : String[]\l-usesList : ArrayList\l-associatesList : ArrayList\l|+generateDiagramText(String[]) : StringBuilder\l-drawUsesArrows(ArrayList, ArrayList, StringBuilder) : void\l+getArguments() : ArrayList\l+getCurrentClass() : String\l}"
 ];
-UMLMaker->DiagramMaker[arrowhead="onormal", style="solid"];
+UMLMaker->DiagramMaker[arrowhead="onormal", style="dashed"];
 DiagramMaker [
 shape="record",
-label = "{\<\<abstract\>\>\nDiagramMaker|-generateDiagramText(String[]) : StringBuilder\l}"
+label = "{\<\<abstract\>\>\n\<\<interface\>\>\nDiagramMaker|-generateDiagramText(String[]) : StringBuilder\l-getCurrentClass() : String\l-getArguments() : ArrayList\l}"
 ];
+SequenceMaker [
+shape="record",
+label = "{SequenceMaker|+generateDiagramText(String[]) : StringBuilder\l+getCurrentClass() : String\l+getArguments() : ArrayList\l}"
+];
+SequenceMaker->DiagramMaker[arrowhead="onormal", style="dashed"];
+NoSuchDiagramMaker [
+shape="record",
+label = "{NoSuchDiagramMaker|+generateDiagramText(String[]) : StringBuilder\l+getCurrentClass() : String\l+getArguments() : ArrayList\l}"
+];
+NoSuchDiagramMaker->DiagramMaker[arrowhead="onormal", style="dashed"];
+BlacklistHolder [
+shape="record",
+label = "{BlacklistHolder|-blacklist : ArrayList\l|-getInstance() : ArrayList\l}"
+];
+DesignParser->NoSuchDiagramMaker[arrowhead="ovee", style="dashed"];
+DesignParser->DiagramMaker[arrowhead="ovee", style="dashed"];
+DesignParser->UMLMaker[arrowhead="ovee", style="dashed"];
+DesignParser->SequenceMaker[arrowhead="ovee", style="dashed"];
 ClassAssociationVisitor->MethodAssociationVisitor[arrowhead="ovee", style="dashed"];
 UMLMaker->ClassDeclarationVisitor[arrowhead="ovee", style="dashed"];
 UMLMaker->InterfaceAbstractCheckVisitor[arrowhead="ovee", style="dashed"];
 UMLMaker->ClassFieldVisitor[arrowhead="ovee", style="dashed"];
 UMLMaker->ClassMethodVisitor[arrowhead="ovee", style="dashed"];
 UMLMaker->ClassAssociationVisitor[arrowhead="ovee", style="dashed"];
+DesignParser->String[arrowhead="ovee", style="solid"];
 MethodAssociationVisitor->String[arrowhead="ovee", style="solid"];
 ClassAssociationVisitor->String[arrowhead="ovee", style="solid"];
 UMLMaker->String[arrowhead="ovee", style="solid"];
+DiagramMaker->String[arrowhead="ovee", style="solid"];
+SequenceMaker->String[arrowhead="ovee", style="solid"];
+NoSuchDiagramMaker->String[arrowhead="ovee", style="solid"];
+BlacklistHolder->String[arrowhead="ovee", style="solid"];
 }

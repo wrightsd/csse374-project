@@ -10,6 +10,7 @@ public class BlacklistHolder {
 		if(blacklist == null){
 			blacklist = new ArrayList<String>();
 			blacklist.add("java.lang.Object");
+			blacklist.add("java.lang.String");
 		}
 		return blacklist;
 	}

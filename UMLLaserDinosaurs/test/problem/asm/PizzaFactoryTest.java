@@ -23,7 +23,7 @@ public class PizzaFactoryTest {
 				"factory.pizzaaf.ThinCrustDough", "factory.pizzaaf.ThickCrustDough", "factory.pizzaaf.PlumTomatoSauce",
 				"factory.pizzaaf.MarinaraSauce", "factory.pizzaaf.MozzarellaCheese", "factory.pizzaaf.ReggianoCheese",
 				"factory.pizzaaf.FrozenClams", "factory.pizzaaf.FreshClams" };
-		DesignParser.parse(arguments, "./test/problem/asm/pizzaaf_output.txt");
+		DesignParser.parse(arguments, "./test/problem/asm/pizzaaf_output.txt", "uml");
 
 		FileInputStream file = new FileInputStream("./test/problem/asm/pizzaaf_output.txt");
 		int i = file.read();

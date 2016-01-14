@@ -11,7 +11,7 @@ public class PizzaRunner {
 				"factory.pizzaaf.ThinCrustDough", "factory.pizzaaf.ThickCrustDough", "factory.pizzaaf.PlumTomatoSauce",
 				"factory.pizzaaf.MarinaraSauce", "factory.pizzaaf.MozzarellaCheese", "factory.pizzaaf.ReggianoCheese",
 				"factory.pizzaaf.FrozenClams", "factory.pizzaaf.FreshClams" };
-		DesignParser.parse(arguments, "./output/pizzaaf_output.txt");
+		DesignParser.parse(arguments, "./output/pizzaaf_output.txt", "uml");
 	}
 
 }

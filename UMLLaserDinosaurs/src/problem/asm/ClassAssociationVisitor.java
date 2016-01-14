@@ -44,6 +44,7 @@ public class ClassAssociationVisitor extends ClassVisitor {
 		return mine;
 	}
 
+	// TODO: Fix for nested aggregation
 	private void compileAggregation(String signature) {
 		if (null == signature) {
 			return;
@@ -71,7 +72,7 @@ public class ClassAssociationVisitor extends ClassVisitor {
 			String typeClass = Type.getType(str).getClassName();
 			String[] typeClassSplit = typeClass.split("[.]");
 			typeClass = typeClassSplit[typeClassSplit.length - 1];
-			String owner = UMLMaker.currentClass;
+			String owner = DesignParser.getCurrentClass();
 			String[] ownerSplit = owner.split("[.]");
 			owner = ownerSplit[ownerSplit.length - 1];
 			
