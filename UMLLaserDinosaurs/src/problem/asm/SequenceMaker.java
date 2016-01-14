@@ -6,6 +6,7 @@ import java.util.ArrayList;
 public class SequenceMaker implements DiagramMaker {
 	
 	public StringBuilder generateDiagramText(String[] args) throws IOException {
+		ClassSequenceVisitor classSequenceVisitor = new ClassSequenceVisitor();
 		return null;
 		
 	}
