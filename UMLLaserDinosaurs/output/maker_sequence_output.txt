@@ -1,16 +1,41 @@
-javalangStringBuilder:java.lang.StringBuilder
-problemasmSequenceMaker:problem.asm.SequenceMaker
-javalangString:java.lang.String
+javalangStringBuilder:java.lang.StringBuilder[a]
+problemasmSequenceMaker:problem.asm.SequenceMaker[a]
+javalangAbstractStringBuilder:java.lang.AbstractStringBuilder[a]
+javalangInteger:java.lang.Integer[a]
+orgobjectwebasmClassReader:org.objectweb.asm.ClassReader[a]
+problemasmClassSequenceVisitor:problem.asm.ClassSequenceVisitor[a]
+javalangString:java.lang.String[a]
+javalangObject:java.lang.Object[a]
 
 problemasmSequenceMaker:void=javalangStringBuilder.<init>()
-problemasmSequenceMaker:void=javalangStringBuilder.<init>()
-problemasmSequenceMaker:void=javalangStringBuilder.<init>()
-problemasmSequenceMaker:void=problemasmSequenceMaker.recursiveSequenceGenerator(java.lang.String[]java.lang.StringBuilder)
+javalangStringBuilder:void=javalangAbstractStringBuilder.<init>(int)
+javalangStringBuilder:void=javalangStringBuilder.<init>()
+javalangStringBuilder:void=javalangAbstractStringBuilder.<init>(int)
+javalangStringBuilder:void=javalangStringBuilder.<init>()
+javalangStringBuilder:void=javalangAbstractStringBuilder.<init>(int)
+javalangStringBuilder:void=problemasmSequenceMaker.recursiveSequenceGenerator(java.lang.String[], java.lang.StringBuilder, java.lang.StringBuilder)
+problemasmSequenceMaker:int=javalangInteger.parseInt(java.lang.String)
+problemasmSequenceMaker:void=orgobjectwebasmClassReader.<init>(java.lang.String)
+problemasmSequenceMaker:void=problemasmClassSequenceVisitor.<init>(int, int, java.lang.String, java.lang.String[], java.lang.StringBuilder, java.lang.StringBuilder)
+problemasmSequenceMaker:void=orgobjectwebasmClassReader.accept(org.objectweb.asm.ClassVisitor, int)
 problemasmSequenceMaker:java.lang.String=javalangStringBuilder.toString()
-problemasmSequenceMaker:java.lang.String=javalangString.valueOf()
-problemasmSequenceMaker:void=javalangStringBuilder.<init>()
-problemasmSequenceMaker:java.lang.StringBuilder=javalangStringBuilder.append()
-problemasmSequenceMaker:java.lang.String=javalangStringBuilder.toString()
-problemasmSequenceMaker:java.lang.StringBuilder=javalangStringBuilder.append()
-problemasmSequenceMaker:java.lang.String=javalangStringBuilder.toString()
-problemasmSequenceMaker:java.lang.StringBuilder=javalangStringBuilder.append()
+javalangStringBuilder:void=javalangString.<init>(char[], int, int)
+javalangStringBuilder:java.lang.String=javalangString.valueOf(java.lang.Object)
+javalangString:java.lang.String=javalangObject.toString()
+javalangString:void=javalangStringBuilder.<init>(java.lang.String)
+javalangStringBuilder:int=javalangString.length()
+javalangStringBuilder:void=javalangAbstractStringBuilder.<init>(int)
+javalangStringBuilder:java.lang.StringBuilder=javalangStringBuilder.append(java.lang.String)
+javalangStringBuilder:java.lang.StringBuilder=javalangStringBuilder.append(java.lang.String)
+javalangStringBuilder:java.lang.AbstractStringBuilder=javalangAbstractStringBuilder.append(java.lang.String)
+javalangStringBuilder:java.lang.StringBuilder=javalangStringBuilder.append(java.lang.String)
+javalangStringBuilder:java.lang.String=javalangStringBuilder.toString()
+javalangStringBuilder:void=javalangString.<init>(char[], int, int)
+javalangStringBuilder:java.lang.StringBuilder=javalangStringBuilder.append(java.lang.String)
+javalangStringBuilder:java.lang.AbstractStringBuilder=javalangAbstractStringBuilder.append(java.lang.String)
+javalangStringBuilder:java.lang.StringBuilder=javalangStringBuilder.append(java.lang.String)
+javalangStringBuilder:java.lang.String=javalangStringBuilder.toString()
+javalangStringBuilder:void=javalangString.<init>(char[], int, int)
+javalangStringBuilder:java.lang.StringBuilder=javalangStringBuilder.append(java.lang.String)
+javalangStringBuilder:java.lang.AbstractStringBuilder=javalangAbstractStringBuilder.append(java.lang.String)
+javalangStringBuilder:java.lang.StringBuilder=javalangStringBuilder.append(java.lang.String)

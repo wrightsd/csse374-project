@@ -1,5 +1,20 @@
-javautilRandom:java.util.Random
-javautilCollections:java.util.Collections
+javautilRandom:java.util.Random[a]
+javautilCollections:java.util.Collections[a]
+javalangSystem:java.lang.System[a]
+javautilList:java.util.List[a]
+javautilListIterator:java.util.ListIterator[a]
 
 javautilCollections:void=javautilRandom.<init>()
-javautilCollections:void=javautilCollections.shuffle(java.util.List)
+javautilRandom:long=javautilRandom.seedUniquifier()
+javautilRandom:long=javalangSystem.nanoTime()
+javautilRandom:void=javautilRandom.<init>(long)
+javautilRandom:void=javautilCollections.shuffle(java.util.List, java.util.Random)
+javautilCollections:int=javautilList.size()
+javautilCollections:int=javautilRandom.nextInt(int)
+javautilCollections:void=javautilCollections.swap(java.util.List, int, int)
+javautilCollections:java.lang.Object[]=javautilList.toArray()
+javautilCollections:int=javautilRandom.nextInt(int)
+javautilCollections:void=javautilCollections.swap(java.lang.Object[], int, int)
+javautilCollections:java.util.ListIterator=javautilList.listIterator()
+javautilCollections:java.lang.Object=javautilListIterator.next()
+javautilCollections:void=javautilListIterator.set(java.lang.Object)

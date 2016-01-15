@@ -40,7 +40,7 @@ public class ClassSequenceVisitor extends ClassVisitor {
 		}
 		if (name.equals(this.chosenMethodName) && Arrays.equals(paramNames, chosenParams)) {
 			MethodVisitor methodSequence = new MethodSequenceVisitor(Opcodes.ASM5, toDecorate, classSequenceBuilder,
-					methodSequenceBuilder);
+					methodSequenceBuilder,chosenDepth);
 			return methodSequence;
 		}
 

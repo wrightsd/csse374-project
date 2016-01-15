@@ -1,5 +1,6 @@
 package problem.asm;
 
+import java.io.IOException;
 import java.sql.Types;
 import java.util.Arrays;
 
@@ -11,17 +12,19 @@ public class MethodSequenceVisitor extends MethodVisitor {
 	private StringBuilder classSequenceBuilder;
 	private StringBuilder methodSequenceBuilder;
 	private MethodVisitor visitor;
+	private int chosenDepth;
 
 	public MethodSequenceVisitor(int arg0) {
 		super(arg0);
 	}
 
 	public MethodSequenceVisitor(int asm5, MethodVisitor toDecorate, StringBuilder classSequenceBuilder,
-			StringBuilder methodSequenceBuilder) {
+			StringBuilder methodSequenceBuilder, int depth) {
 		super(asm5, toDecorate);
 		this.visitor = toDecorate;
 		this.classSequenceBuilder = classSequenceBuilder;
 		this.methodSequenceBuilder = methodSequenceBuilder;
+		this.chosenDepth = depth;
 	}
 
 	@Override
@@ -31,7 +34,7 @@ public class MethodSequenceVisitor extends MethodVisitor {
 		if (classTag.equals("")) {
 			classTag = owner.replace("/", "");
 			SequenceMaker.addClassTag(writeOwner, classTag);
-			classSequenceBuilder.append(classTag + ":" + writeOwner + "\n");
+			classSequenceBuilder.append(classTag + ":" + writeOwner + "[a]\n");
 		}
 
 		String returnStringName = Type.getReturnType(desc).getClassName();
@@ -41,21 +44,40 @@ public class MethodSequenceVisitor extends MethodVisitor {
 
 		String overallParameterListString = "";
 		Type[] parameterTypes = Type.getArgumentTypes(desc);
-		for (int i = 0; i < parameterTypes.length - 1; i++) {
+		for (int i = 0; i < parameterTypes.length; i++) {
 			String parameterStringName = parameterTypes[i].getClassName();
+			if (overallParameterListString.length() > 0) {
+				overallParameterListString += ", ";
+			}
 			overallParameterListString += parameterStringName;
 		}
 
-		String currentClass = DesignParser.getCurrentClass();
+		String currentClass = DesignParser.getCurrentClass().replace("/", ".");
 		String currentClassTag = SequenceMaker.getClassTag(currentClass);
 		if (currentClassTag.equals("")) {
 			currentClassTag = currentClass.replace(".", "");
 			SequenceMaker.addClassTag(currentClass, currentClassTag);
-			classSequenceBuilder.append(currentClassTag + ":" + currentClass + "\n");
+			classSequenceBuilder.append(currentClassTag + ":" + currentClass + "[a]\n");
 		}
 
 		methodSequenceBuilder.append(currentClassTag + ":" + returnStringName + classTag + "." + name + "("
 				+ overallParameterListString + ")\n");
+		if(this.chosenDepth>0){
+			int depthToPassIn = chosenDepth -1;
+			int sizeOfArgs = 3+parameterTypes.length;
+			String[] args = new String[sizeOfArgs];
+			args[0]=Integer.toString(depthToPassIn);
+			args[1]=owner;
+			args[2]=name;
+			for(int i=0;i<parameterTypes.length;i++){
+				args[i+3]=parameterTypes[i].getClassName().replace("/", ".");
+			}
+				
+			try {
+				SequenceMaker.recursiveSequenceGenerator(args, this.classSequenceBuilder, this.methodSequenceBuilder);
+			} catch (IOException e) {
+			}
+		}
 
 	}
 
