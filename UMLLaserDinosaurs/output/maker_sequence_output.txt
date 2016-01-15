@@ -1,0 +1,16 @@
+javalangStringBuilder:java.lang.StringBuilder
+problemasmSequenceMaker:problem.asm.SequenceMaker
+javalangString:java.lang.String
+
+problemasmSequenceMaker:void=javalangStringBuilder.<init>()
+problemasmSequenceMaker:void=javalangStringBuilder.<init>()
+problemasmSequenceMaker:void=javalangStringBuilder.<init>()
+problemasmSequenceMaker:void=problemasmSequenceMaker.recursiveSequenceGenerator(java.lang.String[]java.lang.StringBuilder)
+problemasmSequenceMaker:java.lang.String=javalangStringBuilder.toString()
+problemasmSequenceMaker:java.lang.String=javalangString.valueOf()
+problemasmSequenceMaker:void=javalangStringBuilder.<init>()
+problemasmSequenceMaker:java.lang.StringBuilder=javalangStringBuilder.append()
+problemasmSequenceMaker:java.lang.String=javalangStringBuilder.toString()
+problemasmSequenceMaker:java.lang.StringBuilder=javalangStringBuilder.append()
+problemasmSequenceMaker:java.lang.String=javalangStringBuilder.toString()
+problemasmSequenceMaker:java.lang.StringBuilder=javalangStringBuilder.append()

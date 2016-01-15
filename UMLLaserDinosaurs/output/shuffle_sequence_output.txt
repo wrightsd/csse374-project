@@ -1,0 +1,5 @@
+javautilRandom:java.util.Random
+javautilCollections:java.util.Collections
+
+javautilCollections:void=javautilRandom.<init>()
+javautilCollections:void=javautilCollections.shuffle(java.util.List)

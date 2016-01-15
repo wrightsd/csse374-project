@@ -10,19 +10,21 @@ import org.objectweb.asm.Opcodes;
 public class SequenceMaker implements DiagramMaker {
 
 	private static HashMap<String, String> classTags;
+	private static String currentClass;
 
 	public StringBuilder generateDiagramText(String[] args) throws IOException {
+		StringBuilder completeBuilder = new StringBuilder();
 		StringBuilder classesBuilder = new StringBuilder();
 		StringBuilder methodsBuilder = new StringBuilder();
-		ClassSequenceVisitor classSequenceVisitor = new ClassSequenceVisitor();
-		return null;
+		recursiveSequenceGenerator(args, classesBuilder, methodsBuilder);
+		completeBuilder.append(classesBuilder.toString() + "\n" + methodsBuilder.toString());
+		return completeBuilder;
 
 	}
 
 	@Override
 	public String getCurrentClass() {
-		// TODO Auto-generated method stub
-		return null;
+		return currentClass;
 	}
 
 	@Override
@@ -30,29 +32,31 @@ public class SequenceMaker implements DiagramMaker {
 		return new ArrayList<String>();
 	}
 
-	public void addClassTag(String className, String classTag) {
+	public static void addClassTag(String className, String classTag) {
 		if (classTags == null) {
 			classTags = new HashMap<String, String>();
 		}
 		classTags.put(className, classTag);
 	}
 
-	public String getClassTag(String className) {
+	public static String getClassTag(String className) {
 		if (classTags == null || !classTags.containsKey(className)) {
 			return "";
 		}
 		return classTags.get(className);
 	}
 
-	public ArrayList<StringBuilder> recursiveSequenceGenerator(String args[], StringBuilder classSequenceBuilder,
+	public static void recursiveSequenceGenerator(String args[], StringBuilder classSequenceBuilder,
 			StringBuilder methodSequenceBuilder) throws IOException {
 		int depth = 5;
 		int startIndex = 0;
 		try {
 			depth = Integer.parseInt(args[0]);
 			startIndex++;
-		} catch (Exception e) {}
+		} catch (Exception e) {
+		}
 		String className = args[startIndex++];
+		currentClass = className;
 		ClassReader reader = new ClassReader(className);
 		String methodName = args[startIndex++];
 		int newSize = args.length - startIndex;
@@ -60,12 +64,10 @@ public class SequenceMaker implements DiagramMaker {
 		for (int i = 0; i < parameters.length; i++) {
 			parameters[i] = args[i + startIndex];
 		}
-		ClassSequenceVisitor visitor = new ClassSequenceVisitor(Opcodes.ASM5, depth, methodName, parameters);
-		
-		ArrayList<StringBuilder> listOfBuilders = new ArrayList<StringBuilder>();
-		listOfBuilders.add(classSequenceBuilder);
-		listOfBuilders.add(methodSequenceBuilder);
-		return listOfBuilders;
+		ClassSequenceVisitor visitor = new ClassSequenceVisitor(Opcodes.ASM5, depth, methodName, parameters,
+				classSequenceBuilder, methodSequenceBuilder);
+
+		reader.accept(visitor, ClassReader.EXPAND_FRAMES);
 	}
 
 }
