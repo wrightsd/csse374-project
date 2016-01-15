@@ -1,5 +1,5 @@
-javalangStringBuilder:java.lang.StringBuilder[a]
 problemasmSequenceMaker:problem.asm.SequenceMaker[a]
+javalangStringBuilder:java.lang.StringBuilder[a]
 javalangAbstractStringBuilder:java.lang.AbstractStringBuilder[a]
 javalangInteger:java.lang.Integer[a]
 orgobjectwebasmClassReader:org.objectweb.asm.ClassReader[a]

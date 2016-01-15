@@ -29,6 +29,14 @@ public class MethodSequenceVisitor extends MethodVisitor {
 
 	@Override
 	public void visitMethodInsn(int opcode, String owner, String name, String desc, boolean itf) {
+		String currentClass = DesignParser.getCurrentClass().replace("/", ".");
+		String currentClassTag = SequenceMaker.getClassTag(currentClass);
+		if (currentClassTag.equals("")) {
+			currentClassTag = currentClass.replace(".", "");
+			SequenceMaker.addClassTag(currentClass, currentClassTag);
+			classSequenceBuilder.append(currentClassTag + ":" + currentClass + "[a]\n");
+		}
+		
 		String writeOwner = owner.replace("/", ".");
 		String classTag = SequenceMaker.getClassTag(writeOwner);
 		if (classTag.equals("")) {
@@ -50,14 +58,6 @@ public class MethodSequenceVisitor extends MethodVisitor {
 				overallParameterListString += ", ";
 			}
 			overallParameterListString += parameterStringName;
-		}
-
-		String currentClass = DesignParser.getCurrentClass().replace("/", ".");
-		String currentClassTag = SequenceMaker.getClassTag(currentClass);
-		if (currentClassTag.equals("")) {
-			currentClassTag = currentClass.replace(".", "");
-			SequenceMaker.addClassTag(currentClass, currentClassTag);
-			classSequenceBuilder.append(currentClassTag + ":" + currentClass + "[a]\n");
 		}
 
 		methodSequenceBuilder.append(currentClassTag + ":" + returnStringName + classTag + "." + name + "("

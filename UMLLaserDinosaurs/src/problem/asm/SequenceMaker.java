@@ -13,6 +13,7 @@ public class SequenceMaker implements DiagramMaker {
 	private static String currentClass;
 
 	public StringBuilder generateDiagramText(String[] args) throws IOException {
+		classTags = null;
 		StringBuilder completeBuilder = new StringBuilder();
 		StringBuilder classesBuilder = new StringBuilder();
 		StringBuilder methodsBuilder = new StringBuilder();
@@ -57,6 +58,7 @@ public class SequenceMaker implements DiagramMaker {
 		}
 		String className = args[startIndex++];
 		currentClass = className;
+		
 		ClassReader reader = new ClassReader(className);
 		String methodName = args[startIndex++];
 		int newSize = args.length - startIndex;
