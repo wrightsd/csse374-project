@@ -11,7 +11,9 @@ public class UMLLaserDinosaursRunner {
 				"problem.asm.ClassMethodVisitor", "problem.asm.DesignParser",
 				"problem.asm.InterfaceAbstractCheckVisitor", "problem.asm.MethodAssociationVisitor",
 				"problem.asm.ClassAssociationVisitor", "problem.asm.UMLMaker", "problem.asm.DiagramMaker",
-				"problem.asm.SequenceMaker", "problem.asm.NoSuchDiagramMaker", "problem.asm.BlacklistHolder" };
+				"problem.asm.SequenceMaker", "problem.asm.NoSuchDiagramMaker", "problem.asm.BlacklistHolder",
+				"problem.asm.ClassSequenceVisitor", "problem.asm.MethodSequenceVisitor",
+				"problem.asm.SingletonClassVisitor" };
 		DesignParser.parse(arguments, "./output/UMLLaserDinosaurs_output.txt", "uml");
 	}
 

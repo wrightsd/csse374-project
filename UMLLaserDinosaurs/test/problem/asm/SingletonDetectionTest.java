@@ -54,13 +54,16 @@ public class SingletonDetectionTest {
 		assertTrue(javaContents.contains("blue"));
 		int num = 0;
 		int lastIndex = 0;
+		int currentSpot = 0;
 		while (lastIndex != -1) {
-			lastIndex = javaContents.indexOf("blue");
+			lastIndex = javaContents.substring(currentSpot).indexOf("blue");
 			
 			if (lastIndex != -1) {
 				num++;
-				lastIndex += 4;
+				currentSpot += lastIndex + 4;
 			}
 		}
+		assertTrue(num == 1);
+		assertTrue(javaContents.contains("Runtime [\nshape=\"record\",\ncolor =blue,"));
 	}
 }

@@ -1,0 +1,13 @@
+digraph text{
+rankdir=BT;
+LazySingletonSample [
+shape="record",
+color =blue,
+label = "{LazySingletonSample\n\<\<Singleton\>\>|-s : LazySingletonSample\l|+getInstance() : LazySingletonSample\l}"
+];
+EagerSingletonSample [
+shape="record",
+color =blue,
+label = "{EagerSingletonSample\n\<\<Singleton\>\>|-s : EagerSingletonSample\l|+getInstance() : EagerSingletonSample\l}"
+];
+}
