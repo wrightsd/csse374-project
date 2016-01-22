@@ -69,7 +69,6 @@ public class MethodAssociationVisitor extends MethodVisitor {
 		}
 
 		String parameterString = parameterReturnSplit[0].substring(1);
-		System.out.println(parameterString);
 		if (!parameterString.equals("")) {
 			String[] parameters = parameterString.split("\\[");
 			for (int i = 0; i < parameters.length; i++) {

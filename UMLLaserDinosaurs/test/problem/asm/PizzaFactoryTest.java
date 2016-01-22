@@ -31,6 +31,7 @@ public class PizzaFactoryTest {
 			contents += (char) i;
 			i = file.read();
 		}
+		file.close();
 	}
 
 	@Test

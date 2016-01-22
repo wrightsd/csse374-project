@@ -4,6 +4,7 @@ javalangAbstractStringBuilder:java.lang.AbstractStringBuilder[a]
 javalangInteger:java.lang.Integer[a]
 orgobjectwebasmClassReader:org.objectweb.asm.ClassReader[a]
 problemasmClassSequenceVisitor:problem.asm.ClassSequenceVisitor[a]
+javalangRuntime:java.lang.Runtime[a]
 javalangString:java.lang.String[a]
 javalangObject:java.lang.Object[a]
 
@@ -18,7 +19,8 @@ problemasmSequenceMaker:int=javalangInteger.parseInt(java.lang.String)
 problemasmSequenceMaker:void=orgobjectwebasmClassReader.<init>(java.lang.String)
 problemasmSequenceMaker:void=problemasmClassSequenceVisitor.<init>(int, int, java.lang.String, java.lang.String[], java.lang.StringBuilder, java.lang.StringBuilder)
 problemasmSequenceMaker:void=orgobjectwebasmClassReader.accept(org.objectweb.asm.ClassVisitor, int)
-problemasmSequenceMaker:java.lang.String=javalangStringBuilder.toString()
+problemasmSequenceMaker:java.lang.Runtime=javalangRuntime.getRuntime()
+javalangRuntime:java.lang.String=javalangStringBuilder.toString()
 javalangStringBuilder:void=javalangString.<init>(char[], int, int)
 javalangStringBuilder:java.lang.String=javalangString.valueOf(java.lang.Object)
 javalangString:java.lang.String=javalangObject.toString()

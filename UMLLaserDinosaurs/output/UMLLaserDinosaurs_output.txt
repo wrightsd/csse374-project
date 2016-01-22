@@ -45,7 +45,7 @@ label = "{\<\<abstract\>\>\n\<\<interface\>\>\nDiagramMaker|-generateDiagramText
 ];
 SequenceMaker [
 shape="record",
-label = "{SequenceMaker|+generateDiagramText(String[]) : StringBuilder\l+getCurrentClass() : String\l+getArguments() : ArrayList\l}"
+label = "{SequenceMaker|-classTags : HashMap\l-currentClass : String\l|+generateDiagramText(String[]) : StringBuilder\l+getCurrentClass() : String\l+getArguments() : ArrayList\l-addClassTag(String, String) : void\l-getClassTag(String) : String\l-recursiveSequenceGenerator(String[], StringBuilder, StringBuilder) : void\l}"
 ];
 SequenceMaker->DiagramMaker[arrowhead="onormal", style="dashed"];
 NoSuchDiagramMaker [
