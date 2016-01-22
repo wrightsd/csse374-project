@@ -15,6 +15,9 @@ Any addition to any data that needs to be harvested for the UML diagram can be m
 Milestone 2:
 A separate ClassVisitor class was created to go through the classes to determine the uses and aggregates functionality.  This class calls a class that extends from the MethodVisitor class that creates the lists of uses and aggregation.  A singleton functionality was added to the DesignParser class that lets this MethodVisitor class determine which classes are part of the project that we are examining so that we do not add many extraneous arrows pointing towards external classes (e.g. String, Path etc.).  The lists that are generated from the MethodVisitor class are kept static so that each time a method is visited the program can ensure that it is not duplicating any of the previous arrows that were made from visiting other methods.
 
+Milestone 3:
+Diagram generation has been switched to following the strategy pattern. String arguments are passed into DesignParser with a second parameter to indicated which type of diagram to create. This second parameter is used in a HashMap to determine which DiagramMaker to utilize. The generateDiagramText method is called on the selected DiagramMaker to create the output text for either a sequence diagram or uml diagram and put it into a StringBuilder. As far as the actual implementation of sequence diagram text generation. A ClassMethodVisitor is used to track the visitng of all methods on the selected class until the specified method is visited. Then, a method visitor is created for this method. All other method calls within this method trigger the creation of an additional class visitor on the new class/method pair with a depth of one less. This repeats at increasing depths until the desired depth is reached.
+Every time a new class is utilized, it is added to one StringBuilder tracking the classes necessary for the sequence diagram. Every time a new method is called it's correct signature is added to a StringBuilder holding all methods. These two are combined at the end to return the overall complete StringBuilder holding the text for the sequence diagram. 
 
 Who did what:
 
@@ -27,9 +30,25 @@ Milestone 2:
   Tim Anderson: Updated the README.md file
   Spencer Wright: Updating UML diagram for the project
   Gregory Nathan: Updated testing implementation
+Milestone 3:
+  Tim Anderson: Updated testing implementation
+  Spencer Wright: Manual sequence diagrams
+  Gregory Nathan: Updated README.md file
 
 Instructions:
 
 Right now, we have created a separate runner class for each of the UML diagrams that need to be made.  To run the program, simply run the Lab1_3Runner class to generate the UML for the Lab1_3 or the UMLLaserDinosaursRunner class to generate a UML diagram for the project itself.  As the project currently stands, there is no way to pass a single file or java class to create a UML diagram, but this could be added in a later milestone without needing to modify any existing classes significantly.  Important note:  To run the lab1_3Runner, you must ensure that you have a java project with lab1_3 included in the run configuration.  Also, you may need to manually change the names of the files specified in the runner to match your local files because they are currently hard-coded to our version, which is included in the repository.
+
+As of Milestone 3, all diagram creation is handled by DesignParser, and an additional parameter must be specified to indicated which diagram type to generate from the string array arguments. This parameter by default can be "uml" or "seq" for uml and sequence diagrams respectively. However, additional diagram types can be added and then selected using the addDiagramType method in Design Parser
+
+To create the sequence diagram, the string arguments must be specified as [call depth, class name, method name, parameter1, parameter2, parameter3, ...]
+
+The call depth is an optional parameter that can be any integer 0 or greater. If this is left out of the array the default call depth will be 5.
+
+The class name is the full package path for the class (such as java.lang.String)
+
+The method name is the regular String for the name
+
+The remaining arguments are method parameter types, as many as necessary, using the full package path String.
 
 For testing purposes, run the JUnit tests individually.  When the tests are all run at the same time errors sometime occur with synchronous evaluation reading a file before it gets fully written, making the JUnit test fail, whereas when all tests are ran individually they passed every time.
