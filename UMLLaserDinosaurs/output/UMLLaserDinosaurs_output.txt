@@ -2,71 +2,104 @@ digraph text{
 rankdir=BT;
 ClassDeclarationVisitor [
 shape="record",
+color =black,
 label = "{ClassDeclarationVisitor|-builder : StringBuilder\l|+ClassDeclarationVisitor(int) : void\l+ClassDeclarationVisitor(int, StringBuilder) : void\l+ClassDeclarationVisitor(int, ClassVisitor, StringBuilder) : void\l+visit(int, int, String, String, String, String[]) : void\l}"
 ];
 ClassDeclarationVisitor->ClassVisitor[arrowhead="onormal", style="solid"];
 ClassFieldVisitor [
 shape="record",
+color =black,
 label = "{ClassFieldVisitor|-builder : StringBuilder\l|+ClassFieldVisitor(int) : void\l+ClassFieldVisitor(int, StringBuilder) : void\l+ClassFieldVisitor(int, ClassVisitor) : void\l+ClassFieldVisitor(int, ClassVisitor, StringBuilder) : void\l+visitField(int, String, String, String, Object) : FieldVisitor\l}"
 ];
 ClassFieldVisitor->ClassVisitor[arrowhead="onormal", style="solid"];
 ClassMethodVisitor [
 shape="record",
+color =black,
 label = "{ClassMethodVisitor|-builder : StringBuilder\l|+ClassMethodVisitor(int) : void\l+ClassMethodVisitor(int, StringBuilder) : void\l+ClassMethodVisitor(int, ClassVisitor) : void\l+ClassMethodVisitor(int, ClassVisitor, StringBuilder) : void\l+visitMethod(int, String, String, String, String[]) : MethodVisitor\l}"
 ];
 ClassMethodVisitor->ClassVisitor[arrowhead="onormal", style="solid"];
 DesignParser [
 shape="record",
-label = "{DesignParser|-diagramMap : HashMap\l-maker : DiagramMaker\l|-parse(String[], String, String) : void\l-setUpHashMap() : void\l-addDiagramType(String, DiagramMaker) : void\l-getCurrentClass() : String\l-getArguments() : ArrayList\l}"
+color =black,
+label = "{DesignParser|-diagramMap : HashMap\l-maker : DiagramMaker\l|+parse(String[], String, String) : void\l-setUpHashMap() : void\l+addDiagramType(String, DiagramMaker) : void\l+getCurrentClass() : String\l+getArguments() : ArrayList\l}"
 ];
 InterfaceAbstractCheckVisitor [
 shape="record",
+color =black,
 label = "{InterfaceAbstractCheckVisitor|-builder : StringBuilder\l|+InterfaceAbstractCheckVisitor(int) : void\l+InterfaceAbstractCheckVisitor(int, StringBuilder) : void\l+InterfaceAbstractCheckVisitor(int, ClassVisitor, StringBuilder) : void\l+visit(int, int, String, String, String, String[]) : void\l}"
 ];
 InterfaceAbstractCheckVisitor->ClassVisitor[arrowhead="onormal", style="solid"];
 MethodAssociationVisitor [
 shape="record",
+color =black,
 label = "{MethodAssociationVisitor|-builder : StringBuilder\l-associatesList : ArrayList\l-usesList : ArrayList\l|+MethodAssociationVisitor(int, MethodVisitor, ArrayList, ArrayList) : void\l+visitMethodInsn(int, String, String, String, boolean) : void\l+visitFieldInsn(int, String, String, String) : void\l+visitTypeInsn(int, String) : void\l+visitVarInsn(int, int) : void\l}"
 ];
 MethodAssociationVisitor->MethodVisitor[arrowhead="onormal", style="solid"];
 ClassAssociationVisitor [
 shape="record",
+color =black,
 label = "{ClassAssociationVisitor|-builder : StringBuilder\l-associatesList : ArrayList\l-usesList : ArrayList\l|+ClassAssociationVisitor(int, ClassVisitor, ArrayList, ArrayList) : void\l+ClassAssociationVisitor(int, ArrayList, ArrayList) : void\l+visitField(int, String, String, String, Object) : FieldVisitor\l+visitMethod(int, String, String, String, String[]) : MethodVisitor\l-compileAggregation(String) : void\l}"
 ];
 ClassAssociationVisitor->ClassVisitor[arrowhead="onormal", style="solid"];
 UMLMaker [
 shape="record",
-label = "{UMLMaker|-currentClass : String\l-classSet : ArrayList\l-myArgs : String[]\l-usesList : ArrayList\l-associatesList : ArrayList\l|+generateDiagramText(String[]) : StringBuilder\l-drawUsesArrows(ArrayList, ArrayList, StringBuilder) : void\l+getArguments() : ArrayList\l+getCurrentClass() : String\l}"
+color =black,
+label = "{UMLMaker|-currentClass : String\l-classSet : ArrayList\l-myArgs : String[]\l-usesList : ArrayList\l-associatesList : ArrayList\l-patternColorMap : HashMap\l|+generateDiagramText(String[]) : StringBuilder\l-drawUsesArrows(ArrayList, ArrayList, StringBuilder) : void\l+getArguments() : ArrayList\l+getCurrentClass() : String\l-setupColorMap() : void\l-addPatternColor(String, String) : void\l}"
 ];
 UMLMaker->DiagramMaker[arrowhead="onormal", style="dashed"];
 DiagramMaker [
 shape="record",
-label = "{\<\<abstract\>\>\n\<\<interface\>\>\nDiagramMaker|-generateDiagramText(String[]) : StringBuilder\l-getCurrentClass() : String\l-getArguments() : ArrayList\l}"
+color =black,
+label = "{\<\<abstract\>\>\n\<\<interface\>\>\nDiagramMaker|+generateDiagramText(String[]) : StringBuilder\l+getCurrentClass() : String\l+getArguments() : ArrayList\l}"
 ];
 SequenceMaker [
 shape="record",
-label = "{SequenceMaker|-classTags : HashMap\l-currentClass : String\l|+generateDiagramText(String[]) : StringBuilder\l+getCurrentClass() : String\l+getArguments() : ArrayList\l-addClassTag(String, String) : void\l-getClassTag(String) : String\l-recursiveSequenceGenerator(String[], StringBuilder, StringBuilder) : void\l}"
+color =black,
+label = "{SequenceMaker|-classTags : HashMap\l-currentClass : String\l|+generateDiagramText(String[]) : StringBuilder\l+getCurrentClass() : String\l+getArguments() : ArrayList\l+addClassTag(String, String) : void\l+getClassTag(String) : String\l+recursiveSequenceGenerator(String[], StringBuilder, StringBuilder) : void\l}"
 ];
 SequenceMaker->DiagramMaker[arrowhead="onormal", style="dashed"];
 NoSuchDiagramMaker [
 shape="record",
+color =black,
 label = "{NoSuchDiagramMaker|+generateDiagramText(String[]) : StringBuilder\l+getCurrentClass() : String\l+getArguments() : ArrayList\l}"
 ];
 NoSuchDiagramMaker->DiagramMaker[arrowhead="onormal", style="dashed"];
 BlacklistHolder [
 shape="record",
-label = "{BlacklistHolder|-blacklist : ArrayList\l|-getInstance() : ArrayList\l}"
+color =black,
+label = "{BlacklistHolder|-blacklist : ArrayList\l|+getInstance() : ArrayList\l}"
 ];
+ClassSequenceVisitor [
+shape="record",
+color =black,
+label = "{ClassSequenceVisitor|-chosenDepth : int\l-chosenMethodName : String\l-chosenParams : String[]\l-classSequenceBuilder : StringBuilder\l-methodSequenceBuilder : StringBuilder\l|+ClassSequenceVisitor(int) : void\l+ClassSequenceVisitor(int, int, String, String[], StringBuilder, StringBuilder) : void\l+visitMethod(int, String, String, String, String[]) : MethodVisitor\l}"
+];
+ClassSequenceVisitor->ClassVisitor[arrowhead="onormal", style="solid"];
+MethodSequenceVisitor [
+shape="record",
+color =black,
+label = "{MethodSequenceVisitor|-classSequenceBuilder : StringBuilder\l-methodSequenceBuilder : StringBuilder\l-visitor : MethodVisitor\l-chosenDepth : int\l|+MethodSequenceVisitor(int) : void\l+MethodSequenceVisitor(int, MethodVisitor, StringBuilder, StringBuilder, int) : void\l+visitMethodInsn(int, String, String, String, boolean) : void\l}"
+];
+MethodSequenceVisitor->MethodVisitor[arrowhead="onormal", style="solid"];
+SingletonClassVisitor [
+shape="record",
+color =black,
+label = "{SingletonClassVisitor|-fieldSingletonCriteria : boolean\l-methodSingletonCriteria : boolean\l-patternBuilder : StringBuilder\l|+SingletonClassVisitor(int, ClassVisitor) : void\l+SingletonClassVisitor(int, ClassVisitor, StringBuilder) : void\l+visitField(int, String, String, String, Object) : FieldVisitor\l+visitMethod(int, String, String, String, String[]) : MethodVisitor\l}"
+];
+SingletonClassVisitor->ClassVisitor[arrowhead="onormal", style="solid"];
 DesignParser->NoSuchDiagramMaker[arrowhead="ovee", style="dashed"];
 DesignParser->DiagramMaker[arrowhead="ovee", style="dashed"];
 DesignParser->UMLMaker[arrowhead="ovee", style="dashed"];
 DesignParser->SequenceMaker[arrowhead="ovee", style="dashed"];
 ClassAssociationVisitor->MethodAssociationVisitor[arrowhead="ovee", style="dashed"];
 UMLMaker->ClassDeclarationVisitor[arrowhead="ovee", style="dashed"];
+UMLMaker->SingletonClassVisitor[arrowhead="ovee", style="dashed"];
 UMLMaker->InterfaceAbstractCheckVisitor[arrowhead="ovee", style="dashed"];
 UMLMaker->ClassFieldVisitor[arrowhead="ovee", style="dashed"];
 UMLMaker->ClassMethodVisitor[arrowhead="ovee", style="dashed"];
 UMLMaker->ClassAssociationVisitor[arrowhead="ovee", style="dashed"];
+SequenceMaker->ClassSequenceVisitor[arrowhead="ovee", style="dashed"];
+ClassSequenceVisitor->MethodSequenceVisitor[arrowhead="ovee", style="dashed"];
 DesignParser->String[arrowhead="ovee", style="solid"];
 DesignParser->DiagramMaker[arrowhead="ovee", style="solid"];
 MethodAssociationVisitor->String[arrowhead="ovee", style="solid"];
