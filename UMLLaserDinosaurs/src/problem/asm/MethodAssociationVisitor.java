@@ -69,34 +69,37 @@ public class MethodAssociationVisitor extends MethodVisitor {
 		}
 
 		String parameterString = parameterReturnSplit[0].substring(1);
+		System.out.println(parameterString);
 		if (!parameterString.equals("")) {
 			String[] parameters = parameterString.split("\\[");
 			for (int i = 0; i < parameters.length; i++) {
-				if (parameters[i].charAt(0) == 'L') {
-					String parameterStringName = Type.getType(parameters[i]).getClassName();
-					boolean parameterValid = false;
-					for (String s : DesignParser.getArguments()) {
-						if (s.equals(parameterStringName)) {
-							parameterValid = true;
-							break;
+				if (!parameters[i].equals("")) {
+					if (parameters[i].charAt(0) == 'L') {
+						String parameterStringName = Type.getType(parameters[i]).getClassName();
+						boolean parameterValid = false;
+						for (String s : DesignParser.getArguments()) {
+							if (s.equals(parameterStringName)) {
+								parameterValid = true;
+								break;
+							}
 						}
-					}
-					if (!parameterValid) {
-						return;
-					}
-					String[] parameterStringArray = parameterStringName.split("[.]");
-					if (parameterStringArray.length > 0) {
-						parameterStringName = parameterStringArray[parameterStringArray.length - 1];
-					}
-					boolean contains = false;
-					for (String s : usesList) {
-						if (s.equals(owner + "->" + parameterStringName)) {
-							contains = true;
-							break;
+						if (!parameterValid) {
+							return;
 						}
-					}
-					if (!contains) {
-						usesList.add(owner + "->" + parameterStringName);
+						String[] parameterStringArray = parameterStringName.split("[.]");
+						if (parameterStringArray.length > 0) {
+							parameterStringName = parameterStringArray[parameterStringArray.length - 1];
+						}
+						boolean contains = false;
+						for (String s : usesList) {
+							if (s.equals(owner + "->" + parameterStringName)) {
+								contains = true;
+								break;
+							}
+						}
+						if (!contains) {
+							usesList.add(owner + "->" + parameterStringName);
+						}
 					}
 				}
 			}
@@ -162,7 +165,7 @@ public class MethodAssociationVisitor extends MethodVisitor {
 		}
 
 		String stringName = type;
-		String typeCheck = type.replaceAll("/",".");
+		String typeCheck = type.replaceAll("/", ".");
 		boolean typeValid = false;
 		for (String s : DesignParser.getArguments()) {
 			if (s.equals(typeCheck)) {

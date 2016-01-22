@@ -31,6 +31,7 @@ public class MethodSequenceVisitor extends MethodVisitor {
 	public void visitMethodInsn(int opcode, String owner, String name, String desc, boolean itf) {
 		String currentClass = DesignParser.getCurrentClass().replace("/", ".");
 		String currentClassTag = SequenceMaker.getClassTag(currentClass);
+		System.out.println(name);
 		if (currentClassTag.equals("")) {
 			currentClassTag = currentClass.replace(".", "");
 			SequenceMaker.addClassTag(currentClass, currentClassTag);
@@ -78,11 +79,6 @@ public class MethodSequenceVisitor extends MethodVisitor {
 			} catch (IOException e) {
 			}
 		}
-
-	}
-
-	@Override
-	public void visitTypeInsn(int opcode, String type) {
 
 	}
 

@@ -18,9 +18,9 @@ public class SequenceMaker implements DiagramMaker {
 		StringBuilder classesBuilder = new StringBuilder();
 		StringBuilder methodsBuilder = new StringBuilder();
 		recursiveSequenceGenerator(args, classesBuilder, methodsBuilder);
+		Runtime.getRuntime();
 		completeBuilder.append(classesBuilder.toString() + "\n" + methodsBuilder.toString());
 		return completeBuilder;
-
 	}
 
 	@Override
@@ -58,7 +58,7 @@ public class SequenceMaker implements DiagramMaker {
 		}
 		String className = args[startIndex++];
 		currentClass = className;
-		
+
 		ClassReader reader = new ClassReader(className);
 		String methodName = args[startIndex++];
 		int newSize = args.length - startIndex;
