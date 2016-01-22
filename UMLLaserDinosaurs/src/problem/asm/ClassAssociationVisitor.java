@@ -62,13 +62,16 @@ public class ClassAssociationVisitor extends ClassVisitor {
 
 			types.remove(0);
 			for (String str : types) {
-				String[] typeClassSplit = str.split("/");
-				str = typeClassSplit[typeClassSplit.length - 1];
+				str = str.replaceAll("/", ".");
+				ArbitraryNodeNames.getInstance().addNewNode(str);
+				String strNodeName = ArbitraryNodeNames.getInstance().getNodeName(str);
+				
 				String owner = DesignParser.getCurrentClass();
-				String[] ownerSplit = owner.split("[.]");
-				owner = ownerSplit[ownerSplit.length - 1];
+				
+				ArbitraryNodeNames.getInstance().addNewNode(owner);
+				String ownerNodeName = ArbitraryNodeNames.getInstance().getNodeName(owner);
 
-				String toAdd = owner + "->" + str;
+				String toAdd = ownerNodeName + "->" + strNodeName;
 				boolean add = true;
 				for (String s : associatesList) {
 					if (s.equals(toAdd)) {
@@ -77,6 +80,10 @@ public class ClassAssociationVisitor extends ClassVisitor {
 				}
 				if (add) {
 					associatesList.add(toAdd);
+					
+					if(!DesignParser.getArguments().contains(str)){
+						UMLMaker.addNonIncludedClassBuilder(str);
+					}
 				}
 			}
 		}

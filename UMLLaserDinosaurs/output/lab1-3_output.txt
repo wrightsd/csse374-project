@@ -1,52 +1,62 @@
 digraph text{
 rankdir=BT;
-AppLauncher [
+n0 [
 shape="record",
-color =blacklabel = "{AppLauncher|-watcher : WatchService\l-dir : Path\l-stop : boolean\l-processes : List\l-currentEventType : String\l-currentPathString : String\l-observers : ArrayList\l|+AppLauncher(Path) : void\l+run() : void\l#clearEverything() : void\l+stopGracefully() : void\l+isRunning() : boolean\l+getApplicationsCount() : int\l+handleDirectoryEvent(String, Path) : void\l-main(String[]) : void\l+registerObserver(Observer) : void\l+removeObserver(Observer) : void\l+notifyObservers() : void\l+getCurrentEventType() : String\l+getCurrentFilePathString() : String\l+addProcesses(Process) : void\l}"
+color =black,
+label = "{problem.AppLauncher|-watcher : java.nio.file.WatchService\l-dir : java.nio.file.Path\l-stop : boolean\l-processes : java.util.List\l-currentEventType : java.lang.String\l-currentPathString : java.lang.String\l-observers : java.util.ArrayList\l|+problem.AppLauncher(java.nio.file.Path) : void\l+run() : void\l#clearEverything() : void\l+stopGracefully() : void\l+isRunning() : boolean\l+getApplicationsCount() : int\l+handleDirectoryEvent(java.lang.String, java.nio.file.Path) : void\l+main(java.lang.String[]) : void\l+registerObserver(problem.Observer) : void\l+removeObserver(problem.Observer) : void\l+notifyObservers() : void\l+getCurrentEventType() : java.lang.String\l+getCurrentFilePathString() : java.lang.String\l+addProcesses(java.lang.Process) : void\l}"
 ];
-AppLauncher->Thread[arrowhead="onormal", style="solid"];
-AppLauncher->Subject[arrowhead="onormal", style="dashed"];
-BackwardsTextPrinter [
+n0->n1[arrowhead="onormal", style="solid"];
+n0->n2[arrowhead="onormal", style="dashed"];
+n9 [
 shape="record",
-color =blacklabel = "{BackwardsTextPrinter|+update(AppLauncher) : void\l}"
+color =black,
+label = "{problem.BackwardsTextPrinter|+update(problem.AppLauncher) : void\l}"
 ];
-BackwardsTextPrinter->Observer[arrowhead="onormal", style="dashed"];
-FileNamePrinter [
+n9->n4[arrowhead="onormal", style="dashed"];
+n8 [
 shape="record",
-color =blacklabel = "{FileNamePrinter|+update(AppLauncher) : void\l}"
+color =black,
+label = "{problem.FileNamePrinter|+update(problem.AppLauncher) : void\l}"
 ];
-FileNamePrinter->Observer[arrowhead="onormal", style="dashed"];
-Observer [
+n8->n4[arrowhead="onormal", style="dashed"];
+n4 [
 shape="record",
-color =blacklabel = "{\<\<abstract\>\>\n\<\<interface\>\>\nObserver|-update(AppLauncher) : void\l}"
+color =black,
+label = "{\<\<abstract\>\>\n\<\<interface\>\>\nproblem.Observer|+update(problem.AppLauncher) : void\l}"
 ];
-Subject [
+n2 [
 shape="record",
-color =blacklabel = "{\<\<abstract\>\>\n\<\<interface\>\>\nSubject|-registerObserver(Observer) : void\l-removeObserver(Observer) : void\l-notifyObservers() : void\l}"
+color =black,
+label = "{\<\<abstract\>\>\n\<\<interface\>\>\nproblem.Subject|+registerObserver(problem.Observer) : void\l+removeObserver(problem.Observer) : void\l+notifyObservers() : void\l}"
 ];
-TextLoader [
+n5 [
 shape="record",
-color =blacklabel = "{TextLoader|+update(AppLauncher) : void\l}"
+color =black,
+label = "{problem.TextLoader|+update(problem.AppLauncher) : void\l}"
 ];
-TextLoader->Observer[arrowhead="onormal", style="dashed"];
-WebsiteLoader [
+n5->n4[arrowhead="onormal", style="dashed"];
+n6 [
 shape="record",
-color =blacklabel = "{WebsiteLoader|+update(AppLauncher) : void\l}"
+color =black,
+label = "{problem.WebsiteLoader|+update(problem.AppLauncher) : void\l}"
 ];
-WebsiteLoader->Observer[arrowhead="onormal", style="dashed"];
-WordLoader [
+n6->n4[arrowhead="onormal", style="dashed"];
+n7 [
 shape="record",
-color =blacklabel = "{WordLoader|+update(AppLauncher) : void\l}"
+color =black,
+label = "{problem.WordLoader|+update(problem.AppLauncher) : void\l}"
 ];
-WordLoader->Observer[arrowhead="onormal", style="dashed"];
-AppLauncher->TextLoader[arrowhead="ovee", style="dashed"];
-AppLauncher->WebsiteLoader[arrowhead="ovee", style="dashed"];
-AppLauncher->WordLoader[arrowhead="ovee", style="dashed"];
-AppLauncher->FileNamePrinter[arrowhead="ovee", style="dashed"];
-AppLauncher->BackwardsTextPrinter[arrowhead="ovee", style="dashed"];
-AppLauncher->AppLauncher[arrowhead="ovee", style="dashed"];
-AppLauncher->Observer[arrowhead="ovee", style="dashed"];
-Observer->AppLauncher[arrowhead="ovee", style="dashed"];
-AppLauncher->Process[arrowhead="ovee", style="solid"];
-AppLauncher->Observer[arrowhead="ovee", style="solid"];
+n7->n4[arrowhead="onormal", style="dashed"];
+n1[label = "java.lang.Thread"];
+n3[label = "java.lang.Process"];
+n0->n5[arrowhead="ovee", style="dashed"];
+n0->n6[arrowhead="ovee", style="dashed"];
+n0->n7[arrowhead="ovee", style="dashed"];
+n0->n8[arrowhead="ovee", style="dashed"];
+n0->n9[arrowhead="ovee", style="dashed"];
+n0->n0[arrowhead="ovee", style="dashed"];
+n0->n4[arrowhead="ovee", style="dashed"];
+n4->n0[arrowhead="ovee", style="dashed"];
+n0->n3[arrowhead="ovee", style="solid"];
+n0->n4[arrowhead="ovee", style="solid"];
 }

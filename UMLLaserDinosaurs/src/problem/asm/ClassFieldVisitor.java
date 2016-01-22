@@ -29,9 +29,7 @@ public class ClassFieldVisitor extends ClassVisitor {
 
 	public FieldVisitor visitField(int access, String name, String desc, String signature, Object value) {
 		FieldVisitor toDecorate = super.visitField(access, name, desc, signature, value);
-		String[] typeSplitArray = Type.getType(desc).getClassName().split("[.]");
-		String type = typeSplitArray[typeSplitArray.length - 1];
-		// TODO: delete the line below
+		String type = Type.getType(desc).getClassName();
 		if (access == Opcodes.ACC_PUBLIC) {
 			builder.append("+");
 		} else if (access == Opcodes.ACC_PROTECTED) {
@@ -40,9 +38,6 @@ public class ClassFieldVisitor extends ClassVisitor {
 			builder.append("-");
 		}
 		builder.append(name + " : " + type + "\\l");
-		// TODO: add this field to your internal representation of the current
-		// class.
-		// What is a good way to know what the current class is?
 		return toDecorate;
 	};
 

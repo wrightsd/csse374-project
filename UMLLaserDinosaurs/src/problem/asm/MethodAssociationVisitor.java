@@ -22,7 +22,6 @@ public class MethodAssociationVisitor extends MethodVisitor {
 	@Override
 	public void visitMethodInsn(int opcode, String owner, String name, String desc, boolean itf) {
 		owner = owner.replaceAll("/", ".");
-		// if owner is not in designparser list then just return
 		boolean ownerValid = false;
 		for (String s : DesignParser.getArguments()) {
 			if (s.equals(owner)) {
@@ -33,10 +32,8 @@ public class MethodAssociationVisitor extends MethodVisitor {
 		if (!ownerValid) {
 			return;
 		}
-		String[] ownerStringArray = owner.split("[.]");
-		if (ownerStringArray.length > 0) {
-			owner = ownerStringArray[ownerStringArray.length - 1];
-		}
+		ArbitraryNodeNames.getInstance().addNewNode(owner);
+		String ownerNodeName = ArbitraryNodeNames.getInstance().getNodeName(owner);
 
 		String[] parameterReturnSplit = desc.split("[)]");
 		String returnString = parameterReturnSplit[1];
@@ -52,19 +49,21 @@ public class MethodAssociationVisitor extends MethodVisitor {
 			if (!returnValid) {
 				return;
 			}
-			String[] returnStringArray = returnStringName.split("[.]");
-			if (returnStringArray.length > 0) {
-				returnStringName = returnStringArray[returnStringArray.length - 1];
-			}
+			ArbitraryNodeNames.getInstance().addNewNode(returnStringName);
+			String returnNodeName = ArbitraryNodeNames.getInstance().getNodeName(returnStringName);
 			boolean contains = false;
 			for (String s : usesList) {
-				if (s.equals(owner + "->" + returnStringName)) {
+				if (s.equals(ownerNodeName + "->" + returnNodeName)) {
 					contains = true;
 					break;
 				}
 			}
 			if (!contains) {
-				usesList.add(owner + "->" + returnStringName);
+				usesList.add(ownerNodeName + "->" + returnNodeName);
+				
+				if(!DesignParser.getArguments().contains(returnStringName)){
+					UMLMaker.addNonIncludedClassBuilder(returnStringName);
+				}
 			}
 		}
 
@@ -85,25 +84,26 @@ public class MethodAssociationVisitor extends MethodVisitor {
 						if (!parameterValid) {
 							return;
 						}
-						String[] parameterStringArray = parameterStringName.split("[.]");
-						if (parameterStringArray.length > 0) {
-							parameterStringName = parameterStringArray[parameterStringArray.length - 1];
-						}
+						ArbitraryNodeNames.getInstance().addNewNode(parameterStringName);
+						String parameterNodeName = ArbitraryNodeNames.getInstance().getNodeName(parameterStringName);
 						boolean contains = false;
 						for (String s : usesList) {
-							if (s.equals(owner + "->" + parameterStringName)) {
+							if (s.equals(ownerNodeName + "->" + parameterNodeName)) {
 								contains = true;
 								break;
 							}
 						}
 						if (!contains) {
-							usesList.add(owner + "->" + parameterStringName);
+							usesList.add(ownerNodeName + "->" + parameterNodeName);
+							
+							if(!DesignParser.getArguments().contains(parameterStringName)){
+								UMLMaker.addNonIncludedClassBuilder(parameterStringName);
+							}
 						}
 					}
 				}
 			}
 		}
-
 	}
 
 	@Override
@@ -120,10 +120,8 @@ public class MethodAssociationVisitor extends MethodVisitor {
 		if (!ownerValid) {
 			return;
 		}
-		String[] ownerStringArray = owner.split("[.]");
-		if (ownerStringArray.length > 0) {
-			owner = ownerStringArray[ownerStringArray.length - 1];
-		}
+		ArbitraryNodeNames.getInstance().addNewNode(owner);
+		String ownerNodeName = ArbitraryNodeNames.getInstance().getNodeName(owner);
 
 		if (desc.charAt(0) == 'L') {
 			String descStringName = Type.getType(desc).getClassName();
@@ -137,19 +135,23 @@ public class MethodAssociationVisitor extends MethodVisitor {
 			if (!descValid) {
 				return;
 			}
-			String[] descStringArray = descStringName.split("[.]");
-			if (descStringArray.length > 0) {
-				descStringName = descStringArray[descStringArray.length - 1];
-			}
+			
+			ArbitraryNodeNames.getInstance().addNewNode(descStringName);
+			String descNodeName = ArbitraryNodeNames.getInstance().getNodeName(descStringName);
+			
 			boolean contains = false;
 			for (String s : usesList) {
-				if (s.equals(owner + "->" + descStringName)) {
+				if (s.equals(ownerNodeName + "->" + descNodeName)) {
 					contains = true;
 					break;
 				}
 			}
 			if (!contains) {
-				usesList.add(owner + "->" + descStringName);
+				usesList.add(ownerNodeName + "->" + descNodeName);
+				
+				if(!DesignParser.getArguments().contains(descStringName)){
+					UMLMaker.addNonIncludedClassBuilder(descStringName);
+				}
 			}
 		}
 
@@ -158,12 +160,10 @@ public class MethodAssociationVisitor extends MethodVisitor {
 	@Override
 	public void visitTypeInsn(int opcode, String type) {
 		String owner = DesignParser.getCurrentClass();
-		String[] ownerStringArray = owner.split("[.]");
-		if (ownerStringArray.length > 0) {
-			owner = ownerStringArray[ownerStringArray.length - 1];
-		}
+		
+		ArbitraryNodeNames.getInstance().addNewNode(owner);
+		String ownerNodeName = ArbitraryNodeNames.getInstance().getNodeName(owner);
 
-		String stringName = type;
 		String typeCheck = type.replaceAll("/", ".");
 		boolean typeValid = false;
 		for (String s : DesignParser.getArguments()) {
@@ -175,19 +175,23 @@ public class MethodAssociationVisitor extends MethodVisitor {
 		if (!typeValid) {
 			return;
 		}
-		String[] stringArray = stringName.split("/");
-		if (stringArray.length > 0) {
-			stringName = stringArray[stringArray.length - 1];
-		}
+		
+		ArbitraryNodeNames.getInstance().addNewNode(typeCheck);
+		String typeNodeName = ArbitraryNodeNames.getInstance().getNodeName(typeCheck);
+		
 		boolean contains = false;
 		for (String s : usesList) {
-			if (s.equals(owner + "->" + stringName)) {
+			if (s.equals(ownerNodeName + "->" + typeNodeName)) {
 				contains = true;
 				break;
 			}
 		}
 		if (!contains) {
-			usesList.add(owner + "->" + stringName);
+			usesList.add(ownerNodeName + "->" + typeNodeName);
+			
+			if(!DesignParser.getArguments().contains(typeCheck)){
+				UMLMaker.addNonIncludedClassBuilder(typeCheck);
+			}
 		}
 	}
 

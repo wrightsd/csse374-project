@@ -25,8 +25,9 @@ public class ClassDeclarationVisitor extends ClassVisitor {
 	@Override
 	public void visit(int version, int access, String name, String signature, String superName, String[] interfaces) {
 
-		String[] classNameToWriteArray = name.split("/");
-		String classNameToWrite = classNameToWriteArray[classNameToWriteArray.length - 1];
+		name = name.replaceAll("/", ".");
+		ArbitraryNodeNames.getInstance().addNewNode(name);
+		String nameNodeName = ArbitraryNodeNames.getInstance().getNodeName(name);
 
 		if (superName != null) {
 
@@ -39,10 +40,14 @@ public class ClassDeclarationVisitor extends ClassVisitor {
 				}
 			}
 			if (superValid) {
-				builder.append(classNameToWrite + "->");
-				String[] superClassNameToWriteArray = superName.split("[.]");
-				String superClassNameToWrite = superClassNameToWriteArray[superClassNameToWriteArray.length - 1];
-				builder.append(superClassNameToWrite + "[arrowhead=\"onormal\", style=\"solid\"];\n");
+				builder.append(nameNodeName + "->");
+				ArbitraryNodeNames.getInstance().addNewNode(superName);
+				String superNodeName = ArbitraryNodeNames.getInstance().getNodeName(superName);
+				builder.append(superNodeName + "[arrowhead=\"onormal\", style=\"solid\"];\n");
+				
+				if(!DesignParser.getArguments().contains(superName)){
+					UMLMaker.addNonIncludedClassBuilder(superName);
+				}
 			}
 		}
 
@@ -56,10 +61,14 @@ public class ClassDeclarationVisitor extends ClassVisitor {
 				}
 			}
 			if (interfaceValid) {
-				builder.append(classNameToWrite + "->");
-				String[] interfaceNameToWriteArray = s.split("[.]");
-				String interfaceNameToWrite = interfaceNameToWriteArray[interfaceNameToWriteArray.length - 1];
-				builder.append(interfaceNameToWrite + "[arrowhead=\"onormal\", style=\"dashed\"];\n");
+				builder.append(nameNodeName + "->");
+				ArbitraryNodeNames.getInstance().addNewNode(s);
+				String interfaceNodeName = ArbitraryNodeNames.getInstance().getNodeName(s);
+				builder.append(interfaceNodeName + "[arrowhead=\"onormal\", style=\"dashed\"];\n");
+				
+				if(!DesignParser.getArguments().contains(s)){
+					UMLMaker.addNonIncludedClassBuilder(s);
+				}
 			}
 		}
 		// TODO: construct an internal representation of the class for later use

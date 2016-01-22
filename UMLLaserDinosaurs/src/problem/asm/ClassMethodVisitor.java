@@ -37,25 +37,14 @@ public class ClassMethodVisitor extends ClassVisitor {
 		Type[] argTypes = Type.getArgumentTypes(desc);
 		String[] classNames = new String[argTypes.length];
 		for (int i = 0; i < argTypes.length; i++) {
-			String[] classNameSplitArray = argTypes[i].getClassName().split("[.]");
-			classNames[i] = classNameSplitArray[classNameSplitArray.length - 1];
+			classNames[i] = argTypes[i].getClassName();
 		}
-		// TODO: create an internal representation of the current method and
-		// pass it to the methods below
-		// addAccessLevel(access);
-		// addReturnType(desc);
-		// addArguments(desc);
-		// TODO: add the current method to your internal representation of the
-		// current class
-		// What is a good way for the code to remember what the current class
-		// is?
-		String[] typeArray = Type.getReturnType(desc).getClassName().split("[.]");
-		String type = typeArray[typeArray.length-1];
 		
+		String type = Type.getReturnType(desc).getClassName();
+
 		String argsToPrint = Arrays.toString(classNames);
 		if (argsToPrint.length() > 2) {
 			argsToPrint = argsToPrint.substring(1, argsToPrint.length() - 1);
-		
 		} else {
 			argsToPrint = "";
 		}

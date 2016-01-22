@@ -16,6 +16,8 @@ public class UMLMaker implements DiagramMaker {
 	private ArrayList<String> usesList;
 	private ArrayList<String> associatesList;
 	private HashMap<String, String> patternColorMap = new HashMap<String,String>();
+	private static ArrayList<StringBuilder> nonIncludedBuilders = new ArrayList<StringBuilder>();
+	private static ArrayList<String> nonIncludedClasses = new ArrayList<String>();
 
 	@Override
 	public StringBuilder generateDiagramText(String[] args) throws IOException {
@@ -32,6 +34,7 @@ public class UMLMaker implements DiagramMaker {
 
 		for (String className : args) {
 			currentClass = className;
+			ArbitraryNodeNames.getInstance().addNewNode(currentClass);
 			StringBuilder methodBuilder = new StringBuilder();
 			StringBuilder fieldBuilder = new StringBuilder();
 			StringBuilder arrowBuilder = new StringBuilder();
@@ -42,8 +45,6 @@ public class UMLMaker implements DiagramMaker {
 			ClassReader reader = new ClassReader(className);
 			// make class declaration visitor to get superclass and interfaces
 			ClassVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, arrowBuilder);
-			String[] classNameToWriteArray = className.split("[.]");
-			String classNameToWrite = classNameToWriteArray[classNameToWriteArray.length - 1];
 			
 			ClassVisitor singletonVisitor = new SingletonClassVisitor(Opcodes.ASM5, declVisitor, patternBuilder);
 
@@ -63,14 +64,14 @@ public class UMLMaker implements DiagramMaker {
 			// visit the class
 			reader.accept(associationVisitor, ClassReader.EXPAND_FRAMES);
 			
-			completeBuilder.append(classNameToWrite + " [\nshape=\"record\",\n");
+			completeBuilder.append(ArbitraryNodeNames.getInstance().getNodeName(className) + " [\nshape=\"record\",\n");
 			completeBuilder.append("color =" + patternColorMap.get(patternBuilder.toString()));
 			completeBuilder.append(",\n");
 			completeBuilder.append("label = \"{");
 			if (interfaceBuilder.toString().length() > 0) {
 				completeBuilder.append(interfaceBuilder.toString());
 			}
-			completeBuilder.append(classNameToWrite);
+			completeBuilder.append(className);
 			if(patternBuilder.toString().length()>0){
 				completeBuilder.append("\\n\\<\\<"+ patternBuilder.toString()+"\\>\\>");
 			}
@@ -82,11 +83,16 @@ public class UMLMaker implements DiagramMaker {
 			if (methodBuilder.toString().length() > 0) {
 				// Remove default constructors from UML
 				String methods = methodBuilder.toString().replaceAll("[+]init[(][)] : void\\\\l", "");
-				methods = methods.replaceAll("init[(]", classNameToWrite + "(");
+				methods = methods.replaceAll("init[(]", className + "(");
 				completeBuilder.append(methods);
 			}
+			
 			completeBuilder.append("}\"\n];\n");
 			completeBuilder.append(arrowBuilder.toString());
+		}
+		
+		for(StringBuilder s: nonIncludedBuilders){
+			completeBuilder.append(s.toString() + "\n");
 		}
 
 		drawUsesArrows(usesList, associatesList, associationBuilder);
@@ -135,6 +141,15 @@ public class UMLMaker implements DiagramMaker {
 
 	private void addPatternColor(String patternString, String colorString) {
 		this.patternColorMap.put(patternString, colorString);
+	}
+	
+	public static void addNonIncludedClassBuilder(String className){
+		if(!nonIncludedClasses.contains(className)){
+		nonIncludedClasses .add(className);
+		StringBuilder nonIncludedBuilder = new StringBuilder();
+		nonIncludedBuilder.append(ArbitraryNodeNames.getInstance().getNodeName(className)+"[label = \""+className+"\"];" );
+		nonIncludedBuilders.add(nonIncludedBuilder);
+		}
 	}
 
 }
