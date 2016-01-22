@@ -1,0 +1,70 @@
+javautilCollections:java.util.Collections[a]
+javautilRandom:java.util.Random[a]
+javautilconcurrentatomicAtomicLong:java.util.concurrent.atomic.AtomicLong[a]
+sunmiscUnsafe:sun.misc.Unsafe[a]
+javalangSystem:java.lang.System[a]
+javalangObject:java.lang.Object[a]
+javalangNumber:java.lang.Number[a]
+javautilList:java.util.List[a]
+javalangIllegalArgumentException:java.lang.IllegalArgumentException[a]
+javalangRuntimeException:java.lang.RuntimeException[a]
+javalangException:java.lang.Exception[a]
+javalangThrowable:java.lang.Throwable[a]
+javautilListIterator:java.util.ListIterator[a]
+
+javautilCollections:void=javautilRandom.<init>()
+javautilRandom:long=javautilRandom.seedUniquifier()
+javautilRandom:long=javautilconcurrentatomicAtomicLong.get()
+javautilconcurrentatomicAtomicLong:boolean=javautilconcurrentatomicAtomicLong.compareAndSet(long, long)
+javautilconcurrentatomicAtomicLong:boolean=sunmiscUnsafe.compareAndSwapLong(java.lang.Object, long, long, long)
+sunmiscUnsafe:long=javalangSystem.nanoTime()
+javalangSystem:void=javautilRandom.<init>(long)
+javautilRandom:void=javalangObject.<init>()
+javalangObject:java.lang.Class=javalangObject.getClass()
+javalangObject:long=javautilRandom.initialScramble(long)
+javautilRandom:void=javautilconcurrentatomicAtomicLong.<init>(long)
+javautilconcurrentatomicAtomicLong:void=javalangNumber.<init>()
+javalangNumber:void=javalangObject.<init>()
+javalangObject:void=javautilconcurrentatomicAtomicLong.<init>()
+javautilconcurrentatomicAtomicLong:void=javalangNumber.<init>()
+javalangNumber:void=javalangObject.<init>()
+javalangObject:void=javautilRandom.setSeed(long)
+javautilRandom:long=javautilRandom.initialScramble(long)
+javautilRandom:void=javautilconcurrentatomicAtomicLong.set(long)
+javautilconcurrentatomicAtomicLong:void=javautilCollections.shuffle(java.util.List, java.util.Random)
+javautilCollections:int=javautilList.size()
+javautilList:int=javautilRandom.nextInt(int)
+javautilRandom:void=javalangIllegalArgumentException.<init>(java.lang.String)
+javalangIllegalArgumentException:void=javalangRuntimeException.<init>(java.lang.String)
+javalangRuntimeException:void=javalangException.<init>(java.lang.String)
+javalangException:void=javalangThrowable.<init>(java.lang.String)
+javalangException:int=javautilRandom.next(int)
+javautilRandom:long=javautilconcurrentatomicAtomicLong.get()
+javautilconcurrentatomicAtomicLong:boolean=javautilconcurrentatomicAtomicLong.compareAndSet(long, long)
+javautilconcurrentatomicAtomicLong:boolean=sunmiscUnsafe.compareAndSwapLong(java.lang.Object, long, long, long)
+sunmiscUnsafe:int=javautilRandom.next(int)
+javautilRandom:long=javautilconcurrentatomicAtomicLong.get()
+javautilconcurrentatomicAtomicLong:boolean=javautilconcurrentatomicAtomicLong.compareAndSet(long, long)
+javautilconcurrentatomicAtomicLong:boolean=sunmiscUnsafe.compareAndSwapLong(java.lang.Object, long, long, long)
+sunmiscUnsafe:void=javautilCollections.swap(java.util.List, int, int)
+javautilCollections:java.lang.Object=javautilList.get(int)
+javautilList:java.lang.Object=javautilList.set(int, java.lang.Object)
+javautilList:java.lang.Object=javautilList.set(int, java.lang.Object)
+javautilList:java.lang.Object[]=javautilList.toArray()
+javautilList:int=javautilRandom.nextInt(int)
+javautilRandom:void=javalangIllegalArgumentException.<init>(java.lang.String)
+javalangIllegalArgumentException:void=javalangRuntimeException.<init>(java.lang.String)
+javalangRuntimeException:void=javalangException.<init>(java.lang.String)
+javalangException:void=javalangThrowable.<init>(java.lang.String)
+javalangException:int=javautilRandom.next(int)
+javautilRandom:long=javautilconcurrentatomicAtomicLong.get()
+javautilconcurrentatomicAtomicLong:boolean=javautilconcurrentatomicAtomicLong.compareAndSet(long, long)
+javautilconcurrentatomicAtomicLong:boolean=sunmiscUnsafe.compareAndSwapLong(java.lang.Object, long, long, long)
+sunmiscUnsafe:int=javautilRandom.next(int)
+javautilRandom:long=javautilconcurrentatomicAtomicLong.get()
+javautilconcurrentatomicAtomicLong:boolean=javautilconcurrentatomicAtomicLong.compareAndSet(long, long)
+javautilconcurrentatomicAtomicLong:boolean=sunmiscUnsafe.compareAndSwapLong(java.lang.Object, long, long, long)
+sunmiscUnsafe:void=javautilCollections.swap(java.lang.Object[], int, int)
+javautilCollections:java.util.ListIterator=javautilList.listIterator()
+javautilList:java.lang.Object=javautilListIterator.next()
+javautilListIterator:void=javautilListIterator.set(java.lang.Object)

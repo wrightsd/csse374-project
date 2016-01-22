@@ -52,14 +52,6 @@ public class ClassMethodVisitor extends ClassVisitor {
 		String[] typeArray = Type.getReturnType(desc).getClassName().split("[.]");
 		String type = typeArray[typeArray.length-1];
 		
-		// TODO: delete the line below
-		if (access == Opcodes.ACC_PUBLIC) {
-			builder.append("+");
-		} else if (access == Opcodes.ACC_PROTECTED) {
-			builder.append("#");
-		} else { // method is private
-			builder.append("-");
-		}
 		String argsToPrint = Arrays.toString(classNames);
 		if (argsToPrint.length() > 2) {
 			argsToPrint = argsToPrint.substring(1, argsToPrint.length() - 1);
@@ -71,6 +63,18 @@ public class ClassMethodVisitor extends ClassVisitor {
 		if (name.equals("<init>")) {
 			name = "init";
 		}
+		if (name.equals("<clinit>")){
+			return toDecorate;
+		}
+		
+		if ((access & Opcodes.ACC_PUBLIC) > 0) {
+			builder.append("+");
+		} else if ((access & Opcodes.ACC_PROTECTED) > 0) {
+			builder.append("#");
+		} else { // method is private
+			builder.append("-");
+		}
+
 		builder.append(name + "(" + argsToPrint + ")" + " : " + type + "\\l");
 
 		return toDecorate;

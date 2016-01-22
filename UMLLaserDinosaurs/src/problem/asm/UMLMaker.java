@@ -65,6 +65,7 @@ public class UMLMaker implements DiagramMaker {
 			
 			completeBuilder.append(classNameToWrite + " [\nshape=\"record\",\n");
 			completeBuilder.append("color =" + patternColorMap.get(patternBuilder.toString()));
+			completeBuilder.append(",\n");
 			completeBuilder.append("label = \"{");
 			if (interfaceBuilder.toString().length() > 0) {
 				completeBuilder.append(interfaceBuilder.toString());

@@ -1,0 +1,33 @@
+digraph text{
+rankdir=BT;
+Runtime [
+shape="record",
+color =black,
+label = "{Runtime|-currentRuntime : Runtime\l|+getRuntime() : Runtime\l-Runtime() : void\l+exit(int) : void\l+addShutdownHook(Thread) : void\l+removeShutdownHook(Thread) : boolean\l+halt(int) : void\l+runFinalizersOnExit(boolean) : void\l+exec(String) : Process\l+exec(String, String[]) : Process\l+exec(String, String[], File) : Process\l+exec(String[]) : Process\l+exec(String[], String[]) : Process\l+exec(String[], String[], File) : Process\l+availableProcessors() : int\l+freeMemory() : long\l+totalMemory() : long\l+maxMemory() : long\l+gc() : void\l-runFinalization0() : void\l+runFinalization() : void\l+traceInstructions(boolean) : void\l+traceMethodCalls(boolean) : void\l+load(String) : void\l-load0(Class, String) : void\l+loadLibrary(String) : void\l-loadLibrary0(Class, String) : void\l+getLocalizedInputStream(InputStream) : InputStream\l+getLocalizedOutputStream(OutputStream) : OutputStream\l}"
+];
+Desktop [
+shape="record",
+color =black,
+label = "{Desktop|-peer : DesktopPeer\l|-Desktop() : void\l+getDesktop() : Desktop\l+isDesktopSupported() : boolean\l+isSupported(Desktop$Action) : boolean\l-checkFileValidation(File) : void\l-checkActionSupport(Desktop$Action) : void\l-checkAWTPermission() : void\l+open(File) : void\l+edit(File) : void\l+print(File) : void\l+browse(URI) : void\l+mail() : void\l+mail(URI) : void\l-checkExec() : void\l}"
+];
+FilterInputStream [
+shape="record",
+color =black,
+label = "{FilterInputStream|-in : InputStream\l|#FilterInputStream(InputStream) : void\l+read() : int\l+read(byte[]) : int\l+read(byte[], int, int) : int\l+skip(long) : long\l+available() : int\l+close() : void\l+mark(int) : void\l+reset() : void\l+markSupported() : boolean\l}"
+];
+FilterInputStream->InputStream[arrowhead="onormal", style="solid"];
+EagerSingletonSample [
+shape="record",
+color =blue,
+label = "{EagerSingletonSample\n\<\<Singleton\>\>|-s : EagerSingletonSample\l|+getInstance() : EagerSingletonSample\l}"
+];
+LazySingletonSample [
+shape="record",
+color =blue,
+label = "{LazySingletonSample\n\<\<Singleton\>\>|-s : LazySingletonSample\l|+getInstance() : LazySingletonSample\l}"
+];
+Runtime->Runtime[arrowhead="ovee", style="dashed"];
+Desktop->Desktop[arrowhead="ovee", style="dashed"];
+EagerSingletonSample->EagerSingletonSample[arrowhead="ovee", style="dashed"];
+LazySingletonSample->LazySingletonSample[arrowhead="ovee", style="dashed"];
+}
