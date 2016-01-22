@@ -47,7 +47,7 @@ public class SingletonClassVisitor extends ClassVisitor {
 	public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
 		MethodVisitor toDecorate = super.visitMethod(access, name, desc, signature, exceptions);
 
-		if ((name.equals("getInstance")) && ((access & Opcodes.ACC_STATIC) >= 1)) {
+		if ((access & Opcodes.ACC_STATIC) >= 1) {
 			if (Type.getArgumentTypes(desc).length == 0) {
 				if (Type.getReturnType(desc).getClassName().equals(DesignParser.getCurrentClass())) {
 					this.methodSingletonCriteria = true;
