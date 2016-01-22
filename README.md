@@ -19,6 +19,9 @@ Milestone 3:
 Diagram generation has been switched to following the strategy pattern. String arguments are passed into DesignParser with a second parameter to indicated which type of diagram to create. This second parameter is used in a HashMap to determine which DiagramMaker to utilize. The generateDiagramText method is called on the selected DiagramMaker to create the output text for either a sequence diagram or uml diagram and put it into a StringBuilder. As far as the actual implementation of sequence diagram text generation. A ClassMethodVisitor is used to track the visitng of all methods on the selected class until the specified method is visited. Then, a method visitor is created for this method. All other method calls within this method trigger the creation of an additional class visitor on the new class/method pair with a depth of one less. This repeats at increasing depths until the desired depth is reached.
 Every time a new class is utilized, it is added to one StringBuilder tracking the classes necessary for the sequence diagram. Every time a new method is called it's correct signature is added to a StringBuilder holding all methods. These two are combined at the end to return the overall complete StringBuilder holding the text for the sequence diagram. 
 
+Milestone 4:
+Another ClassVisitor has been added, the SingletonClassVisitor, which decorates the previous ClassVisitor decoration and searches for the signs of a Singleton in the current class. If found, the class is nmarked as a singleton by adding an indicating string to a StringBuilder. This builder is later converted to a string and then a HashMap is used to determine the correct color for the pattern (or for no pattern at all). The color and pattern name are then appended to the overall string builder in the correct locations to cause desired look in the UML.
+
 Who did what:
 
 For the most part, we all worked together on every part of the code, alternating every 10 minutes to ensure that everyone worked on everything equally, and we were all paying attention when other group members were the one coding.  None of the methods or classes in the project can be accurately attributed to any single member of our group, as we all worked together on everything so far.  The only parts that we have done separately are as follows (separated by milestone):
@@ -34,6 +37,10 @@ Milestone 3:
   Tim Anderson: Updated testing implementation
   Spencer Wright: Manual sequence diagrams
   Gregory Nathan: Updated README.md file
+Milestone 4:
+  Tim Anderson: Updated testing implementation
+  Spencer Wright: Manual UML updates
+  Gregory Nathan: README.md updates
 
 Instructions:
 
@@ -50,5 +57,7 @@ The class name is the full package path for the class (such as java.lang.String)
 The method name is the regular String for the name
 
 The remaining arguments are method parameter types, as many as necessary, using the full package path String.
+
+Patterns currently detected: Singleton (blue)
 
 For testing purposes, run the JUnit tests individually.  When the tests are all run at the same time errors sometime occur with synchronous evaluation reading a file before it gets fully written, making the JUnit test fail, whereas when all tests are ran individually they passed every time.
