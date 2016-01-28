@@ -2,88 +2,73 @@ digraph text{
 rankdir=BT;
 n0 [
 shape="record",
-color =black,
 label = "{problem.asm.ClassDeclarationVisitor|-builder : java.lang.StringBuilder\l|+problem.asm.ClassDeclarationVisitor(int) : void\l+problem.asm.ClassDeclarationVisitor(int, java.lang.StringBuilder) : void\l+problem.asm.ClassDeclarationVisitor(int, org.objectweb.asm.ClassVisitor, java.lang.StringBuilder) : void\l+visit(int, int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[]) : void\l}"
 ];
 n0->n1[arrowhead="onormal", style="solid"];
 n6 [
 shape="record",
-color =black,
 label = "{problem.asm.ClassFieldVisitor|-builder : java.lang.StringBuilder\l|+problem.asm.ClassFieldVisitor(int) : void\l+problem.asm.ClassFieldVisitor(int, java.lang.StringBuilder) : void\l+problem.asm.ClassFieldVisitor(int, org.objectweb.asm.ClassVisitor) : void\l+problem.asm.ClassFieldVisitor(int, org.objectweb.asm.ClassVisitor, java.lang.StringBuilder) : void\l+visitField(int, java.lang.String, java.lang.String, java.lang.String, java.lang.Object) : org.objectweb.asm.FieldVisitor\l}"
 ];
 n6->n1[arrowhead="onormal", style="solid"];
 n7 [
 shape="record",
-color =black,
 label = "{problem.asm.ClassMethodVisitor|-builder : java.lang.StringBuilder\l|+problem.asm.ClassMethodVisitor(int) : void\l+problem.asm.ClassMethodVisitor(int, java.lang.StringBuilder) : void\l+problem.asm.ClassMethodVisitor(int, org.objectweb.asm.ClassVisitor) : void\l+problem.asm.ClassMethodVisitor(int, org.objectweb.asm.ClassVisitor, java.lang.StringBuilder) : void\l+visitMethod(int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[]) : org.objectweb.asm.MethodVisitor\l}"
 ];
 n7->n1[arrowhead="onormal", style="solid"];
 n4 [
 shape="record",
-color =black,
 label = "{problem.asm.DesignParser|-diagramMap : java.util.HashMap\l-maker : problem.asm.DiagramMaker\l|+parse(java.lang.String[], java.lang.String, java.lang.String) : void\l-setUpHashMap() : void\l+addDiagramType(java.lang.String, problem.asm.DiagramMaker) : void\l+getCurrentClass() : java.lang.String\l+getArguments() : java.util.ArrayList\l}"
 ];
 n12 [
 shape="record",
-color =black,
 label = "{problem.asm.InterfaceAbstractCheckVisitor|-builder : java.lang.StringBuilder\l|+problem.asm.InterfaceAbstractCheckVisitor(int) : void\l+problem.asm.InterfaceAbstractCheckVisitor(int, java.lang.StringBuilder) : void\l+problem.asm.InterfaceAbstractCheckVisitor(int, org.objectweb.asm.ClassVisitor, java.lang.StringBuilder) : void\l+visit(int, int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[]) : void\l}"
 ];
 n12->n1[arrowhead="onormal", style="solid"];
 n13 [
 shape="record",
-color =black,
 label = "{problem.asm.MethodAssociationVisitor|-builder : java.lang.StringBuilder\l-associatesList : java.util.ArrayList\l-usesList : java.util.ArrayList\l|+problem.asm.MethodAssociationVisitor(int, org.objectweb.asm.MethodVisitor, java.util.ArrayList, java.util.ArrayList) : void\l+visitMethodInsn(int, java.lang.String, java.lang.String, java.lang.String, boolean) : void\l+visitFieldInsn(int, java.lang.String, java.lang.String, java.lang.String) : void\l+visitTypeInsn(int, java.lang.String) : void\l+visitVarInsn(int, int) : void\l}"
 ];
 n13->n14[arrowhead="onormal", style="solid"];
 n15 [
 shape="record",
-color =black,
 label = "{problem.asm.ClassAssociationVisitor|-builder : java.lang.StringBuilder\l-associatesList : java.util.ArrayList\l-usesList : java.util.ArrayList\l|+problem.asm.ClassAssociationVisitor(int, org.objectweb.asm.ClassVisitor, java.util.ArrayList, java.util.ArrayList) : void\l+problem.asm.ClassAssociationVisitor(int, java.util.ArrayList, java.util.ArrayList) : void\l+visitField(int, java.lang.String, java.lang.String, java.lang.String, java.lang.Object) : org.objectweb.asm.FieldVisitor\l+visitMethod(int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[]) : org.objectweb.asm.MethodVisitor\l-compileAggregation(java.lang.String) : void\l}"
 ];
 n15->n1[arrowhead="onormal", style="solid"];
 n5 [
 shape="record",
-color =black,
-label = "{problem.asm.UMLMaker|-currentClass : java.lang.String\l-classSet : java.util.ArrayList\l-myArgs : java.lang.String[]\l-usesList : java.util.ArrayList\l-associatesList : java.util.ArrayList\l-patternColorMap : java.util.HashMap\l-nonIncludedBuilders : java.util.ArrayList\l-nonIncludedClasses : java.util.ArrayList\l|+generateDiagramText(java.lang.String[]) : java.lang.StringBuilder\l-drawUsesArrows(java.util.ArrayList, java.util.ArrayList, java.lang.StringBuilder) : void\l+getArguments() : java.util.ArrayList\l+getCurrentClass() : java.lang.String\l-setupColorMap() : void\l-addPatternColor(java.lang.String, java.lang.String) : void\l+addNonIncludedClassBuilder(java.lang.String) : void\l}"
+label = "{problem.asm.UMLMaker|-currentClass : java.lang.String\l-classSet : java.util.ArrayList\l-myArgs : java.lang.String[]\l-usesList : java.util.ArrayList\l-associatesList : java.util.ArrayList\l-borderColorMap : java.util.HashMap\l-fillColorMap : java.util.HashMap\l-classPatternStrings : java.util.HashMap\l-nonIncludedBuilders : java.util.ArrayList\l-nonIncludedClasses : java.util.ArrayList\l|+generateDiagramText(java.lang.String[]) : java.lang.StringBuilder\l-drawUsesArrows(java.util.ArrayList, java.util.ArrayList, java.lang.StringBuilder) : void\l+getArguments() : java.util.ArrayList\l+getCurrentClass() : java.lang.String\l-setupBorderColorMap() : void\l-setupFillColorMap() : void\l-addColorKey(java.util.HashMap, java.lang.String, java.lang.String) : void\l+addNonIncludedClassBuilder(java.lang.String) : void\l}"
 ];
 n5->n9[arrowhead="onormal", style="dashed"];
 n9 [
 shape="record",
-color =black,
 label = "{\<\<abstract\>\>\n\<\<interface\>\>\nproblem.asm.DiagramMaker|+generateDiagramText(java.lang.String[]) : java.lang.StringBuilder\l+getCurrentClass() : java.lang.String\l+getArguments() : java.util.ArrayList\l}"
 ];
 n11 [
 shape="record",
-color =black,
 label = "{problem.asm.SequenceMaker|-classTags : java.util.HashMap\l-currentClass : java.lang.String\l|+generateDiagramText(java.lang.String[]) : java.lang.StringBuilder\l+getCurrentClass() : java.lang.String\l+getArguments() : java.util.ArrayList\l+addClassTag(java.lang.String, java.lang.String) : void\l+getClassTag(java.lang.String) : java.lang.String\l+recursiveSequenceGenerator(java.lang.String[], java.lang.StringBuilder, java.lang.StringBuilder) : void\l}"
 ];
 n11->n9[arrowhead="onormal", style="dashed"];
 n10 [
 shape="record",
-color =black,
 label = "{problem.asm.NoSuchDiagramMaker|+generateDiagramText(java.lang.String[]) : java.lang.StringBuilder\l+getCurrentClass() : java.lang.String\l+getArguments() : java.util.ArrayList\l}"
 ];
 n10->n9[arrowhead="onormal", style="dashed"];
 n3 [
 shape="record",
-color =black,
 label = "{problem.asm.BlacklistHolder|-blacklist : java.util.ArrayList\l|+getInstance() : java.util.ArrayList\l}"
 ];
 n18 [
 shape="record",
-color =black,
 label = "{problem.asm.ClassSequenceVisitor|-chosenDepth : int\l-chosenMethodName : java.lang.String\l-chosenParams : java.lang.String[]\l-classSequenceBuilder : java.lang.StringBuilder\l-methodSequenceBuilder : java.lang.StringBuilder\l|+problem.asm.ClassSequenceVisitor(int) : void\l+problem.asm.ClassSequenceVisitor(int, int, java.lang.String, java.lang.String[], java.lang.StringBuilder, java.lang.StringBuilder) : void\l+visitMethod(int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[]) : org.objectweb.asm.MethodVisitor\l}"
 ];
 n18->n1[arrowhead="onormal", style="solid"];
 n19 [
 shape="record",
-color =black,
 label = "{problem.asm.MethodSequenceVisitor|-classSequenceBuilder : java.lang.StringBuilder\l-methodSequenceBuilder : java.lang.StringBuilder\l-visitor : org.objectweb.asm.MethodVisitor\l-chosenDepth : int\l|+problem.asm.MethodSequenceVisitor(int) : void\l+problem.asm.MethodSequenceVisitor(int, org.objectweb.asm.MethodVisitor, java.lang.StringBuilder, java.lang.StringBuilder, int) : void\l+visitMethodInsn(int, java.lang.String, java.lang.String, java.lang.String, boolean) : void\l}"
 ];
 n19->n14[arrowhead="onormal", style="solid"];
 n17 [
 shape="record",
-color =black,
 label = "{problem.asm.SingletonClassVisitor|-fieldSingletonCriteria : boolean\l-methodSingletonCriteria : boolean\l-patternBuilder : java.lang.StringBuilder\l|+problem.asm.SingletonClassVisitor(int, org.objectweb.asm.ClassVisitor) : void\l+problem.asm.SingletonClassVisitor(int, org.objectweb.asm.ClassVisitor, java.lang.StringBuilder) : void\l+visitField(int, java.lang.String, java.lang.String, java.lang.String, java.lang.Object) : org.objectweb.asm.FieldVisitor\l+visitMethod(int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[]) : org.objectweb.asm.MethodVisitor\l}"
 ];
 n17->n1[arrowhead="onormal", style="solid"];
