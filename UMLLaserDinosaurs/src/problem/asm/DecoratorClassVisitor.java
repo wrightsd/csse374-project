@@ -42,14 +42,16 @@ public class DecoratorClassVisitor extends ClassVisitor {
 	@Override
 	public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
 		MethodVisitor toDecorate = super.visitMethod(access, name, desc, signature, exceptions);
-		if (name.equals("<init>")) {
-			Type[] args = Type.getArgumentTypes(desc);
-			for (int i = 0; i < args.length; i++) {
-				if (this.superName.equals(args[i].getClassName())) {
-					UMLMaker.addPattern(DesignParser.getCurrentClass(), "decorator");
-					UMLMaker.addPattern(args[i].getClassName(), "component");
-					UMLMaker.addLabelledArrow(DesignParser.getCurrentClass(), args[i].getClassName(),
-							"\\<\\<decorates\\>\\>");
+		if (this.superName != null) {
+			if (name.equals("<init>")) {
+				Type[] args = Type.getArgumentTypes(desc);
+				for (int i = 0; i < args.length; i++) {
+					if (this.superName.equals(args[i].getClassName())) {
+						UMLMaker.addPattern(DesignParser.getCurrentClass(), "decorator");
+						UMLMaker.addPattern(args[i].getClassName(), "component");
+						UMLMaker.addLabelledArrow(DesignParser.getCurrentClass(), args[i].getClassName(),
+								"\\<\\<decorates\\>\\>");
+					}
 				}
 			}
 		}

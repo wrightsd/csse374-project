@@ -1,0 +1,54 @@
+digraph text{
+rankdir=BT;
+n0 [
+shape="record",
+label = "{problem.DecryptionInputStream|-decryptor : problem.IDecryption\l|+problem.DecryptionInputStream(java.io.InputStream, problem.IDecryption) : void\l+read() : int\l+read(byte[], int, int) : int\l}"
+];
+n0->n1[arrowhead="onormal", style="solid"];
+n4 [
+shape="record",
+label = "{problem.EncryptionOutputStream|-encryptor : problem.IEncryption\l|+problem.EncryptionOutputStream(java.io.OutputStream, problem.IEncryption) : void\l+write(int) : void\l}"
+];
+n4->n5[arrowhead="onormal", style="solid"];
+n2 [
+shape="record",
+label = "{\<\<abstract\>\>\n\<\<interface\>\>\nproblem.IDecryption|+decrypt(char) : char\l}"
+];
+n6 [
+shape="record",
+label = "{\<\<abstract\>\>\n\<\<interface\>\>\nproblem.IEncryption|+encrypt(char) : char\l}"
+];
+n7 [
+shape="record",
+label = "{problem.SubstitutionCipher|-encryptionKey : char[]\l-decryptionKey : char[]\l|+encrypt(char) : char\l+decrypt(char) : char\l}"
+];
+n7->n6[arrowhead="onormal", style="dashed"];
+n7->n2[arrowhead="onormal", style="dashed"];
+n8 [
+shape="record",
+label = "{problem.TextEditorApp|+main(java.lang.String[]) : void\l}"
+];
+n1[
+label = "java.io.FilterInputStream"];
+n3[
+label = "java.io.PrintStream"];
+n5[
+label = "java.io.FilterOutputStream"];
+n9[
+label = "java.io.FileInputStream"];
+n10[
+label = "java.io.FileOutputStream"];
+n11[
+label = "problem.TextEditor"];
+n0->n1[arrowhead="ovee", style="dashed"];
+n0->n2[arrowhead="ovee", style="dashed"];
+n0->n3[arrowhead="ovee", style="dashed"];
+n4->n5[arrowhead="ovee", style="dashed"];
+n4->n6[arrowhead="ovee", style="dashed"];
+n8->n7[arrowhead="ovee", style="dashed"];
+n8->n9[arrowhead="ovee", style="dashed"];
+n8->n10[arrowhead="ovee", style="dashed"];
+n8->n0[arrowhead="ovee", style="dashed"];
+n8->n4[arrowhead="ovee", style="dashed"];
+n8->n11[arrowhead="ovee", style="dashed"];
+}

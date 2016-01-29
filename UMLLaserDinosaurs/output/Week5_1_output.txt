@@ -1,0 +1,17 @@
+digraph text{
+rankdir=BT;
+n0 [
+shape="record",
+label = "{problem.client.App|+main(java.lang.String[]) : void\l}"
+];
+n1 [
+shape="record",
+label = "{problem.client.IteratorToEnumerationAdapter|-itr : java.util.Iterator\l|+problem.client.IteratorToEnumerationAdapter(java.util.Iterator) : void\l+hasMoreElements() : boolean\l+nextElement() : java.lang.Object\l}"
+];
+n2 [
+shape="record",
+label = "{problem.lib.LinearTransformer|-enumTion : java.util.Enumeration\l|+problem.lib.LinearTransformer(java.util.Enumeration) : void\l+transform(java.io.OutputStream) : void\l}"
+];
+n0->n1[arrowhead="ovee", style="dashed"];
+n0->n2[arrowhead="ovee", style="dashed"];
+}
