@@ -6,7 +6,9 @@ label = "{problem.client.App|+main(java.lang.String[]) : void\l}"
 ];
 n2 [
 shape="record",
-label = "{problem.client.IteratorToEnumerationAdapter|-itr : java.util.Iterator\l|+problem.client.IteratorToEnumerationAdapter(java.util.Iterator) : void\l+hasMoreElements() : boolean\l+nextElement() : java.lang.Object\l}"
+style = filled,
+fillcolor =firebrick2,
+label = "{problem.client.IteratorToEnumerationAdapter\n\<\<adapter\>\>|-itr : java.util.Iterator\l|+problem.client.IteratorToEnumerationAdapter(java.util.Iterator) : void\l+hasMoreElements() : boolean\l+nextElement() : java.lang.Object\l}"
 ];
 n2->n4[arrowhead="onormal", style="dashed"];
 n3 [
@@ -16,11 +18,16 @@ label = "{problem.lib.LinearTransformer|-enumTion : java.util.Enumeration\l|+pro
 n1[
 label = "java.util.ArrayList"];
 n4[
-label = "java.util.Enumeration"];
+style = filled,
+fillcolor =firebrick2,
+label = "java.util.Enumeration\n\<\<target\>\>"];
 n5[
-label = "java.util.Iterator"];
+style = filled,
+fillcolor =firebrick2,
+label = "java.util.Iterator\n\<\<adaptee\>\>"];
 n6[
 label = "java.io.OutputStream"];
+n2->n4[arrowhead="normal", style="solid", label="\<\<adapts\>\>"];
 n0->n1[arrowhead="ovee", style="dashed"];
 n0->n2[arrowhead="ovee", style="dashed"];
 n0->n3[arrowhead="ovee", style="dashed"];

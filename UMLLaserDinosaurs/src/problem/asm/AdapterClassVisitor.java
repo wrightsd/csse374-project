@@ -2,6 +2,7 @@ package problem.asm;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
@@ -35,7 +36,7 @@ public class AdapterClassVisitor extends ClassVisitor {
 	@Override
 	public void visit(int version, int access, String name, String signature, String superName, String[] interfaces) {
 		if (superName != null) {
-			this.nameOfSuper = superName;
+			this.nameOfSuper = superName.replaceAll("/", ".");
 			try {
 				reader = new ClassReader(superName);
 				ClassVisitor visitor = new MethodGetterVisitor(Opcodes.ASM5, superMethods);
@@ -45,8 +46,12 @@ public class AdapterClassVisitor extends ClassVisitor {
 		}
 		if (null != interfaces && interfaces.length == 1) {
 			this.interfaces = interfaces;
-			ClassVisitor visitor = new MethodGetterVisitor(Opcodes.ASM5, interfaceMethods);
-			reader.accept(visitor, ClassReader.EXPAND_FRAMES);
+			try {
+				reader = new ClassReader(interfaces[0]);
+				ClassVisitor visitor = new MethodGetterVisitor(Opcodes.ASM5, interfaceMethods);
+				reader.accept(visitor, ClassReader.EXPAND_FRAMES);
+			} catch (IOException e) {
+			}
 		}
 
 		super.visit(version, access, name, signature, superName, interfaces);
@@ -79,12 +84,12 @@ public class AdapterClassVisitor extends ClassVisitor {
 		} else if ((access & Opcodes.ACC_PUBLIC) > 0) {
 			if (superMethods.contains(name + desc)) {
 				attemptedMethods.add(name + desc);
-				MethodVisitor adapterVisitor = new AdapterMethodVisitor(Opcodes.ASM5, this, param);
+				MethodVisitor adapterVisitor = new AdapterMethodVisitor(Opcodes.ASM5, this, param, name + desc);
 				return adapterVisitor;
 			}
 			if (interfaceMethods.contains(name + desc)) {
 				attemptedInterfaceMethods.add(name + desc);
-				MethodVisitor adapterVisitor = new AdapterMethodVisitor(Opcodes.ASM5, this, param);
+				MethodVisitor adapterVisitor = new AdapterMethodVisitor(Opcodes.ASM5, this, param, name + desc);
 				return adapterVisitor;
 			}
 		}
@@ -96,6 +101,7 @@ public class AdapterClassVisitor extends ClassVisitor {
 	}
 
 	public void assignAdaption() {
+
 		boolean interfaceTarget = false;
 		if (attemptedInterfaceMethods.size() > 0) {
 			interfaceTarget = true;
@@ -108,9 +114,11 @@ public class AdapterClassVisitor extends ClassVisitor {
 			}
 		}
 		if (interfaceTarget) {
-			UMLMaker.addPattern(interfaces[0], "target");
+			UMLMaker.addPattern(interfaces[0].replaceAll("/", "."), "target");
 			UMLMaker.addPattern(DesignParser.getCurrentClass(), "adapter");
-			UMLMaker.addPattern(this.param, "adaptee");
+			UMLMaker.addPattern(this.param.replaceAll("/", "."), "adaptee");
+			UMLMaker.addLabelledArrow(DesignParser.getCurrentClass(), interfaces[0].replaceAll("/", "."),
+					"\\<\\<adapts\\>\\>");
 		} else {
 
 			boolean superTarget = false;
@@ -127,6 +135,8 @@ public class AdapterClassVisitor extends ClassVisitor {
 				UMLMaker.addPattern(this.nameOfSuper, "target");
 				UMLMaker.addPattern(DesignParser.getCurrentClass(), "adapter");
 				UMLMaker.addPattern(this.param, "adaptee");
+				UMLMaker.addLabelledArrow(DesignParser.getCurrentClass(), this.nameOfSuper,
+						"\\<\\<adapts\\>\\>");
 			}
 		}
 	}
