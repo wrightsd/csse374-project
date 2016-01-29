@@ -19,7 +19,6 @@ public class UMLMaker implements DiagramMaker {
 	private HashMap<String, String> fillColorMap = new HashMap<String, String>();
 	private static HashMap<String, HashMap<String, StringBuilder>> classInfo = new HashMap<String, HashMap<String, StringBuilder>>();
 
-	private static ArrayList<StringBuilder> nonIncludedBuilders = new ArrayList<StringBuilder>();
 	private static ArrayList<String> nonIncludedClasses = new ArrayList<String>();
 
 	private static HashMap<String, ArrayList<String>> patternLists = new HashMap<String, ArrayList<String>>();
@@ -65,9 +64,11 @@ public class UMLMaker implements DiagramMaker {
 			ClassVisitor associationVisitor = new ClassAssociationVisitor(Opcodes.ASM5, methodVisitor, usesList,
 					associatesList);
 
+			ClassVisitor decoratorVisitor = new DecoratorClassVisitor(Opcodes.ASM5, associationVisitor);
+
 			// Tell the Reader to use our (heavily decorated) ClassVisitor to
 			// visit the class
-			reader.accept(associationVisitor, ClassReader.EXPAND_FRAMES);
+			reader.accept(decoratorVisitor, ClassReader.EXPAND_FRAMES);
 
 			HashMap<String, StringBuilder> builderList = new HashMap<String, StringBuilder>();
 			builderList.put("field", fieldBuilder);
@@ -97,6 +98,7 @@ public class UMLMaker implements DiagramMaker {
 					if (fillColorMap.containsKey(pattern)) {
 						completeBuilder.append("style = filled,\n");
 						completeBuilder.append("fillcolor =" + fillColorMap.get(pattern));
+						completeBuilder.append(",\n");
 					}
 				}
 			}
@@ -127,8 +129,35 @@ public class UMLMaker implements DiagramMaker {
 			completeBuilder.append(arrowBuilder.toString());
 		}
 
-		for (StringBuilder s : nonIncludedBuilders) {
-			completeBuilder.append(s.toString() + "\n");
+		for (String s : nonIncludedClasses) {
+			StringBuilder nonIncludedBuilder = new StringBuilder();
+			nonIncludedBuilder.append(ArbitraryNodeNames.getInstance().getNodeName(s) + "[\n");
+			ArrayList<String> patternBuilder = patternLists.get(s);
+			if (patternBuilder != null) {
+				for (String pattern : patternBuilder) {
+
+					if (borderColorMap.containsKey(pattern)) {
+						nonIncludedBuilder.append("color =" + borderColorMap.get(pattern));
+						nonIncludedBuilder.append(",\n");
+					}
+					if (fillColorMap.containsKey(pattern)) {
+						nonIncludedBuilder.append("style = filled,\n");
+						nonIncludedBuilder.append("fillcolor =" + fillColorMap.get(pattern));
+						nonIncludedBuilder.append(",\n");
+					}
+				}
+			}
+
+			nonIncludedBuilder.append("label = \"" + s);
+			ArrayList<String> patterns = patternLists.get(s);
+			if (patterns != null) {
+				for (String pattern : patternLists.get(s)) {
+					nonIncludedBuilder.append("\\n\\<\\<" + pattern + "\\>\\>");
+				}
+			}
+			nonIncludedBuilder.append("\"];");
+
+			completeBuilder.append(nonIncludedBuilder.toString() + "\n");
 		}
 
 		drawUsesArrows(usesList, associatesList, associationBuilder);
@@ -177,31 +206,41 @@ public class UMLMaker implements DiagramMaker {
 	private void setupFillColorMap() {
 		this.addColorKey(this.fillColorMap, "adapter", "firebrick2");
 		this.addColorKey(this.fillColorMap, "adaptee", "firebrick2");
-		this.addColorKey(this.fillColorMap, "Decorator", "chartreuse");
+		this.addColorKey(this.fillColorMap, "target", "firebrick2");
+		this.addColorKey(this.fillColorMap, "decorator", "chartreuse");
+		this.addColorKey(this.fillColorMap, "component", "chartreuse");
 	}
 
 	private void addColorKey(HashMap<String, String> colorMap, String patternString, String colorString) {
 		colorMap.put(patternString, colorString);
 	}
 
-	public static void addNonIncludedClassBuilder(String className) {
+	public static void addNonIncludedClass(String className) {
 		if (!nonIncludedClasses.contains(className)) {
 			nonIncludedClasses.add(className);
-			StringBuilder nonIncludedBuilder = new StringBuilder();
-			nonIncludedBuilder.append(
-					ArbitraryNodeNames.getInstance().getNodeName(className) + "[label = \"" + className + "\"];");
-			nonIncludedBuilders.add(nonIncludedBuilder);
 		}
 	}
 
 	public static void addPattern(String classString, String patternString) {
 		if (patternLists.containsKey(classString)) {
-			patternLists.get(classString).add(patternString);
+			ArrayList<String> currentPatterns = patternLists.get(classString);
+			if (!currentPatterns.contains(patternString)) {
+				patternLists.get(classString).add(patternString);
+			}
 		} else {
 			ArrayList<String> newList = new ArrayList<String>();
 			newList.add(patternString);
 			patternLists.put(classString, newList);
 		}
+	}
+
+	public static boolean isBlacklisted(String s) {
+		for (String blacklisted : BlacklistHolder.getInstance()) {
+			if (s.contains(blacklisted)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }

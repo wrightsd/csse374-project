@@ -11,6 +11,7 @@ public class BlacklistHolder {
 			blacklist = new ArrayList<String>();
 			blacklist.add("java.lang.Object");
 			blacklist.add("java.lang.String");
+			blacklist.add("java.");
 		}
 		return blacklist;
 	}

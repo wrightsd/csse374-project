@@ -63,26 +63,29 @@ public class ClassAssociationVisitor extends ClassVisitor {
 			types.remove(0);
 			for (String str : types) {
 				str = str.replaceAll("/", ".");
-				ArbitraryNodeNames.getInstance().addNewNode(str);
-				String strNodeName = ArbitraryNodeNames.getInstance().getNodeName(str);
-				
-				String owner = DesignParser.getCurrentClass();
-				
-				ArbitraryNodeNames.getInstance().addNewNode(owner);
-				String ownerNodeName = ArbitraryNodeNames.getInstance().getNodeName(owner);
 
-				String toAdd = ownerNodeName + "->" + strNodeName;
-				boolean add = true;
-				for (String s : associatesList) {
-					if (s.equals(toAdd)) {
-						add = false;
+				if (!UMLMaker.isBlacklisted(str)) {
+					ArbitraryNodeNames.getInstance().addNewNode(str);
+					String strNodeName = ArbitraryNodeNames.getInstance().getNodeName(str);
+
+					String owner = DesignParser.getCurrentClass();
+
+					ArbitraryNodeNames.getInstance().addNewNode(owner);
+					String ownerNodeName = ArbitraryNodeNames.getInstance().getNodeName(owner);
+
+					String toAdd = ownerNodeName + "->" + strNodeName;
+					boolean add = true;
+					for (String s : associatesList) {
+						if (s.equals(toAdd)) {
+							add = false;
+						}
 					}
-				}
-				if (add) {
-					associatesList.add(toAdd);
-					
-					if(!DesignParser.getArguments().contains(str)){
-						UMLMaker.addNonIncludedClassBuilder(str);
+					if (add) {
+						associatesList.add(toAdd);
+
+						if (!DesignParser.getArguments().contains(str)) {
+							UMLMaker.addNonIncludedClass(str);
+						}
 					}
 				}
 			}

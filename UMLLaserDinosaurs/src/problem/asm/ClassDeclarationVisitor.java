@@ -33,20 +33,17 @@ public class ClassDeclarationVisitor extends ClassVisitor {
 
 			boolean superValid = true;
 			superName = superName.replaceAll("/", ".");
-			for (String blacklisted : BlacklistHolder.getInstance()) {
-				if (blacklisted.equals(superName)) {
-					superValid = false;
-					break;
-				}
+			if (UMLMaker.isBlacklisted(superName)) {
+				superValid = false;
 			}
 			if (superValid) {
 				builder.append(nameNodeName + "->");
 				ArbitraryNodeNames.getInstance().addNewNode(superName);
 				String superNodeName = ArbitraryNodeNames.getInstance().getNodeName(superName);
 				builder.append(superNodeName + "[arrowhead=\"onormal\", style=\"solid\"];\n");
-				
-				if(!DesignParser.getArguments().contains(superName)){
-					UMLMaker.addNonIncludedClassBuilder(superName);
+
+				if (!DesignParser.getArguments().contains(superName)) {
+					UMLMaker.addNonIncludedClass(superName);
 				}
 			}
 		}
@@ -54,20 +51,17 @@ public class ClassDeclarationVisitor extends ClassVisitor {
 		for (String s : interfaces) {
 			boolean interfaceValid = true;
 			s = s.replaceAll("/", ".");
-			for (String blacklisted : BlacklistHolder.getInstance()) {
-				if (blacklisted.equals(s)) {
-					interfaceValid = false;
-					break;
-				}
+			if (UMLMaker.isBlacklisted(s)) {
+				interfaceValid = false;
 			}
 			if (interfaceValid) {
 				builder.append(nameNodeName + "->");
 				ArbitraryNodeNames.getInstance().addNewNode(s);
 				String interfaceNodeName = ArbitraryNodeNames.getInstance().getNodeName(s);
 				builder.append(interfaceNodeName + "[arrowhead=\"onormal\", style=\"dashed\"];\n");
-				
-				if(!DesignParser.getArguments().contains(s)){
-					UMLMaker.addNonIncludedClassBuilder(s);
+
+				if (!DesignParser.getArguments().contains(s)) {
+					UMLMaker.addNonIncludedClass(s);
 				}
 			}
 		}
