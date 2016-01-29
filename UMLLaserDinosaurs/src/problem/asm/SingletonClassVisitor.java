@@ -12,19 +12,11 @@ public class SingletonClassVisitor extends ClassVisitor {
 
 	private boolean fieldSingletonCriteria;
 	private boolean methodSingletonCriteria;
-	private StringBuilder patternBuilder;
 
 	public SingletonClassVisitor(int arg0, ClassVisitor arg1) {
 		super(arg0, arg1);
 		this.fieldSingletonCriteria = false;
 		this.methodSingletonCriteria = false;
-	}
-
-	public SingletonClassVisitor(int asm5, ClassVisitor visitor, StringBuilder builder) {
-		super(asm5, visitor);
-		this.fieldSingletonCriteria = false;
-		this.methodSingletonCriteria = false;
-		this.patternBuilder = builder;
 	}
 
 	@Override
@@ -34,8 +26,8 @@ public class SingletonClassVisitor extends ClassVisitor {
 		if ((access & Opcodes.ACC_STATIC) >= 1) {
 			if (Type.getType(desc).getClassName().equals(DesignParser.getCurrentClass())) {
 				this.fieldSingletonCriteria = true;
-				if (this.methodSingletonCriteria && patternBuilder.length() < 1) {
-					patternBuilder.append("Singleton");
+				if (this.methodSingletonCriteria) {
+					UMLMaker.addPattern(DesignParser.getCurrentClass(),"Singleton");
 				}
 			}
 		}
@@ -52,7 +44,7 @@ public class SingletonClassVisitor extends ClassVisitor {
 				if (Type.getReturnType(desc).getClassName().equals(DesignParser.getCurrentClass())) {
 					this.methodSingletonCriteria = true;
 					if (this.fieldSingletonCriteria) {
-						patternBuilder.append("Singleton");
+						UMLMaker.addPattern(DesignParser.getCurrentClass(),"Singleton");
 					}
 				}
 			}
