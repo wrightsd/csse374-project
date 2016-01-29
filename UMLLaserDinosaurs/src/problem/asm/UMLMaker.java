@@ -22,6 +22,8 @@ public class UMLMaker implements DiagramMaker {
 	private static ArrayList<String> nonIncludedClasses = new ArrayList<String>();
 
 	private static HashMap<String, ArrayList<String>> patternLists = new HashMap<String, ArrayList<String>>();
+	
+	private static StringBuilder labelledArrows = new StringBuilder();
 
 	@Override
 	public StringBuilder generateDiagramText(String[] args) throws IOException {
@@ -161,6 +163,7 @@ public class UMLMaker implements DiagramMaker {
 		}
 
 		drawUsesArrows(usesList, associatesList, associationBuilder);
+		completeBuilder.append(labelledArrows.toString());
 		completeBuilder.append(associationBuilder.toString());
 		completeBuilder.append("}");
 
@@ -241,6 +244,14 @@ public class UMLMaker implements DiagramMaker {
 			}
 		}
 		return false;
+	}
+
+	public static void addLabelledArrow(String pointee, String pointer, String labelText) {
+		pointee = ArbitraryNodeNames.getInstance().getNodeName(pointee);
+		pointer = ArbitraryNodeNames.getInstance().getNodeName(pointer);
+		labelledArrows.append(pointee + "->" + pointer);
+		labelledArrows.append("[arrowhead=\"normal\", style=\"solid\"");
+		labelledArrows.append(", label=\"" + labelText + "\"];\n");
 	}
 
 }

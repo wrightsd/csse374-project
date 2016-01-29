@@ -48,6 +48,8 @@ public class DecoratorClassVisitor extends ClassVisitor {
 				if (this.superName.equals(args[i].getClassName())) {
 					UMLMaker.addPattern(DesignParser.getCurrentClass(), "decorator");
 					UMLMaker.addPattern(args[i].getClassName(), "component");
+					UMLMaker.addLabelledArrow(DesignParser.getCurrentClass(), args[i].getClassName(),
+							"\\<\\<decorates\\>\\>");
 				}
 			}
 		}

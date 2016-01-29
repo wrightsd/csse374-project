@@ -48,7 +48,7 @@ label = "{problem.asm.ClassAssociationVisitor\n\<\<decorator\>\>|-builder : java
 n14->n1[arrowhead="onormal", style="solid"];
 n3 [
 shape="record",
-label = "{problem.asm.UMLMaker|-currentClass : java.lang.String\l-classSet : java.util.ArrayList\l-myArgs : java.lang.String[]\l-usesList : java.util.ArrayList\l-associatesList : java.util.ArrayList\l-borderColorMap : java.util.HashMap\l-fillColorMap : java.util.HashMap\l-classInfo : java.util.HashMap\l-nonIncludedClasses : java.util.ArrayList\l-patternLists : java.util.HashMap\l|+generateDiagramText(java.lang.String[]) : java.lang.StringBuilder\l-drawUsesArrows(java.util.ArrayList, java.util.ArrayList, java.lang.StringBuilder) : void\l+getArguments() : java.util.ArrayList\l+getCurrentClass() : java.lang.String\l-setupBorderColorMap() : void\l-setupFillColorMap() : void\l-addColorKey(java.util.HashMap, java.lang.String, java.lang.String) : void\l+addNonIncludedClass(java.lang.String) : void\l+addPattern(java.lang.String, java.lang.String) : void\l+isBlacklisted(java.lang.String) : boolean\l}"
+label = "{problem.asm.UMLMaker|-currentClass : java.lang.String\l-classSet : java.util.ArrayList\l-myArgs : java.lang.String[]\l-usesList : java.util.ArrayList\l-associatesList : java.util.ArrayList\l-borderColorMap : java.util.HashMap\l-fillColorMap : java.util.HashMap\l-classInfo : java.util.HashMap\l-nonIncludedClasses : java.util.ArrayList\l-patternLists : java.util.HashMap\l-labelledArrows : java.lang.StringBuilder\l|+generateDiagramText(java.lang.String[]) : java.lang.StringBuilder\l-drawUsesArrows(java.util.ArrayList, java.util.ArrayList, java.lang.StringBuilder) : void\l+getArguments() : java.util.ArrayList\l+getCurrentClass() : java.lang.String\l-setupBorderColorMap() : void\l-setupFillColorMap() : void\l-addColorKey(java.util.HashMap, java.lang.String, java.lang.String) : void\l+addNonIncludedClass(java.lang.String) : void\l+addPattern(java.lang.String, java.lang.String) : void\l+isBlacklisted(java.lang.String) : boolean\l+addLabelledArrow(java.lang.String, java.lang.String, java.lang.String) : void\l}"
 ];
 n3->n8[arrowhead="onormal", style="dashed"];
 n8 [
@@ -116,6 +116,17 @@ n16[
 label = "problem.asm.ClassAssociationVisitor$1"];
 n17[
 label = "org.objectweb.asm.ClassReader"];
+n0->n1[arrowhead="normal", style="solid", label="\<\<decorates\>\>"];
+n5->n1[arrowhead="normal", style="solid", label="\<\<decorates\>\>"];
+n5->n1[arrowhead="normal", style="solid", label="\<\<decorates\>\>"];
+n7->n1[arrowhead="normal", style="solid", label="\<\<decorates\>\>"];
+n7->n1[arrowhead="normal", style="solid", label="\<\<decorates\>\>"];
+n11->n1[arrowhead="normal", style="solid", label="\<\<decorates\>\>"];
+n12->n13[arrowhead="normal", style="solid", label="\<\<decorates\>\>"];
+n14->n1[arrowhead="normal", style="solid", label="\<\<decorates\>\>"];
+n22->n13[arrowhead="normal", style="solid", label="\<\<decorates\>\>"];
+n18->n1[arrowhead="normal", style="solid", label="\<\<decorates\>\>"];
+n19->n1[arrowhead="normal", style="solid", label="\<\<decorates\>\>"];
 n0->n1[arrowhead="ovee", style="dashed"];
 n0->n2[arrowhead="ovee", style="dashed"];
 n0->n3[arrowhead="ovee", style="dashed"];
