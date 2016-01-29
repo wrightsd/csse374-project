@@ -18,6 +18,7 @@ public class UMLMaker implements DiagramMaker {
 	private HashMap<String, String> borderColorMap = new HashMap<String, String>();
 	private HashMap<String, String> fillColorMap = new HashMap<String, String>();
 	private static HashMap<String, String> classPatternStrings = new HashMap<String, String>();
+	private static HashMap<String, HashMap<String, StringBuilder>> classInfo = new HashMap<String, HashMap<String, StringBuilder>>();
 
 	private static ArrayList<StringBuilder> nonIncludedBuilders = new ArrayList<StringBuilder>();
 	private static ArrayList<String> nonIncludedClasses = new ArrayList<String>();
@@ -50,7 +51,7 @@ public class UMLMaker implements DiagramMaker {
 			// make class declaration visitor to get superclass and interfaces
 			ClassVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, arrowBuilder);
 
-			ClassVisitor singletonVisitor = new SingletonClassVisitor(Opcodes.ASM5, declVisitor);
+			ClassVisitor singletonVisitor = new SingletonClassVisitor(Opcodes.ASM5, declVisitor, patternBuilder);
 
 			ClassVisitor interfaceVisitor = new InterfaceAbstractCheckVisitor(Opcodes.ASM5, singletonVisitor,
 					interfaceBuilder);
@@ -67,6 +68,24 @@ public class UMLMaker implements DiagramMaker {
 			// Tell the Reader to use our (heavily decorated) ClassVisitor to
 			// visit the class
 			reader.accept(associationVisitor, ClassReader.EXPAND_FRAMES);
+			
+			HashMap<String, StringBuilder> builderList = new HashMap<String, StringBuilder>();
+			builderList.put("pattern", patternBuilder);
+			builderList.put("field", fieldBuilder);
+			builderList.put("method", methodBuilder);
+			builderList.put("interface", interfaceBuilder);
+			builderList.put("arrows", arrowBuilder);
+			
+			classInfo.put(className, builderList);
+		}
+		
+		for (String className : args) {
+			
+			StringBuilder methodBuilder = classInfo.get(className).get("method");
+			StringBuilder fieldBuilder = classInfo.get(className).get("field");
+			StringBuilder arrowBuilder = classInfo.get(className).get("arrows");
+			StringBuilder interfaceBuilder = classInfo.get(className).get("interface");
+			StringBuilder patternBuilder = classInfo.get(className).get("pattern");
 
 			completeBuilder.append(ArbitraryNodeNames.getInstance().getNodeName(className) + " [\nshape=\"record\",\n");
 			if (borderColorMap.containsKey(patternBuilder.toString())) {
@@ -168,7 +187,7 @@ public class UMLMaker implements DiagramMaker {
 		}
 	}
 
-	public static void addPattern(String classString, String patternString){
+	public static void addPattern(String classString, String patternString) {
 		classPatternStrings.put(classString, patternString);
 	}
 }
