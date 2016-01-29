@@ -247,11 +247,55 @@ public class UMLMaker implements DiagramMaker {
 	}
 
 	public static void addLabelledArrow(String pointee, String pointer, String labelText) {
-		pointee = ArbitraryNodeNames.getInstance().getNodeName(pointee);
-		pointer = ArbitraryNodeNames.getInstance().getNodeName(pointer);
-		labelledArrows.append(pointee + "->" + pointer);
+		String pointeeName = ArbitraryNodeNames.getInstance().getNodeName(pointee);
+		if(pointeeName == null){
+			ArbitraryNodeNames.getInstance().addNewNode(pointee);
+			addNonIncludedClass(pointee);
+			pointeeName = ArbitraryNodeNames.getInstance().getNodeName(pointee);
+		}
+		String pointerName = ArbitraryNodeNames.getInstance().getNodeName(pointer);
+		if(pointerName == null){
+			ArbitraryNodeNames.getInstance().addNewNode(pointer);
+			addNonIncludedClass(pointer);
+			pointerName = ArbitraryNodeNames.getInstance().getNodeName(pointer);
+		}
+		labelledArrows.append(pointeeName + "->" + pointerName);
 		labelledArrows.append("[arrowhead=\"normal\", style=\"solid\"");
 		labelledArrows.append(", label=\"" + labelText + "\"];\n");
+	}
+
+	public static void addExtendsArrow(String pointee, String pointer) {
+		String pointeeName = ArbitraryNodeNames.getInstance().getNodeName(pointee);
+		if(pointeeName == null){
+			ArbitraryNodeNames.getInstance().addNewNode(pointee);
+			addNonIncludedClass(pointee);
+			pointeeName = ArbitraryNodeNames.getInstance().getNodeName(pointee);
+		}
+		String pointerName = ArbitraryNodeNames.getInstance().getNodeName(pointer);
+		if(pointerName == null){
+			ArbitraryNodeNames.getInstance().addNewNode(pointer);
+			addNonIncludedClass(pointer);
+			pointerName = ArbitraryNodeNames.getInstance().getNodeName(pointer);
+		}
+		labelledArrows.append(pointeeName + "->" + pointerName);
+		labelledArrows.append("[arrowhead=\"onormal\", style=\"solid\"]\n");
+	}
+
+	public static void addImplementsArrow(String pointee, String pointer) {
+		String pointeeName = ArbitraryNodeNames.getInstance().getNodeName(pointee);
+		if(pointeeName == null){
+			ArbitraryNodeNames.getInstance().addNewNode(pointee);
+			addNonIncludedClass(pointee);
+			pointeeName = ArbitraryNodeNames.getInstance().getNodeName(pointee);
+		}
+		String pointerName = ArbitraryNodeNames.getInstance().getNodeName(pointer);
+		if(pointerName == null){
+			ArbitraryNodeNames.getInstance().addNewNode(pointer);
+			addNonIncludedClass(pointer);
+			pointerName = ArbitraryNodeNames.getInstance().getNodeName(pointer);
+		}
+		labelledArrows.append(pointeeName + "->" + pointerName);
+		labelledArrows.append("[arrowhead=\"onormal\", style=\"dashed\"]\n");
 	}
 
 }
