@@ -14,12 +14,14 @@ public class AdapterClassVisitor extends ClassVisitor {
 
 	private ArrayList<String> checkMethods = new ArrayList<String>();
 	private ArrayList<String> superMethods = new ArrayList<String>();
+	private ArrayList<String> interfaceMethods = new ArrayList<String>();
 	private ArrayList<String> attemptedMethods = new ArrayList<String>();
 	private String nameOfSuper;
 	private String[] interfaces;
 	private String param = "";
 	private ArrayList<String> fieldList = new ArrayList<String>();
 	private ClassReader reader;
+	private ArrayList<String> attemptedInterfaceMethods = new ArrayList<String>();
 
 	public AdapterClassVisitor(int api) {
 		super(api);
@@ -43,7 +45,7 @@ public class AdapterClassVisitor extends ClassVisitor {
 		}
 		if (null != interfaces && interfaces.length == 1) {
 			this.interfaces = interfaces;
-			ClassVisitor visitor = new MethodGetterVisitor(Opcodes.ASM5, superMethods);
+			ClassVisitor visitor = new MethodGetterVisitor(Opcodes.ASM5, interfaceMethods);
 			reader.accept(visitor, ClassReader.EXPAND_FRAMES);
 		}
 
@@ -75,9 +77,15 @@ public class AdapterClassVisitor extends ClassVisitor {
 				return toDecorate;
 			}
 		} else if ((access & Opcodes.ACC_PUBLIC) > 0) {
-			attemptedMethods.add(name + desc);
 			if (superMethods.contains(name + desc)) {
+				attemptedMethods.add(name + desc);
 				MethodVisitor adapterVisitor = new AdapterMethodVisitor(Opcodes.ASM5, this, param);
+				return adapterVisitor;
+			}
+			if (interfaceMethods.contains(name + desc)) {
+				attemptedInterfaceMethods.add(name + desc);
+				MethodVisitor adapterVisitor = new AdapterMethodVisitor(Opcodes.ASM5, this, param);
+				return adapterVisitor;
 			}
 		}
 		return toDecorate;
@@ -85,6 +93,42 @@ public class AdapterClassVisitor extends ClassVisitor {
 
 	public void verify(String nameDesc) {
 		checkMethods.add(nameDesc);
+	}
+
+	public void assignAdaption() {
+		boolean interfaceTarget = false;
+		if (attemptedInterfaceMethods.size() > 0) {
+			interfaceTarget = true;
+		}
+
+		for (int i = 0; i < attemptedInterfaceMethods.size(); i++) {
+			if (!checkMethods.contains(attemptedInterfaceMethods.get(i))) {
+				interfaceTarget = false;
+				break;
+			}
+		}
+		if (interfaceTarget) {
+			UMLMaker.addPattern(interfaces[0], "target");
+			UMLMaker.addPattern(DesignParser.getCurrentClass(), "adapter");
+			UMLMaker.addPattern(this.param, "adaptee");
+		} else {
+
+			boolean superTarget = false;
+			if (attemptedMethods.size() > 0) {
+				superTarget = true;
+			}
+			for (int i = 0; i < attemptedMethods.size(); i++) {
+				if (!checkMethods.contains(attemptedMethods.get(i))) {
+					superTarget = false;
+					break;
+				}
+			}
+			if (superTarget) {
+				UMLMaker.addPattern(this.nameOfSuper, "target");
+				UMLMaker.addPattern(DesignParser.getCurrentClass(), "adapter");
+				UMLMaker.addPattern(this.param, "adaptee");
+			}
+		}
 	}
 
 }

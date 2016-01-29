@@ -1,8 +1,6 @@
 package problem.asm;
 
-import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
-import org.objectweb.asm.Type;
 
 public class AdapterMethodVisitor extends MethodVisitor {
 

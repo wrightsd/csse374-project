@@ -67,10 +67,12 @@ public class UMLMaker implements DiagramMaker {
 					associatesList);
 
 			ClassVisitor decoratorVisitor = new DecoratorClassVisitor(Opcodes.ASM5, associationVisitor);
+			
+			ClassVisitor adapterVisitor = new AdapterManagementVisitor(Opcodes.ASM5, decoratorVisitor);
 
 			// Tell the Reader to use our (heavily decorated) ClassVisitor to
 			// visit the class
-			reader.accept(decoratorVisitor, ClassReader.EXPAND_FRAMES);
+			reader.accept(adapterVisitor, ClassReader.EXPAND_FRAMES);
 
 			HashMap<String, StringBuilder> builderList = new HashMap<String, StringBuilder>();
 			builderList.put("field", fieldBuilder);

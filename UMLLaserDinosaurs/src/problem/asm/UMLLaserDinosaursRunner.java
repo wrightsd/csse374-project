@@ -13,7 +13,10 @@ public class UMLLaserDinosaursRunner {
 				"problem.asm.ClassAssociationVisitor", "problem.asm.UMLMaker", "problem.asm.DiagramMaker",
 				"problem.asm.SequenceMaker", "problem.asm.NoSuchDiagramMaker", "problem.asm.BlacklistHolder",
 				"problem.asm.ClassSequenceVisitor", "problem.asm.MethodSequenceVisitor",
-				"problem.asm.SingletonClassVisitor", "problem.asm.ArbitraryNodeNames", "problem.asm.DecoratorClassVisitor" };
+				"problem.asm.SingletonClassVisitor", "problem.asm.ArbitraryNodeNames",
+				"problem.asm.DecoratorClassVisitor", "problem.asm.DecorateRecursiveVisitor",
+				"problem.asm.AdapterMethodVisitor", "problem.asm.MethodGetterVisitor",
+				"problem.asm.AdapterManagementVisitor" , "problem.asm.AdapterClassVisitor"};
 		DesignParser.parse(arguments, "./output/UMLLaserDinosaurs_output.txt", "uml");
 	}
 
