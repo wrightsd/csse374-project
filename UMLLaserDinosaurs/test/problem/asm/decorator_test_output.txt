@@ -1,0 +1,78 @@
+digraph text{
+rankdir=BT;
+n0 [
+shape="record",
+style = filled,
+fillcolor =chartreuse,
+label = "{problem.DecryptionInputStream\n\<\<decorator\>\>|-decryptor : problem.IDecryption\l|+problem.DecryptionInputStream(java.io.InputStream, problem.IDecryption) : void\l+read() : int\l+read(byte[], int, int) : int\l}"
+];
+n0->n1[arrowhead="onormal", style="solid"];
+n5 [
+shape="record",
+style = filled,
+fillcolor =chartreuse,
+label = "{problem.EncryptionOutputStream\n\<\<decorator\>\>|-encryptor : problem.IEncryption\l|+problem.EncryptionOutputStream(java.io.OutputStream, problem.IEncryption) : void\l+write(int) : void\l}"
+];
+n5->n6[arrowhead="onormal", style="solid"];
+n3 [
+shape="record",
+label = "{\<\<abstract\>\>\n\<\<interface\>\>\nproblem.IDecryption|+decrypt(char) : char\l}"
+];
+n8 [
+shape="record",
+label = "{\<\<abstract\>\>\n\<\<interface\>\>\nproblem.IEncryption|+encrypt(char) : char\l}"
+];
+n9 [
+shape="record",
+label = "{problem.SubstitutionCipher|-encryptionKey : char[]\l-decryptionKey : char[]\l|+encrypt(char) : char\l+decrypt(char) : char\l}"
+];
+n9->n8[arrowhead="onormal", style="dashed"];
+n9->n3[arrowhead="onormal", style="dashed"];
+n10 [
+shape="record",
+label = "{problem.TextEditorApp|+main(java.lang.String[]) : void\l}"
+];
+n1[
+style = filled,
+fillcolor =chartreuse,
+label = "java.io.FilterInputStream\n\<\<decorator\>\>"];
+n2[
+style = filled,
+fillcolor =chartreuse,
+label = "java.io.InputStream\n\<\<component\>\>"];
+n4[
+label = "java.io.PrintStream"];
+n6[
+style = filled,
+fillcolor =chartreuse,
+label = "java.io.FilterOutputStream\n\<\<decorator\>\>"];
+n7[
+style = filled,
+fillcolor =chartreuse,
+label = "java.io.OutputStream\n\<\<component\>\>"];
+n11[
+label = "java.io.FileInputStream"];
+n12[
+label = "java.io.FileOutputStream"];
+n13[
+label = "problem.TextEditor"];
+n1->n2[arrowhead="onormal", style="solid"]
+n1->n2[arrowhead="normal", style="solid", label="\<\<decorates\>\>"];
+n6->n7[arrowhead="onormal", style="solid"]
+n6->n7[arrowhead="normal", style="solid", label="\<\<decorates\>\>"];
+n1->n2[arrowhead="onormal", style="solid"]
+n1->n2[arrowhead="normal", style="solid", label="\<\<decorates\>\>"];
+n6->n7[arrowhead="onormal", style="solid"]
+n6->n7[arrowhead="normal", style="solid", label="\<\<decorates\>\>"];
+n0->n1[arrowhead="ovee", style="dashed"];
+n0->n3[arrowhead="ovee", style="dashed"];
+n0->n4[arrowhead="ovee", style="dashed"];
+n5->n6[arrowhead="ovee", style="dashed"];
+n5->n8[arrowhead="ovee", style="dashed"];
+n10->n9[arrowhead="ovee", style="dashed"];
+n10->n11[arrowhead="ovee", style="dashed"];
+n10->n12[arrowhead="ovee", style="dashed"];
+n10->n0[arrowhead="ovee", style="dashed"];
+n10->n5[arrowhead="ovee", style="dashed"];
+n10->n13[arrowhead="ovee", style="dashed"];
+}

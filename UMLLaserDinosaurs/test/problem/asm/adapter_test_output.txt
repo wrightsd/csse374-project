@@ -1,0 +1,38 @@
+digraph text{
+rankdir=BT;
+n0 [
+shape="record",
+label = "{problem.client.App|+main(java.lang.String[]) : void\l}"
+];
+n2 [
+shape="record",
+style = filled,
+fillcolor =firebrick2,
+label = "{problem.client.IteratorToEnumerationAdapter\n\<\<adapter\>\>|-itr : java.util.Iterator\l|+problem.client.IteratorToEnumerationAdapter(java.util.Iterator) : void\l+hasMoreElements() : boolean\l+nextElement() : java.lang.Object\l}"
+];
+n2->n4[arrowhead="onormal", style="dashed"];
+n3 [
+shape="record",
+label = "{problem.lib.LinearTransformer|-enumTion : java.util.Enumeration\l|+problem.lib.LinearTransformer(java.util.Enumeration) : void\l+transform(java.io.OutputStream) : void\l}"
+];
+n1[
+label = "java.util.ArrayList"];
+n4[
+style = filled,
+fillcolor =firebrick2,
+label = "java.util.Enumeration\n\<\<target\>\>"];
+n5[
+style = filled,
+fillcolor =firebrick2,
+label = "java.util.Iterator\n\<\<adaptee\>\>"];
+n6[
+label = "java.io.OutputStream"];
+n2->n4[arrowhead="normal", style="solid", label="\<\<adapts\>\>"];
+n2->n4[arrowhead="normal", style="solid", label="\<\<adapts\>\>"];
+n0->n1[arrowhead="ovee", style="dashed"];
+n0->n2[arrowhead="ovee", style="dashed"];
+n0->n3[arrowhead="ovee", style="dashed"];
+n2->n5[arrowhead="ovee", style="dashed"];
+n3->n6[arrowhead="ovee", style="dashed"];
+n3->n4[arrowhead="ovee", style="dashed"];
+}

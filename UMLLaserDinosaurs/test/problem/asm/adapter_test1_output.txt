@@ -1,0 +1,292 @@
+digraph text{
+rankdir=BT;
+n0 [
+shape="record",
+style = filled,
+fillcolor =chartreuse,
+label = "{problem.asm.ClassDeclarationVisitor\n\<\<decorator\>\>|-builder : java.lang.StringBuilder\l|+problem.asm.ClassDeclarationVisitor(int) : void\l+problem.asm.ClassDeclarationVisitor(int, java.lang.StringBuilder) : void\l+problem.asm.ClassDeclarationVisitor(int, org.objectweb.asm.ClassVisitor, java.lang.StringBuilder) : void\l+visit(int, int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[]) : void\l}"
+];
+n0->n1[arrowhead="onormal", style="solid"];
+n6 [
+shape="record",
+style = filled,
+fillcolor =chartreuse,
+label = "{problem.asm.ClassFieldVisitor\n\<\<decorator\>\>|-builder : java.lang.StringBuilder\l|+problem.asm.ClassFieldVisitor(int) : void\l+problem.asm.ClassFieldVisitor(int, java.lang.StringBuilder) : void\l+problem.asm.ClassFieldVisitor(int, org.objectweb.asm.ClassVisitor) : void\l+problem.asm.ClassFieldVisitor(int, org.objectweb.asm.ClassVisitor, java.lang.StringBuilder) : void\l+visitField(int, java.lang.String, java.lang.String, java.lang.String, java.lang.Object) : org.objectweb.asm.FieldVisitor\l}"
+];
+n6->n1[arrowhead="onormal", style="solid"];
+n8 [
+shape="record",
+style = filled,
+fillcolor =chartreuse,
+label = "{problem.asm.ClassMethodVisitor\n\<\<decorator\>\>|-builder : java.lang.StringBuilder\l|+problem.asm.ClassMethodVisitor(int) : void\l+problem.asm.ClassMethodVisitor(int, java.lang.StringBuilder) : void\l+problem.asm.ClassMethodVisitor(int, org.objectweb.asm.ClassVisitor) : void\l+problem.asm.ClassMethodVisitor(int, org.objectweb.asm.ClassVisitor, java.lang.StringBuilder) : void\l+visitMethod(int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[]) : org.objectweb.asm.MethodVisitor\l}"
+];
+n8->n1[arrowhead="onormal", style="solid"];
+n4 [
+shape="record",
+label = "{problem.asm.DesignParser|-diagramMap : java.util.HashMap\l-maker : problem.asm.DiagramMaker\l|+parse(java.lang.String[], java.lang.String, java.lang.String) : void\l-setUpHashMap() : void\l+addDiagramType(java.lang.String, problem.asm.DiagramMaker) : void\l+getCurrentClass() : java.lang.String\l+getArguments() : java.util.ArrayList\l}"
+];
+n15 [
+shape="record",
+style = filled,
+fillcolor =chartreuse,
+label = "{problem.asm.InterfaceAbstractCheckVisitor\n\<\<decorator\>\>|-builder : java.lang.StringBuilder\l|+problem.asm.InterfaceAbstractCheckVisitor(int) : void\l+problem.asm.InterfaceAbstractCheckVisitor(int, java.lang.StringBuilder) : void\l+problem.asm.InterfaceAbstractCheckVisitor(int, org.objectweb.asm.ClassVisitor, java.lang.StringBuilder) : void\l+visit(int, int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[]) : void\l}"
+];
+n15->n1[arrowhead="onormal", style="solid"];
+n16 [
+shape="record",
+style = filled,
+fillcolor =chartreuse,
+label = "{problem.asm.MethodAssociationVisitor\n\<\<decorator\>\>|-builder : java.lang.StringBuilder\l-associatesList : java.util.ArrayList\l-usesList : java.util.ArrayList\l|+problem.asm.MethodAssociationVisitor(int, org.objectweb.asm.MethodVisitor, java.util.ArrayList, java.util.ArrayList) : void\l+visitMethodInsn(int, java.lang.String, java.lang.String, java.lang.String, boolean) : void\l+visitFieldInsn(int, java.lang.String, java.lang.String, java.lang.String) : void\l+visitTypeInsn(int, java.lang.String) : void\l+visitVarInsn(int, int) : void\l}"
+];
+n16->n17[arrowhead="onormal", style="solid"];
+n19 [
+shape="record",
+style = filled,
+fillcolor =chartreuse,
+label = "{problem.asm.ClassAssociationVisitor\n\<\<decorator\>\>|-builder : java.lang.StringBuilder\l-associatesList : java.util.ArrayList\l-usesList : java.util.ArrayList\l|+problem.asm.ClassAssociationVisitor(int, org.objectweb.asm.ClassVisitor, java.util.ArrayList, java.util.ArrayList) : void\l+problem.asm.ClassAssociationVisitor(int, java.util.ArrayList, java.util.ArrayList) : void\l+visitField(int, java.lang.String, java.lang.String, java.lang.String, java.lang.Object) : org.objectweb.asm.FieldVisitor\l+visitMethod(int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[]) : org.objectweb.asm.MethodVisitor\l-compileAggregation(java.lang.String) : void\l}"
+];
+n19->n1[arrowhead="onormal", style="solid"];
+n3 [
+shape="record",
+label = "{problem.asm.UMLMaker|-currentClass : java.lang.String\l-classSet : java.util.ArrayList\l-myArgs : java.lang.String[]\l-usesList : java.util.ArrayList\l-associatesList : java.util.ArrayList\l-borderColorMap : java.util.HashMap\l-fillColorMap : java.util.HashMap\l-classInfo : java.util.HashMap\l-nonIncludedClasses : java.util.ArrayList\l-patternLists : java.util.HashMap\l-labelledArrows : java.lang.StringBuilder\l|+generateDiagramText(java.lang.String[]) : java.lang.StringBuilder\l-drawUsesArrows(java.util.ArrayList, java.util.ArrayList, java.lang.StringBuilder) : void\l+getArguments() : java.util.ArrayList\l+getCurrentClass() : java.lang.String\l-setupBorderColorMap() : void\l-setupFillColorMap() : void\l-addColorKey(java.util.HashMap, java.lang.String, java.lang.String) : void\l+addNonIncludedClass(java.lang.String) : void\l+addPattern(java.lang.String, java.lang.String) : void\l+isBlacklisted(java.lang.String) : boolean\l+addLabelledArrow(java.lang.String, java.lang.String, java.lang.String) : void\l+addExtendsArrow(java.lang.String, java.lang.String) : void\l+addImplementsArrow(java.lang.String, java.lang.String) : void\l}"
+];
+n3->n10[arrowhead="onormal", style="dashed"];
+n10 [
+shape="record",
+label = "{\<\<abstract\>\>\n\<\<interface\>\>\nproblem.asm.DiagramMaker|+generateDiagramText(java.lang.String[]) : java.lang.StringBuilder\l+getCurrentClass() : java.lang.String\l+getArguments() : java.util.ArrayList\l}"
+];
+n14 [
+shape="record",
+label = "{problem.asm.SequenceMaker|-classTags : java.util.HashMap\l-currentClass : java.lang.String\l|+generateDiagramText(java.lang.String[]) : java.lang.StringBuilder\l+getCurrentClass() : java.lang.String\l+getArguments() : java.util.ArrayList\l+addClassTag(java.lang.String, java.lang.String) : void\l+getClassTag(java.lang.String) : java.lang.String\l+recursiveSequenceGenerator(java.lang.String[], java.lang.StringBuilder, java.lang.StringBuilder) : void\l}"
+];
+n14->n10[arrowhead="onormal", style="dashed"];
+n11 [
+shape="record",
+label = "{problem.asm.NoSuchDiagramMaker|+generateDiagramText(java.lang.String[]) : java.lang.StringBuilder\l+getCurrentClass() : java.lang.String\l+getArguments() : java.util.ArrayList\l}"
+];
+n11->n10[arrowhead="onormal", style="dashed"];
+n26 [
+shape="record",
+label = "{problem.asm.BlacklistHolder|-blacklist : java.util.ArrayList\l|+getInstance() : java.util.ArrayList\l}"
+];
+n29 [
+shape="record",
+label = "{problem.asm.ClassSequenceVisitor|-chosenDepth : int\l-chosenMethodName : java.lang.String\l-chosenParams : java.lang.String[]\l-classSequenceBuilder : java.lang.StringBuilder\l-methodSequenceBuilder : java.lang.StringBuilder\l|+problem.asm.ClassSequenceVisitor(int) : void\l+problem.asm.ClassSequenceVisitor(int, int, java.lang.String, java.lang.String[], java.lang.StringBuilder, java.lang.StringBuilder) : void\l+visitMethod(int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[]) : org.objectweb.asm.MethodVisitor\l}"
+];
+n29->n1[arrowhead="onormal", style="solid"];
+n30 [
+shape="record",
+style = filled,
+fillcolor =chartreuse,
+label = "{problem.asm.MethodSequenceVisitor\n\<\<decorator\>\>|-classSequenceBuilder : java.lang.StringBuilder\l-methodSequenceBuilder : java.lang.StringBuilder\l-visitor : org.objectweb.asm.MethodVisitor\l-chosenDepth : int\l|+problem.asm.MethodSequenceVisitor(int) : void\l+problem.asm.MethodSequenceVisitor(int, org.objectweb.asm.MethodVisitor, java.lang.StringBuilder, java.lang.StringBuilder, int) : void\l+visitMethodInsn(int, java.lang.String, java.lang.String, java.lang.String, boolean) : void\l}"
+];
+n30->n17[arrowhead="onormal", style="solid"];
+n23 [
+shape="record",
+style = filled,
+fillcolor =chartreuse,
+label = "{problem.asm.SingletonClassVisitor\n\<\<decorator\>\>|-fieldSingletonCriteria : boolean\l-methodSingletonCriteria : boolean\l|+problem.asm.SingletonClassVisitor(int, org.objectweb.asm.ClassVisitor) : void\l+visitField(int, java.lang.String, java.lang.String, java.lang.String, java.lang.Object) : org.objectweb.asm.FieldVisitor\l+visitMethod(int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[]) : org.objectweb.asm.MethodVisitor\l}"
+];
+n23->n1[arrowhead="onormal", style="solid"];
+n2 [
+shape="record",
+color =blue,
+label = "{problem.asm.ArbitraryNodeNames\n\<\<Singleton\>\>|-names : problem.asm.ArbitraryNodeNames\l-nameMap : java.util.HashMap\l-nodeNumber : int\l|-problem.asm.ArbitraryNodeNames() : void\l+getInstance() : problem.asm.ArbitraryNodeNames\l+addNewNode(java.lang.String) : void\l+getNodeName(java.lang.String) : java.lang.String\l}"
+];
+n24 [
+shape="record",
+style = filled,
+fillcolor =chartreuse,
+label = "{problem.asm.DecoratorClassVisitor\n\<\<decorator\>\>|-superName : java.lang.String\l-interfaces : java.lang.String[]\l|+problem.asm.DecoratorClassVisitor(int) : void\l+problem.asm.DecoratorClassVisitor(int, org.objectweb.asm.ClassVisitor) : void\l+visit(int, int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[]) : void\l+visitMethod(int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[]) : org.objectweb.asm.MethodVisitor\l-checkDecorates(java.lang.String) : void\l}"
+];
+n24->n1[arrowhead="onormal", style="solid"];
+n32 [
+shape="record",
+label = "{problem.asm.DecorateRecursiveVisitor|-classNameToCheck : java.lang.String\l-subclasses : java.util.ArrayList\l|+problem.asm.DecorateRecursiveVisitor(int) : void\l+problem.asm.DecorateRecursiveVisitor(int, java.lang.String, java.util.ArrayList) : void\l+visit(int, int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[]) : void\l-checkDecorates(java.lang.String) : void\l}"
+];
+n32->n1[arrowhead="onormal", style="solid"];
+n34 [
+shape="record",
+style = filled,
+fillcolor =chartreuse,
+label = "{problem.asm.AdapterMethodVisitor\n\<\<decorator\>\>|-paramToCheck : java.lang.String\l-visitor : problem.asm.AdapterClassVisitor\l-currentMethod : java.lang.String\l|+problem.asm.AdapterMethodVisitor(int, org.objectweb.asm.MethodVisitor) : void\l+problem.asm.AdapterMethodVisitor(int, problem.asm.AdapterClassVisitor, java.lang.String, java.lang.String) : void\l+visitMethodInsn(int, java.lang.String, java.lang.String, java.lang.String, boolean) : void\l}"
+];
+n34->n17[arrowhead="onormal", style="solid"];
+n36 [
+shape="record",
+label = "{problem.asm.MethodGetterVisitor|-superMethods : java.util.ArrayList\l|+problem.asm.MethodGetterVisitor(int) : void\l+problem.asm.MethodGetterVisitor(int, java.util.ArrayList) : void\l+visitMethod(int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[]) : org.objectweb.asm.MethodVisitor\l}"
+];
+n36->n1[arrowhead="onormal", style="solid"];
+n25 [
+shape="record",
+style = filled,
+fillcolor =chartreuse,
+label = "{problem.asm.AdapterManagementVisitor\n\<\<decorator\>\>|+problem.asm.AdapterManagementVisitor(int, org.objectweb.asm.ClassVisitor) : void\l}"
+];
+n25->n1[arrowhead="onormal", style="solid"];
+n35 [
+shape="record",
+style = filled,
+fillcolor =chartreuse,
+label = "{problem.asm.AdapterClassVisitor\n\<\<decorator\>\>|-checkMethods : java.util.ArrayList\l-superMethods : java.util.ArrayList\l-interfaceMethods : java.util.ArrayList\l-attemptedMethods : java.util.ArrayList\l-nameOfSuper : java.lang.String\l-interfaces : java.lang.String[]\l-param : java.lang.String\l-fieldList : java.util.ArrayList\l-reader : org.objectweb.asm.ClassReader\l-attemptedInterfaceMethods : java.util.ArrayList\l|+problem.asm.AdapterClassVisitor(int) : void\l+problem.asm.AdapterClassVisitor(int, org.objectweb.asm.ClassVisitor) : void\l+visit(int, int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[]) : void\l+visitField(int, java.lang.String, java.lang.String, java.lang.String, java.lang.Object) : org.objectweb.asm.FieldVisitor\l+visitMethod(int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[]) : org.objectweb.asm.MethodVisitor\l+verify(java.lang.String) : void\l+assignAdaption() : void\l}"
+];
+n35->n1[arrowhead="onormal", style="solid"];
+n1[
+style = filled,
+fillcolor =chartreuse,
+label = "org.objectweb.asm.ClassVisitor\n\<\<component\>\>"];
+n5[
+label = "java.util.ArrayList"];
+n7[
+label = "org.objectweb.asm.Type"];
+n9[
+label = "java.util.Arrays"];
+n12[
+label = "java.util.HashMap"];
+n13[
+label = "java.io.FileOutputStream"];
+n17[
+style = filled,
+fillcolor =chartreuse,
+label = "org.objectweb.asm.MethodVisitor\n\<\<component\>\>"];
+n18[
+label = "java.util.Iterator"];
+n20[
+label = "org.objectweb.asm.signature.SignatureReader"];
+n21[
+label = "problem.asm.ClassAssociationVisitor$1"];
+n22[
+label = "org.objectweb.asm.ClassReader"];
+n27[
+label = "java.lang.Runtime"];
+n28[
+label = "java.lang.Integer"];
+n31[
+label = "java.io.PrintStream"];
+n33[
+label = "java.io.IOException"];
+n0->n1[arrowhead="normal", style="solid", label="\<\<decorates\>\>"];
+n6->n1[arrowhead="normal", style="solid", label="\<\<decorates\>\>"];
+n6->n1[arrowhead="normal", style="solid", label="\<\<decorates\>\>"];
+n8->n1[arrowhead="normal", style="solid", label="\<\<decorates\>\>"];
+n8->n1[arrowhead="normal", style="solid", label="\<\<decorates\>\>"];
+n15->n1[arrowhead="normal", style="solid", label="\<\<decorates\>\>"];
+n16->n17[arrowhead="normal", style="solid", label="\<\<decorates\>\>"];
+n19->n1[arrowhead="normal", style="solid", label="\<\<decorates\>\>"];
+n30->n17[arrowhead="normal", style="solid", label="\<\<decorates\>\>"];
+n23->n1[arrowhead="normal", style="solid", label="\<\<decorates\>\>"];
+n24->n1[arrowhead="normal", style="solid", label="\<\<decorates\>\>"];
+n34->n17[arrowhead="normal", style="solid", label="\<\<decorates\>\>"];
+n25->n1[arrowhead="normal", style="solid", label="\<\<decorates\>\>"];
+n35->n1[arrowhead="normal", style="solid", label="\<\<decorates\>\>"];
+n0->n1[arrowhead="ovee", style="dashed"];
+n0->n2[arrowhead="ovee", style="dashed"];
+n0->n3[arrowhead="ovee", style="dashed"];
+n0->n4[arrowhead="ovee", style="dashed"];
+n0->n5[arrowhead="ovee", style="dashed"];
+n6->n1[arrowhead="ovee", style="dashed"];
+n6->n7[arrowhead="ovee", style="dashed"];
+n8->n1[arrowhead="ovee", style="dashed"];
+n8->n7[arrowhead="ovee", style="dashed"];
+n8->n9[arrowhead="ovee", style="dashed"];
+n4->n11[arrowhead="ovee", style="dashed"];
+n4->n10[arrowhead="ovee", style="dashed"];
+n4->n12[arrowhead="ovee", style="dashed"];
+n4->n13[arrowhead="ovee", style="dashed"];
+n4->n3[arrowhead="ovee", style="dashed"];
+n4->n14[arrowhead="ovee", style="dashed"];
+n15->n1[arrowhead="ovee", style="dashed"];
+n16->n17[arrowhead="ovee", style="dashed"];
+n16->n3[arrowhead="ovee", style="dashed"];
+n16->n4[arrowhead="ovee", style="dashed"];
+n16->n2[arrowhead="ovee", style="dashed"];
+n16->n5[arrowhead="ovee", style="dashed"];
+n16->n18[arrowhead="ovee", style="dashed"];
+n16->n7[arrowhead="ovee", style="dashed"];
+n19->n1[arrowhead="ovee", style="dashed"];
+n19->n16[arrowhead="ovee", style="dashed"];
+n19->n5[arrowhead="ovee", style="dashed"];
+n19->n20[arrowhead="ovee", style="dashed"];
+n19->n21[arrowhead="ovee", style="dashed"];
+n19->n18[arrowhead="ovee", style="dashed"];
+n19->n3[arrowhead="ovee", style="dashed"];
+n19->n2[arrowhead="ovee", style="dashed"];
+n19->n4[arrowhead="ovee", style="dashed"];
+n3->n12[arrowhead="ovee", style="dashed"];
+n3->n5[arrowhead="ovee", style="dashed"];
+n3->n2[arrowhead="ovee", style="dashed"];
+n3->n22[arrowhead="ovee", style="dashed"];
+n3->n0[arrowhead="ovee", style="dashed"];
+n3->n23[arrowhead="ovee", style="dashed"];
+n3->n15[arrowhead="ovee", style="dashed"];
+n3->n6[arrowhead="ovee", style="dashed"];
+n3->n8[arrowhead="ovee", style="dashed"];
+n3->n19[arrowhead="ovee", style="dashed"];
+n3->n24[arrowhead="ovee", style="dashed"];
+n3->n25[arrowhead="ovee", style="dashed"];
+n3->n18[arrowhead="ovee", style="dashed"];
+n3->n26[arrowhead="ovee", style="dashed"];
+n14->n27[arrowhead="ovee", style="dashed"];
+n14->n5[arrowhead="ovee", style="dashed"];
+n14->n12[arrowhead="ovee", style="dashed"];
+n14->n28[arrowhead="ovee", style="dashed"];
+n14->n22[arrowhead="ovee", style="dashed"];
+n14->n29[arrowhead="ovee", style="dashed"];
+n11->n5[arrowhead="ovee", style="dashed"];
+n26->n5[arrowhead="ovee", style="dashed"];
+n29->n1[arrowhead="ovee", style="dashed"];
+n29->n7[arrowhead="ovee", style="dashed"];
+n29->n9[arrowhead="ovee", style="dashed"];
+n29->n30[arrowhead="ovee", style="dashed"];
+n30->n17[arrowhead="ovee", style="dashed"];
+n30->n4[arrowhead="ovee", style="dashed"];
+n30->n14[arrowhead="ovee", style="dashed"];
+n30->n31[arrowhead="ovee", style="dashed"];
+n30->n7[arrowhead="ovee", style="dashed"];
+n30->n28[arrowhead="ovee", style="dashed"];
+n23->n1[arrowhead="ovee", style="dashed"];
+n23->n7[arrowhead="ovee", style="dashed"];
+n23->n4[arrowhead="ovee", style="dashed"];
+n23->n3[arrowhead="ovee", style="dashed"];
+n2->n12[arrowhead="ovee", style="dashed"];
+n2->n2[arrowhead="ovee", style="dashed"];
+n2->n28[arrowhead="ovee", style="dashed"];
+n24->n1[arrowhead="ovee", style="dashed"];
+n24->n26[arrowhead="ovee", style="dashed"];
+n24->n5[arrowhead="ovee", style="dashed"];
+n24->n18[arrowhead="ovee", style="dashed"];
+n24->n7[arrowhead="ovee", style="dashed"];
+n24->n4[arrowhead="ovee", style="dashed"];
+n24->n3[arrowhead="ovee", style="dashed"];
+n24->n22[arrowhead="ovee", style="dashed"];
+n24->n32[arrowhead="ovee", style="dashed"];
+n24->n33[arrowhead="ovee", style="dashed"];
+n32->n1[arrowhead="ovee", style="dashed"];
+n32->n26[arrowhead="ovee", style="dashed"];
+n32->n5[arrowhead="ovee", style="dashed"];
+n32->n18[arrowhead="ovee", style="dashed"];
+n32->n3[arrowhead="ovee", style="dashed"];
+n32->n22[arrowhead="ovee", style="dashed"];
+n32->n32[arrowhead="ovee", style="dashed"];
+n32->n33[arrowhead="ovee", style="dashed"];
+n34->n17[arrowhead="ovee", style="dashed"];
+n34->n35[arrowhead="ovee", style="dashed"];
+n36->n1[arrowhead="ovee", style="dashed"];
+n36->n5[arrowhead="ovee", style="dashed"];
+n25->n1[arrowhead="ovee", style="dashed"];
+n25->n35[arrowhead="ovee", style="dashed"];
+n25->n4[arrowhead="ovee", style="dashed"];
+n25->n22[arrowhead="ovee", style="dashed"];
+n25->n33[arrowhead="ovee", style="dashed"];
+n35->n1[arrowhead="ovee", style="dashed"];
+n35->n5[arrowhead="ovee", style="dashed"];
+n35->n22[arrowhead="ovee", style="dashed"];
+n35->n36[arrowhead="ovee", style="dashed"];
+n35->n7[arrowhead="ovee", style="dashed"];
+n35->n34[arrowhead="ovee", style="dashed"];
+n35->n3[arrowhead="ovee", style="dashed"];
+n35->n4[arrowhead="ovee", style="dashed"];
+n4->n10[arrowhead="ovee", style="solid"];
+n3->n12[arrowhead="ovee", style="solid"];
+n3->n5[arrowhead="ovee", style="solid"];
+}
