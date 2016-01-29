@@ -65,6 +65,6 @@ The method name is the regular String for the name
 
 The remaining arguments are method parameter types, as many as necessary, using the full package path String.
 
-Patterns currently detected: Singleton (blue)
+Patterns currently detected: Singleton (blue outline), Decorator(green fill {component and decorator labels}), Adapter(red fill {target, adapter, and adaptee labels})
 
 For testing purposes, run the JUnit tests individually.  When the tests are all run at the same time errors sometime occur with synchronous evaluation reading a file before it gets fully written, making the JUnit test fail, whereas when all tests are ran individually they passed every time.
