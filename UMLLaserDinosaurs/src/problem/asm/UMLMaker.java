@@ -24,6 +24,8 @@ public class UMLMaker implements DiagramMaker {
 	private static HashMap<String, ArrayList<String>> patternLists = new HashMap<String, ArrayList<String>>();
 	
 	private static StringBuilder labelledArrows = new StringBuilder();
+	
+	private static ArrayList<ArrayList<String>> compositeComponents = new ArrayList<ArrayList<String>>();
 
 	@Override
 	public StringBuilder generateDiagramText(String[] args) throws IOException {
@@ -70,9 +72,10 @@ public class UMLMaker implements DiagramMaker {
 			
 			ClassVisitor adapterVisitor = new AdapterManagementVisitor(Opcodes.ASM5, decoratorVisitor);
 
+			ClassVisitor compositeComponentVisitor = new CompositeVisitor(Opcodes.ASM5, adapterVisitor, compositeComponents);
 			// Tell the Reader to use our (heavily decorated) ClassVisitor to
 			// visit the class
-			reader.accept(adapterVisitor, ClassReader.EXPAND_FRAMES);
+			reader.accept(compositeComponentVisitor, ClassReader.EXPAND_FRAMES);
 
 			HashMap<String, StringBuilder> builderList = new HashMap<String, StringBuilder>();
 			builderList.put("field", fieldBuilder);
@@ -214,6 +217,9 @@ public class UMLMaker implements DiagramMaker {
 		this.addColorKey(this.fillColorMap, "target", "firebrick2");
 		this.addColorKey(this.fillColorMap, "decorator", "chartreuse");
 		this.addColorKey(this.fillColorMap, "component", "chartreuse");
+		this.addColorKey(this.fillColorMap, "composite component", "yellow1");
+		this.addColorKey(this.fillColorMap, "composite", "yellow1");
+		this.addColorKey(this.fillColorMap, "leaf", "yellow1");
 	}
 
 	private void addColorKey(HashMap<String, String> colorMap, String patternString, String colorString) {
