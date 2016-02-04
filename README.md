@@ -22,6 +22,9 @@ Every time a new class is utilized, it is added to one StringBuilder tracking th
 Milestone 4:
 Another ClassVisitor has been added, the SingletonClassVisitor, which decorates the previous ClassVisitor decoration and searches for the signs of a Singleton in the current class. If found, the class is nmarked as a singleton by adding an indicating string to a StringBuilder. This builder is later converted to a string and then a HashMap is used to determine the correct color for the pattern (or for no pattern at all). The color and pattern name are then appended to the overall string builder in the correct locations to cause desired look in the UML.
 
+Milestone 5:
+Two sets of ClassVisitors have been added for pattern detection. The DecoratorClassVisitor and DecorateRecursiveVisitor which work in tandem to verify that a class has the same input class that it extends (or if this class exists somewhere up the extension tree). The other set is the AdapterManagementVisitor, AdapterClassVisitor, AdapterMethodVisitor, and MethodGetterVisitor. These work to find all methods a class is attempting to adapt from a super class or interface and ensure they implement methods of the class they are adapting. All pattern finding visitors can now call the addPattern method in UMLMaker which adds a string describing a classes role in the pattern to an arraylist of patterns for that class. These pattern role strings are then interpreted by UMLMaker after all visiting is complete to pull the correct colors for filling or outlining classes. The visitors can also call the addLabeledArrow method to show the relationship between two classes in the pattern on the diagram. The design can be extended to add further patterns by assigning new key color combinations to the hash maps that assign colors based on patterns. New class visitor would need to be constructed to find and assign these patterns.
+
 Who did what:
 
 For the most part, we all worked together on every part of the code, alternating every 10 minutes to ensure that everyone worked on everything equally, and we were all paying attention when other group members were the one coding.  None of the methods or classes in the project can be accurately attributed to any single member of our group, as we all worked together on everything so far.  The only parts that we have done separately are as follows (separated by milestone):
@@ -41,6 +44,10 @@ Milestone 4:
   Tim Anderson: Updated testing implementation
   Spencer Wright: Manual UML updates
   Gregory Nathan: README.md updates
+Milestone 5:
+  Tim Anderson: Testing implementation
+  Spencer Wright: Manual UML updates
+  Gregory Nathan: README.md updates
 
 Instructions:
 
@@ -58,6 +65,6 @@ The method name is the regular String for the name
 
 The remaining arguments are method parameter types, as many as necessary, using the full package path String.
 
-Patterns currently detected: Singleton (blue)
+Patterns currently detected: Singleton (blue outline), Decorator(green fill {component and decorator labels}), Adapter(red fill {target, adapter, and adaptee labels})
 
 For testing purposes, run the JUnit tests individually.  When the tests are all run at the same time errors sometime occur with synchronous evaluation reading a file before it gets fully written, making the JUnit test fail, whereas when all tests are ran individually they passed every time.
