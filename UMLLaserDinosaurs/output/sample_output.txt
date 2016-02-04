@@ -2,66 +2,11 @@ digraph text{
 rankdir=BT;
 n0 [
 shape="record",
-label = "{java.io.InputStreamReader|-sd : sun.nio.cs.StreamDecoder\l|+java.io.InputStreamReader(java.io.InputStream) : void\l+java.io.InputStreamReader(java.io.InputStream, java.lang.String) : void\l+java.io.InputStreamReader(java.io.InputStream, java.nio.charset.Charset) : void\l+java.io.InputStreamReader(java.io.InputStream, java.nio.charset.CharsetDecoder) : void\l+getEncoding() : java.lang.String\l+read() : int\l+read(char[], int, int) : int\l+ready() : boolean\l+close() : void\l}"
+style = filled,
+fillcolor =yellow1,
+label = "{\<\<abstract\>\>\n\<\<interface\>\>\nproblem.sprites.ISprite\n\<\<composite component\>\>|+move(java.awt.Dimension) : void\l+getShape() : java.util.ArrayList\l+getChild(int) : problem.sprites.ISprite\l+addSprite(problem.sprites.ISprite) : void\l+removeSprite(problem.sprites.ISprite) : void\l}"
 ];
-n0->n1[arrowhead="onormal", style="solid"];
-n2 [
-shape="record",
-label = "{sun.nio.cs.StreamDecoder|-MIN_BYTE_BUFFER_SIZE : int\l-DEFAULT_BYTE_BUFFER_SIZE : int\l-isOpen : boolean\l-haveLeftoverChar : boolean\l-leftoverChar : char\l-channelsAvailable : boolean\l-cs : java.nio.charset.Charset\l-decoder : java.nio.charset.CharsetDecoder\l-bb : java.nio.ByteBuffer\l-in : java.io.InputStream\l-ch : java.nio.channels.ReadableByteChannel\l-$assertionsDisabled : boolean\l|-ensureOpen() : void\l+forInputStreamReader(java.io.InputStream, java.lang.Object, java.lang.String) : sun.nio.cs.StreamDecoder\l+forInputStreamReader(java.io.InputStream, java.lang.Object, java.nio.charset.Charset) : sun.nio.cs.StreamDecoder\l+forInputStreamReader(java.io.InputStream, java.lang.Object, java.nio.charset.CharsetDecoder) : sun.nio.cs.StreamDecoder\l+forDecoder(java.nio.channels.ReadableByteChannel, java.nio.charset.CharsetDecoder, int) : sun.nio.cs.StreamDecoder\l+getEncoding() : java.lang.String\l+read() : int\l-read0() : int\l+read(char[], int, int) : int\l+ready() : boolean\l+close() : void\l-isOpen() : boolean\l-getChannel(java.io.FileInputStream) : java.nio.channels.FileChannel\l-sun.nio.cs.StreamDecoder(java.io.InputStream, java.lang.Object, java.nio.charset.Charset) : void\l-sun.nio.cs.StreamDecoder(java.io.InputStream, java.lang.Object, java.nio.charset.CharsetDecoder) : void\l-sun.nio.cs.StreamDecoder(java.nio.channels.ReadableByteChannel, java.nio.charset.CharsetDecoder, int) : void\l-readBytes() : int\l-implRead(char[], int, int) : int\l-encodingName() : java.lang.String\l-inReady() : boolean\l-implReady() : boolean\l-implClose() : void\l}"
-];
-n2->n1[arrowhead="onormal", style="solid"];
 n1[
-label = "java.io.Reader"];
-n3[
-label = "java.lang.Error"];
-n4[
-label = "java.lang.NullPointerException"];
-n5[
-label = "java.io.IOException"];
-n6[
-label = "java.nio.charset.Charset"];
-n7[
-label = "java.io.UnsupportedEncodingException"];
-n8[
-label = "java.lang.AssertionError"];
-n9[
-label = "java.lang.IndexOutOfBoundsException"];
-n10[
-label = "java.io.FileInputStream"];
-n11[
-label = "java.nio.charset.CharsetDecoder"];
-n12[
-label = "java.nio.ByteBuffer"];
-n13[
-label = "java.nio.channels.ReadableByteChannel"];
-n14[
-label = "java.io.InputStream"];
-n15[
-label = "java.nio.CharBuffer"];
-n16[
-label = "java.nio.charset.CoderResult"];
-n17[
-label = "sun.nio.cs.HistoricallyNamedCharset"];
-n18[
-label = "java.lang.Class"];
-n0->n1[arrowhead="ovee", style="dashed"];
-n0->n2[arrowhead="ovee", style="dashed"];
-n0->n3[arrowhead="ovee", style="dashed"];
-n0->n4[arrowhead="ovee", style="dashed"];
-n2->n5[arrowhead="ovee", style="dashed"];
-n2->n6[arrowhead="ovee", style="dashed"];
-n2->n2[arrowhead="ovee", style="dashed"];
-n2->n7[arrowhead="ovee", style="dashed"];
-n2->n8[arrowhead="ovee", style="dashed"];
-n2->n9[arrowhead="ovee", style="dashed"];
-n2->n10[arrowhead="ovee", style="dashed"];
-n2->n11[arrowhead="ovee", style="dashed"];
-n2->n1[arrowhead="ovee", style="dashed"];
-n2->n12[arrowhead="ovee", style="dashed"];
-n2->n13[arrowhead="ovee", style="dashed"];
-n2->n14[arrowhead="ovee", style="dashed"];
-n2->n15[arrowhead="ovee", style="dashed"];
-n2->n16[arrowhead="ovee", style="dashed"];
-n2->n17[arrowhead="ovee", style="dashed"];
-n2->n18[arrowhead="ovee", style="dashed"];
+label = "java.awt.Shape"];
+n0->n1[arrowhead="ovee", style="solid"];
 }
