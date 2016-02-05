@@ -2,6 +2,7 @@ package problem.asm;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 import org.objectweb.asm.ClassReader;
@@ -22,10 +23,13 @@ public class UMLMaker implements DiagramMaker {
 	private static ArrayList<String> nonIncludedClasses = new ArrayList<String>();
 
 	private static HashMap<String, ArrayList<String>> patternLists = new HashMap<String, ArrayList<String>>();
-	
+
 	private static StringBuilder labelledArrows = new StringBuilder();
-	
+
 	private static ArrayList<ArrayList<String>> compositeComponents = new ArrayList<ArrayList<String>>();
+
+	private static HashMap<String, ArrayList<String>> classExtensions = new HashMap<String, ArrayList<String>>();
+	private static HashMap<String, ArrayList<String>> interfaceExtensions = new HashMap<String, ArrayList<String>>();
 
 	@Override
 	public StringBuilder generateDiagramText(String[] args) throws IOException {
@@ -69,10 +73,11 @@ public class UMLMaker implements DiagramMaker {
 					associatesList);
 
 			ClassVisitor decoratorVisitor = new DecoratorClassVisitor(Opcodes.ASM5, associationVisitor);
-			
+
 			ClassVisitor adapterVisitor = new AdapterManagementVisitor(Opcodes.ASM5, decoratorVisitor);
 
-			ClassVisitor compositeComponentVisitor = new CompositeVisitor(Opcodes.ASM5, adapterVisitor, compositeComponents);
+			ClassVisitor compositeComponentVisitor = new CompositeVisitor(Opcodes.ASM5, adapterVisitor,
+					compositeComponents);
 			// Tell the Reader to use our (heavily decorated) ClassVisitor to
 			// visit the class
 			reader.accept(compositeComponentVisitor, ClassReader.EXPAND_FRAMES);
@@ -84,6 +89,30 @@ public class UMLMaker implements DiagramMaker {
 			builderList.put("arrows", arrowBuilder);
 
 			classInfo.put(className, builderList);
+		}
+
+		for (String s : classExtensions.keySet()) {
+			ArrayList<String> extendedClasses = classExtensions.get(s);
+			for (String e : extendedClasses) {
+				ArrayList<String> patternList = patternLists.get(e);
+				if (patternList != null) {
+					if (patternList.contains("composite component")) {
+						UMLMaker.addPattern(s, "leaf");
+					}
+				}
+			}
+		}
+
+		for (String s : interfaceExtensions.keySet()) {
+			ArrayList<String> extendedClasses = interfaceExtensions.get(s);
+			for (String e : extendedClasses) {
+				ArrayList<String> patternList = patternLists.get(e);
+				if (patternList != null) {
+					if (patternList.contains("composite component")) {
+						UMLMaker.addPattern(s, "leaf");
+					}
+				}
+			}
 		}
 
 		for (String className : args) {
@@ -256,13 +285,13 @@ public class UMLMaker implements DiagramMaker {
 
 	public static void addLabelledArrow(String pointee, String pointer, String labelText) {
 		String pointeeName = ArbitraryNodeNames.getInstance().getNodeName(pointee);
-		if(pointeeName == null){
+		if (pointeeName == null) {
 			ArbitraryNodeNames.getInstance().addNewNode(pointee);
 			addNonIncludedClass(pointee);
 			pointeeName = ArbitraryNodeNames.getInstance().getNodeName(pointee);
 		}
 		String pointerName = ArbitraryNodeNames.getInstance().getNodeName(pointer);
-		if(pointerName == null){
+		if (pointerName == null) {
 			ArbitraryNodeNames.getInstance().addNewNode(pointer);
 			addNonIncludedClass(pointer);
 			pointerName = ArbitraryNodeNames.getInstance().getNodeName(pointer);
@@ -274,13 +303,13 @@ public class UMLMaker implements DiagramMaker {
 
 	public static void addExtendsArrow(String pointee, String pointer) {
 		String pointeeName = ArbitraryNodeNames.getInstance().getNodeName(pointee);
-		if(pointeeName == null){
+		if (pointeeName == null) {
 			ArbitraryNodeNames.getInstance().addNewNode(pointee);
 			addNonIncludedClass(pointee);
 			pointeeName = ArbitraryNodeNames.getInstance().getNodeName(pointee);
 		}
 		String pointerName = ArbitraryNodeNames.getInstance().getNodeName(pointer);
-		if(pointerName == null){
+		if (pointerName == null) {
 			ArbitraryNodeNames.getInstance().addNewNode(pointer);
 			addNonIncludedClass(pointer);
 			pointerName = ArbitraryNodeNames.getInstance().getNodeName(pointer);
@@ -291,19 +320,45 @@ public class UMLMaker implements DiagramMaker {
 
 	public static void addImplementsArrow(String pointee, String pointer) {
 		String pointeeName = ArbitraryNodeNames.getInstance().getNodeName(pointee);
-		if(pointeeName == null){
+		if (pointeeName == null) {
 			ArbitraryNodeNames.getInstance().addNewNode(pointee);
 			addNonIncludedClass(pointee);
 			pointeeName = ArbitraryNodeNames.getInstance().getNodeName(pointee);
 		}
 		String pointerName = ArbitraryNodeNames.getInstance().getNodeName(pointer);
-		if(pointerName == null){
+		if (pointerName == null) {
 			ArbitraryNodeNames.getInstance().addNewNode(pointer);
 			addNonIncludedClass(pointer);
 			pointerName = ArbitraryNodeNames.getInstance().getNodeName(pointer);
 		}
 		labelledArrows.append(pointeeName + "->" + pointerName);
 		labelledArrows.append("[arrowhead=\"onormal\", style=\"dashed\"]\n");
+	}
+
+	public static void addClassExtensionMapping(String classString, String extensionClass) {
+		if (classExtensions.containsKey(classString)) {
+			if (classExtensions.get(classString).contains(extensionClass)) {
+				return;
+			}
+			classExtensions.get(classString).add(extensionClass);
+		} else {
+			ArrayList<String> classExtensionList = new ArrayList<String>();
+			classExtensionList.add(extensionClass);
+			classExtensions.put(classString, classExtensionList);
+		}
+	}
+
+	public static void addInterfaceExtensionMapping(String classString, String extensionClass) {
+		if (interfaceExtensions.containsKey(classString)) {
+			if (interfaceExtensions.get(classString).contains(extensionClass)) {
+				return;
+			}
+			interfaceExtensions.get(classString).add(extensionClass);
+		} else {
+			ArrayList<String> classExtensionList = new ArrayList<String>();
+			classExtensionList.add(extensionClass);
+			interfaceExtensions.put(classString, classExtensionList);
+		}
 	}
 
 }

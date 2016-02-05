@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
+import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 
 public class CompositeVisitor extends ClassVisitor {
@@ -23,7 +24,7 @@ public class CompositeVisitor extends ClassVisitor {
 		for (int i = 0; i < argTypes.length; i++) {
 			classNames.add(argTypes[i].getClassName());
 		}
-		if(classNames.contains(DesignParser.getCurrentClass())){
+		if(classNames.contains(DesignParser.getCurrentClass()) && (access & Opcodes.ACC_PUBLIC) > 0){
 			UMLMaker.addPattern(DesignParser.getCurrentClass(), "composite component");
 			ArrayList<String> newList = new ArrayList<String>();
 			newList.add(DesignParser.getCurrentClass());

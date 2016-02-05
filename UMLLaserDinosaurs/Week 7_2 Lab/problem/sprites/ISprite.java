@@ -7,7 +7,13 @@ import java.util.ArrayList;
 public interface ISprite {
 	public void move(Dimension space);
 	public ArrayList<Shape> getShape();
-	public ISprite getChild(int i);
-	void addSprite(ISprite spriteToAdd);
-	void removeSprite(ISprite spriteToRemove);
+	public default ISprite getChild(int i){
+		throw new UnsupportedOperationException();
+	}
+	default void addSprite(ISprite spriteToAdd){
+		throw new UnsupportedOperationException();
+	}
+	default void removeSprite(ISprite spriteToRemove){
+		throw new UnsupportedOperationException();
+	}
 }

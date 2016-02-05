@@ -41,19 +41,4 @@ public abstract class AbstractSprite implements ISprite {
 	@Override
 	public abstract void move(Dimension space);
 
-	@Override
-	public final void addSprite(ISprite spriteToAdd) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public final void removeSprite(ISprite spriteToRemove) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public final ISprite getChild(int i) {
-		throw new UnsupportedOperationException();
-	}
-
 }

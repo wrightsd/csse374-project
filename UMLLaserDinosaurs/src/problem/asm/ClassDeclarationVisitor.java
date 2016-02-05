@@ -38,6 +38,7 @@ public class ClassDeclarationVisitor extends ClassVisitor {
 			}
 			if (superValid) {
 				builder.append(nameNodeName + "->");
+				UMLMaker.addClassExtensionMapping(name, superName);
 				ArbitraryNodeNames.getInstance().addNewNode(superName);
 				String superNodeName = ArbitraryNodeNames.getInstance().getNodeName(superName);
 				builder.append(superNodeName + "[arrowhead=\"onormal\", style=\"solid\"];\n");
@@ -56,6 +57,7 @@ public class ClassDeclarationVisitor extends ClassVisitor {
 			}
 			if (interfaceValid) {
 				builder.append(nameNodeName + "->");
+				UMLMaker.addInterfaceExtensionMapping(name, s);
 				ArbitraryNodeNames.getInstance().addNewNode(s);
 				String interfaceNodeName = ArbitraryNodeNames.getInstance().getNodeName(s);
 				builder.append(interfaceNodeName + "[arrowhead=\"onormal\", style=\"dashed\"];\n");
