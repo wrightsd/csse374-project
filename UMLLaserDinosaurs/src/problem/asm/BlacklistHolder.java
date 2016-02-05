@@ -12,7 +12,7 @@ public class BlacklistHolder {
 			blacklist.add("java.lang.Object");
 			blacklist.add("java.lang.String");
 		    blacklist.add("java.");
-		    blacklist.add("javax");
+//		    blacklist.add("javax");
 		    blacklist.add("$");
 		}
 		return blacklist;
