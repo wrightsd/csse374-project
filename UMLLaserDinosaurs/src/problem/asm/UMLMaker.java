@@ -30,6 +30,8 @@ public class UMLMaker implements DiagramMaker {
 
 	private static HashMap<String, ArrayList<String>> classExtensions = new HashMap<String, ArrayList<String>>();
 	private static HashMap<String, ArrayList<String>> interfaceExtensions = new HashMap<String, ArrayList<String>>();
+	
+	private static HashMap<String,ArrayList<ArrayList<String>>> classMethodMap = new HashMap<String, ArrayList<ArrayList<String>>>();
 
 	@Override
 	public StringBuilder generateDiagramText(String[] args) throws IOException {
@@ -200,7 +202,7 @@ public class UMLMaker implements DiagramMaker {
 		completeBuilder.append(labelledArrows.toString());
 		completeBuilder.append(associationBuilder.toString());
 		completeBuilder.append("}");
-
+		
 		return completeBuilder;
 	}
 
@@ -358,6 +360,17 @@ public class UMLMaker implements DiagramMaker {
 			ArrayList<String> classExtensionList = new ArrayList<String>();
 			classExtensionList.add(extensionClass);
 			interfaceExtensions.put(classString, classExtensionList);
+		}
+	}
+	
+	public static void addMethodsToList(String classKey, ArrayList<String> listToAdd){
+		if(classMethodMap.containsKey(classKey)){
+			classMethodMap.get(classKey).add(listToAdd);
+		}
+		else{
+			ArrayList<ArrayList<String>> newestList = new ArrayList<ArrayList<String>>();
+			newestList.add(listToAdd);
+			classMethodMap.put(classKey, newestList);
 		}
 	}
 

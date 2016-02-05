@@ -1,5 +1,6 @@
 package problem.asm;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.objectweb.asm.ClassVisitor;
@@ -34,6 +35,7 @@ public class ClassMethodVisitor extends ClassVisitor {
 	public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
 		MethodVisitor toDecorate = super.visitMethod(access, name, desc, signature, exceptions);
 		// TODO: delete the line below
+		ArrayList<String> listOfMethods = new ArrayList<String>();
 		Type[] argTypes = Type.getArgumentTypes(desc);
 		String[] classNames = new String[argTypes.length];
 		for (int i = 0; i < argTypes.length; i++) {
@@ -55,6 +57,7 @@ public class ClassMethodVisitor extends ClassVisitor {
 		if (name.equals("<clinit>")){
 			return toDecorate;
 		}
+		listOfMethods.add(name);
 		
 		if ((access & Opcodes.ACC_PUBLIC) > 0) {
 			builder.append("+");
@@ -66,6 +69,10 @@ public class ClassMethodVisitor extends ClassVisitor {
 
 		builder.append(name + "(" + argsToPrint + ")" + " : " + type + "\\l");
 
+		listOfMethods.add(argsToPrint);
+		listOfMethods.add(type);
+		UMLMaker.addMethodsToList(DesignParser.getCurrentClass(), listOfMethods);
+		
 		return toDecorate;
 	}
 }
