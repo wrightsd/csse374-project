@@ -30,8 +30,8 @@ public class UMLMaker implements DiagramMaker {
 
 	private static HashMap<String, ArrayList<String>> classExtensions = new HashMap<String, ArrayList<String>>();
 	private static HashMap<String, ArrayList<String>> interfaceExtensions = new HashMap<String, ArrayList<String>>();
-	
-	private static HashMap<String,ArrayList<ArrayList<String>>> classMethodMap = new HashMap<String, ArrayList<ArrayList<String>>>();
+
+	private static HashMap<String, ArrayList<ArrayList<String>>> classMethodMap = new HashMap<String, ArrayList<ArrayList<String>>>();
 
 	@Override
 	public StringBuilder generateDiagramText(String[] args) throws IOException {
@@ -99,7 +99,25 @@ public class UMLMaker implements DiagramMaker {
 				ArrayList<String> patternList = patternLists.get(e);
 				if (patternList != null) {
 					if (patternList.contains("composite component")) {
-						UMLMaker.addPattern(s, "leaf");
+						ArrayList<ArrayList<String>> listOfLists = classMethodMap.get(s);
+						ArrayList<ArrayList<String>> parentList = classMethodMap.get(e);
+						boolean leaf = true;
+						for (int i = 0; i < listOfLists.size(); i++) {
+							String params = listOfLists.get(i).get(1);
+							if (params.contains(e)) {
+								for (ArrayList<String> list : parentList) {
+									if (list.get(0).equals(listOfLists.get(i).get(0))
+											&& list.get(1).equals(listOfLists.get(i).get(1))
+											&& list.get(2).equals(listOfLists.get(i).get(2))) {
+										UMLMaker.addPattern(s, "composite");
+										leaf = false;
+									}
+								}
+							}
+						}
+						if (leaf) {
+							UMLMaker.addPattern(s, "leaf");
+						}
 					}
 				}
 			}
@@ -111,7 +129,25 @@ public class UMLMaker implements DiagramMaker {
 				ArrayList<String> patternList = patternLists.get(e);
 				if (patternList != null) {
 					if (patternList.contains("composite component")) {
-						UMLMaker.addPattern(s, "leaf");
+						ArrayList<ArrayList<String>> listOfLists = classMethodMap.get(s);
+						ArrayList<ArrayList<String>> parentList = classMethodMap.get(e);
+						boolean leaf = true;
+						for (int i = 0; i < listOfLists.size(); i++) {
+							String params = listOfLists.get(i).get(1);
+							if (params.contains(e)) {
+								for (ArrayList<String> list : parentList) {
+									if (list.get(0).equals(listOfLists.get(i).get(0))
+											&& list.get(1).equals(listOfLists.get(i).get(1))
+											&& list.get(2).equals(listOfLists.get(i).get(2))) {
+										UMLMaker.addPattern(s, "composite");
+										leaf = false;
+									}
+								}
+							}
+						}
+						if (leaf) {
+							UMLMaker.addPattern(s, "leaf");
+						}
 					}
 				}
 			}
@@ -202,7 +238,7 @@ public class UMLMaker implements DiagramMaker {
 		completeBuilder.append(labelledArrows.toString());
 		completeBuilder.append(associationBuilder.toString());
 		completeBuilder.append("}");
-		
+
 		return completeBuilder;
 	}
 
@@ -362,12 +398,11 @@ public class UMLMaker implements DiagramMaker {
 			interfaceExtensions.put(classString, classExtensionList);
 		}
 	}
-	
-	public static void addMethodsToList(String classKey, ArrayList<String> listToAdd){
-		if(classMethodMap.containsKey(classKey)){
+
+	public static void addMethodsToList(String classKey, ArrayList<String> listToAdd) {
+		if (classMethodMap.containsKey(classKey)) {
 			classMethodMap.get(classKey).add(listToAdd);
-		}
-		else{
+		} else {
 			ArrayList<ArrayList<String>> newestList = new ArrayList<ArrayList<String>>();
 			newestList.add(listToAdd);
 			classMethodMap.put(classKey, newestList);

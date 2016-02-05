@@ -34,7 +34,7 @@ n6 [
 shape="record",
 style = filled,
 fillcolor =yellow1,
-label = "{\<\<abstract\>\>\nproblem.sprites.CompositeSprite\n\<\<leaf\>\>|#spriteList : java.util.ArrayList\l|+move(java.awt.Dimension) : void\l+getShape() : java.util.ArrayList\l+getChild(int) : problem.sprites.ISprite\l+addSprite(problem.sprites.ISprite) : void\l+removeSprite(problem.sprites.ISprite) : void\l}"
+label = "{\<\<abstract\>\>\nproblem.sprites.CompositeSprite\n\<\<composite\>\>|#spriteList : java.util.ArrayList\l|+move(java.awt.Dimension) : void\l+getShape() : java.util.ArrayList\l+getChild(int) : problem.sprites.ISprite\l+addSprite(problem.sprites.ISprite) : void\l+removeSprite(problem.sprites.ISprite) : void\l}"
 ];
 n6->n0[arrowhead="onormal", style="dashed"];
 n7 [
