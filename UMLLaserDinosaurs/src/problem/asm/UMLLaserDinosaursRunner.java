@@ -16,7 +16,8 @@ public class UMLLaserDinosaursRunner {
 				"problem.asm.SingletonClassVisitor", "problem.asm.ArbitraryNodeNames",
 				"problem.asm.DecoratorClassVisitor", "problem.asm.DecorateRecursiveVisitor",
 				"problem.asm.AdapterMethodVisitor", "problem.asm.MethodGetterVisitor",
-				"problem.asm.AdapterManagementVisitor" , "problem.asm.AdapterClassVisitor"};
+				"problem.asm.AdapterManagementVisitor" , "problem.asm.AdapterClassVisitor",
+				"problem.asm.CompositeVisitor"};
 		DesignParser.parse(arguments, "./output/UMLLaserDinosaurs_output.txt", "uml");
 	}
 

@@ -93,67 +93,142 @@ public class UMLMaker implements DiagramMaker {
 			classInfo.put(className, builderList);
 		}
 
-		for (String s : classExtensions.keySet()) {
-			ArrayList<String> extendedClasses = classExtensions.get(s);
-			for (String e : extendedClasses) {
-				ArrayList<String> patternList = patternLists.get(e);
-				if (patternList != null) {
-					if (patternList.contains("composite component")) {
-						ArrayList<ArrayList<String>> listOfLists = classMethodMap.get(s);
-						ArrayList<ArrayList<String>> parentList = classMethodMap.get(e);
-						boolean leaf = true;
-						for (int i = 0; i < listOfLists.size(); i++) {
-							String params = listOfLists.get(i).get(1);
-							if (params.contains(e)) {
-								for (ArrayList<String> list : parentList) {
-									if (list.get(0).equals(listOfLists.get(i).get(0))
-											&& list.get(1).equals(listOfLists.get(i).get(1))
-											&& list.get(2).equals(listOfLists.get(i).get(2))) {
-										UMLMaker.addPattern(s, "composite");
-										leaf = false;
+		boolean loop = true;
+		while (loop) {
+			ArrayList<Integer> tempCompositesSize = new ArrayList<Integer>();
+			for (int i = 0; i < compositeComponents.size(); i++) {
+				tempCompositesSize.add(compositeComponents.get(i).size());
+			}
+			loop = false;
+			for (String s : classExtensions.keySet()) {
+				ArrayList<String> extendedClasses = classExtensions.get(s);
+				for (String e : extendedClasses) {
+					ArrayList<String> patternList = patternLists.get(e);
+					if (patternList != null) {
+						if (patternList.contains("composite component")) {
+							ArrayList<ArrayList<String>> listOfLists = classMethodMap.get(s);
+							ArrayList<ArrayList<String>> parentList = classMethodMap.get(e);
+							boolean leaf = true;
+							for (int i = 0; i < listOfLists.size(); i++) {
+								String params = listOfLists.get(i).get(1);
+								if (params.contains(e)) {
+									for (ArrayList<String> list : parentList) {
+										if (list.get(0).equals(listOfLists.get(i).get(0))
+												&& list.get(1).equals(listOfLists.get(i).get(1))
+												&& list.get(2).equals(listOfLists.get(i).get(2))) {
+											UMLMaker.addPattern(s, "composite");
+											leaf = false;
+										}
+									}
+								}
+							}
+							if (leaf) {
+								UMLMaker.addPattern(s, "leaf");
+							}
+							for (ArrayList<String> list : compositeComponents) {
+								if (list.contains(e)) {
+									if (!list.contains(s)) {
+										list.add(s);
+									}
+								}
+							}
+						} else if (patternList.contains("composite")) {
+							UMLMaker.addPattern(s, "composite");
+							for (ArrayList<String> list : compositeComponents) {
+								if (list.contains(e)) {
+									if (!list.contains(s)) {
+										list.add(s);
+									}
+								}
+							}
+						} else if (patternList.contains("leaf")) {
+							UMLMaker.addPattern(s, "leaf");
+							for (ArrayList<String> list : compositeComponents) {
+								if (list.contains(e)) {
+									if (!list.contains(s)) {
+										list.add(s);
 									}
 								}
 							}
 						}
-						if (leaf) {
-							UMLMaker.addPattern(s, "leaf");
-						}
 					}
 				}
 			}
-		}
 
-		for (String s : interfaceExtensions.keySet()) {
-			ArrayList<String> extendedClasses = interfaceExtensions.get(s);
-			for (String e : extendedClasses) {
-				ArrayList<String> patternList = patternLists.get(e);
-				if (patternList != null) {
-					if (patternList.contains("composite component")) {
-						ArrayList<ArrayList<String>> listOfLists = classMethodMap.get(s);
-						ArrayList<ArrayList<String>> parentList = classMethodMap.get(e);
-						boolean leaf = true;
-						for (int i = 0; i < listOfLists.size(); i++) {
-							String params = listOfLists.get(i).get(1);
-							if (params.contains(e)) {
-								for (ArrayList<String> list : parentList) {
-									if (list.get(0).equals(listOfLists.get(i).get(0))
-											&& list.get(1).equals(listOfLists.get(i).get(1))
-											&& list.get(2).equals(listOfLists.get(i).get(2))) {
-										UMLMaker.addPattern(s, "composite");
-										leaf = false;
+			for (int i = 0; i < tempCompositesSize.size(); i++) {
+				if (tempCompositesSize.get(i) != compositeComponents.get(i).size()) {
+					loop = true;
+					break;
+				}
+			}
+
+			for (String s : interfaceExtensions.keySet()) {
+				ArrayList<String> extendedClasses = interfaceExtensions.get(s);
+				for (String e : extendedClasses) {
+					ArrayList<String> patternList = patternLists.get(e);
+					if (patternList != null) {
+						if (patternList.contains("composite component")) {
+							ArrayList<ArrayList<String>> listOfLists = classMethodMap.get(s);
+							ArrayList<ArrayList<String>> parentList = classMethodMap.get(e);
+							boolean leaf = true;
+							for (int i = 0; i < listOfLists.size(); i++) {
+								String params = listOfLists.get(i).get(1);
+								if (params.contains(e)) {
+									for (ArrayList<String> list : parentList) {
+										if (list.get(0).equals(listOfLists.get(i).get(0))
+												&& list.get(1).equals(listOfLists.get(i).get(1))
+												&& list.get(2).equals(listOfLists.get(i).get(2))) {
+											UMLMaker.addPattern(s, "composite");
+											leaf = false;
+										}
+									}
+								}
+							}
+							if (leaf) {
+								UMLMaker.addPattern(s, "leaf");
+							}
+							for (ArrayList<String> list : compositeComponents) {
+								if (list.contains(e)) {
+									if (!list.contains(s)) {
+										list.add(s);
+									}
+								}
+							}
+						} else if (patternList.contains("composite")) {
+							UMLMaker.addPattern(s, "composite");
+							for (ArrayList<String> list : compositeComponents) {
+								if (list.contains(e)) {
+									if (!list.contains(s)) {
+										list.add(s);
+									}
+								}
+							}
+						} else if (patternList.contains("leaf")) {
+							UMLMaker.addPattern(s, "leaf");
+							for (ArrayList<String> list : compositeComponents) {
+								if (list.contains(e)) {
+									if (!list.contains(s)) {
+										list.add(s);
 									}
 								}
 							}
 						}
-						if (leaf) {
-							UMLMaker.addPattern(s, "leaf");
-						}
 					}
+				}
+			}
+			for (int i = 0; i < tempCompositesSize.size(); i++) {
+				if (tempCompositesSize.get(i) != compositeComponents.get(i).size()) {
+					loop = true;
+					break;
 				}
 			}
 		}
 
-		for (String className : args) {
+		for (
+
+		String className : args)
+
+		{
 
 			StringBuilder methodBuilder = classInfo.get(className).get("method");
 			StringBuilder fieldBuilder = classInfo.get(className).get("field");
@@ -203,7 +278,11 @@ public class UMLMaker implements DiagramMaker {
 			completeBuilder.append(arrowBuilder.toString());
 		}
 
-		for (String s : nonIncludedClasses) {
+		for (
+
+		String s : nonIncludedClasses)
+
+		{
 			StringBuilder nonIncludedBuilder = new StringBuilder();
 			nonIncludedBuilder.append(ArbitraryNodeNames.getInstance().getNodeName(s) + "[\n");
 			ArrayList<String> patternBuilder = patternLists.get(s);

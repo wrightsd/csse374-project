@@ -8,16 +8,16 @@ label = "{problem.AppLauncher\n\<\<adapter\>\>|-watcher : java.nio.file.WatchSer
 ];
 n0->n1[arrowhead="onormal", style="solid"];
 n0->n2[arrowhead="onormal", style="dashed"];
-n22 [
+n21 [
 shape="record",
 label = "{problem.BackwardsTextPrinter|+update(problem.AppLauncher) : void\l}"
 ];
-n22->n4[arrowhead="onormal", style="dashed"];
-n21 [
+n21->n4[arrowhead="onormal", style="dashed"];
+n20 [
 shape="record",
 label = "{problem.FileNamePrinter|+update(problem.AppLauncher) : void\l}"
 ];
-n21->n4[arrowhead="onormal", style="dashed"];
+n20->n4[arrowhead="onormal", style="dashed"];
 n4 [
 shape="record",
 label = "{\<\<abstract\>\>\n\<\<interface\>\>\nproblem.Observer|+update(problem.AppLauncher) : void\l}"
@@ -26,21 +26,21 @@ n2 [
 shape="record",
 label = "{\<\<abstract\>\>\n\<\<interface\>\>\nproblem.Subject|+registerObserver(problem.Observer) : void\l+removeObserver(problem.Observer) : void\l+notifyObservers() : void\l}"
 ];
-n18 [
+n17 [
 shape="record",
 label = "{problem.TextLoader|+update(problem.AppLauncher) : void\l}"
+];
+n17->n4[arrowhead="onormal", style="dashed"];
+n18 [
+shape="record",
+label = "{problem.WebsiteLoader|+update(problem.AppLauncher) : void\l}"
 ];
 n18->n4[arrowhead="onormal", style="dashed"];
 n19 [
 shape="record",
-label = "{problem.WebsiteLoader|+update(problem.AppLauncher) : void\l}"
-];
-n19->n4[arrowhead="onormal", style="dashed"];
-n20 [
-shape="record",
 label = "{problem.WordLoader|+update(problem.AppLauncher) : void\l}"
 ];
-n20->n4[arrowhead="onormal", style="dashed"];
+n19->n4[arrowhead="onormal", style="dashed"];
 n1[
 style = filled,
 fillcolor =firebrick2,
@@ -68,28 +68,26 @@ label = "java.util.List"];
 n13[
 label = "java.nio.file.WatchEvent"];
 n14[
-label = "java.nio.file.WatchEvent$Kind"];
-n15[
 label = "java.io.File"];
-n16[
+n15[
 label = "java.util.Iterator"];
-n17[
+n16[
 label = "java.io.PrintStream"];
-n23[
+n22[
 label = "java.nio.file.Paths"];
-n24[
+n23[
 label = "java.io.InputStream"];
-n25[
+n24[
 label = "java.nio.charset.Charset"];
-n26[
+n25[
 label = "java.nio.file.Files"];
-n27[
+n26[
 label = "java.io.BufferedReader"];
-n28[
+n27[
 label = "java.lang.Throwable"];
-n29[
+n28[
 label = "java.lang.ProcessBuilder"];
-n30[
+n29[
 label = "java.io.IOException"];
 n0->n1[arrowhead="normal", style="solid", label="\<\<adapts\>\>"];
 n0->n1[arrowhead="ovee", style="dashed"];
@@ -104,39 +102,38 @@ n0->n12[arrowhead="ovee", style="dashed"];
 n0->n13[arrowhead="ovee", style="dashed"];
 n0->n14[arrowhead="ovee", style="dashed"];
 n0->n15[arrowhead="ovee", style="dashed"];
-n0->n16[arrowhead="ovee", style="dashed"];
 n0->n3[arrowhead="ovee", style="dashed"];
+n0->n16[arrowhead="ovee", style="dashed"];
 n0->n17[arrowhead="ovee", style="dashed"];
 n0->n18[arrowhead="ovee", style="dashed"];
 n0->n19[arrowhead="ovee", style="dashed"];
 n0->n20[arrowhead="ovee", style="dashed"];
 n0->n21[arrowhead="ovee", style="dashed"];
 n0->n22[arrowhead="ovee", style="dashed"];
-n0->n23[arrowhead="ovee", style="dashed"];
 n0->n0[arrowhead="ovee", style="dashed"];
-n0->n24[arrowhead="ovee", style="dashed"];
+n0->n23[arrowhead="ovee", style="dashed"];
 n0->n4[arrowhead="ovee", style="dashed"];
-n22->n0[arrowhead="ovee", style="dashed"];
-n22->n25[arrowhead="ovee", style="dashed"];
-n22->n23[arrowhead="ovee", style="dashed"];
-n22->n26[arrowhead="ovee", style="dashed"];
-n22->n27[arrowhead="ovee", style="dashed"];
-n22->n17[arrowhead="ovee", style="dashed"];
-n22->n28[arrowhead="ovee", style="dashed"];
 n21->n0[arrowhead="ovee", style="dashed"];
-n21->n17[arrowhead="ovee", style="dashed"];
-n18->n0[arrowhead="ovee", style="dashed"];
-n18->n17[arrowhead="ovee", style="dashed"];
-n18->n29[arrowhead="ovee", style="dashed"];
-n18->n30[arrowhead="ovee", style="dashed"];
-n19->n0[arrowhead="ovee", style="dashed"];
-n19->n17[arrowhead="ovee", style="dashed"];
-n19->n29[arrowhead="ovee", style="dashed"];
-n19->n30[arrowhead="ovee", style="dashed"];
+n21->n24[arrowhead="ovee", style="dashed"];
+n21->n22[arrowhead="ovee", style="dashed"];
+n21->n25[arrowhead="ovee", style="dashed"];
+n21->n26[arrowhead="ovee", style="dashed"];
+n21->n16[arrowhead="ovee", style="dashed"];
+n21->n27[arrowhead="ovee", style="dashed"];
 n20->n0[arrowhead="ovee", style="dashed"];
-n20->n17[arrowhead="ovee", style="dashed"];
-n20->n29[arrowhead="ovee", style="dashed"];
-n20->n30[arrowhead="ovee", style="dashed"];
+n20->n16[arrowhead="ovee", style="dashed"];
+n17->n0[arrowhead="ovee", style="dashed"];
+n17->n16[arrowhead="ovee", style="dashed"];
+n17->n28[arrowhead="ovee", style="dashed"];
+n17->n29[arrowhead="ovee", style="dashed"];
+n18->n0[arrowhead="ovee", style="dashed"];
+n18->n16[arrowhead="ovee", style="dashed"];
+n18->n28[arrowhead="ovee", style="dashed"];
+n18->n29[arrowhead="ovee", style="dashed"];
+n19->n0[arrowhead="ovee", style="dashed"];
+n19->n16[arrowhead="ovee", style="dashed"];
+n19->n28[arrowhead="ovee", style="dashed"];
+n19->n29[arrowhead="ovee", style="dashed"];
 n0->n3[arrowhead="ovee", style="solid"];
 n0->n4[arrowhead="ovee", style="solid"];
 }
