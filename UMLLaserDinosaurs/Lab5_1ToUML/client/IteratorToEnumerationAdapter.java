@@ -1,4 +1,4 @@
-package problem.client;
+package client;
 
 import java.util.Enumeration;
 import java.util.Iterator;

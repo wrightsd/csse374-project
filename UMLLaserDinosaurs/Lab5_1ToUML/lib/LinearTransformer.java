@@ -1,4 +1,4 @@
-package problem.lib;
+package lib;
 
 import java.io.OutputStream;
 import java.util.Enumeration;
