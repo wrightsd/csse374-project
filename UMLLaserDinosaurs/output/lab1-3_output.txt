@@ -21,10 +21,6 @@ n3 [
 shape="record",
 label = "{\<\<abstract\>\>\n\<\<interface\>\>\nproblem.Observer|+update(problem.AppLauncher) : void\l}"
 ];
-n9 [
-shape="record",
-label = "{problem.psych|+psych() : void\l}"
-];
 n2 [
 shape="record",
 label = "{\<\<abstract\>\>\n\<\<interface\>\>\nproblem.Subject|+registerObserver(problem.Observer) : void\l+removeObserver(problem.Observer) : void\l+notifyObservers() : void\l}"

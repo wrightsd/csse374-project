@@ -11,6 +11,10 @@ public class Lab1_3Runner {
 		
 		String dotPath = "C:/Program Files (x86)/Graphviz2.38/bin/dot";
 		
+		String inputFilePath = "C:/EclipseWorkspaces/csse374/csse374-project/UMLLaserDinosaurs/output/lab1-3_output.txt";
+		
+		String outputFilePath = "C:/EclipseWorkspaces/csse374/csse374-project/UMLLaserDinosaurs/output/lab1-3_output.png";
+		
 		File classFolder = new File(
 				"C:/EclipseWorkspaces/csse374/csse374-project/UMLLaserDinosaurs/Lab1-3ClassesToUML");
 		File[] packageArray = classFolder.listFiles();
@@ -34,8 +38,7 @@ public class Lab1_3Runner {
 		DesignParser.parse((String[]) arguments.toArray(new String[arguments.size()]), gvFile, "uml");
 		
 		Runtime runTimeEnvironment = Runtime.getRuntime();
-		String outputPicture = gvFile.split(".txt")[0]+".png";
-		Process showingProcess = runTimeEnvironment.exec("\""+dotPath+"\" -Tpng "+gvFile+" > "+outputPicture);
+		Process showingProcess = runTimeEnvironment.exec("cmd /c \""+dotPath+"\" -Tpng "+inputFilePath+" > "+outputFilePath);
 	}
 
 }
