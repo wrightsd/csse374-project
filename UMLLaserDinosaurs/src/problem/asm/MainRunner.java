@@ -73,7 +73,6 @@ public class MainRunner {
 		ArrayList<String> arguments = new ArrayList<String>();
 
 		if (inputFolder != null) {
-			System.out.println(inputFolder);
 			File classFolder = new File(inputFolder);
 			File[] packageArray = classFolder.listFiles();
 			String[] packageArguments = new String[packageArray.length];

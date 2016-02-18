@@ -17,7 +17,7 @@ public class Lab1_3Runner {
 	static ArrayList<String> patterns;
 
 	public static void main(String[] args) throws Exception {
-		parseConfiguration("./Configurations/Lab1-3Configuration");
+		parseConfiguration("./Configurations/Lab1-3ConfigurationSDW");
 		if (patterns == null || dotPath == null || (inputClasses == null && inputFolder == null)
 				|| outputDirectory == null) {
 			System.out.println("Configuration incorrect.");
