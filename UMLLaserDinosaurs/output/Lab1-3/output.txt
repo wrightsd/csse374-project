@@ -7,16 +7,16 @@ fillcolor =firebrick2,
 label = "{problem.AppLauncher\n\<\<adapter\>\>|-watcher : java.nio.file.WatchService\l-dir : java.nio.file.Path\l-stop : boolean\l-processes : java.util.List\l-currentEventType : java.lang.String\l-currentPathString : java.lang.String\l-observers : java.util.ArrayList\l|+problem.AppLauncher(java.nio.file.Path) : void\l+run() : void\l#clearEverything() : void\l+stopGracefully() : void\l+isRunning() : boolean\l+getApplicationsCount() : int\l+handleDirectoryEvent(java.lang.String, java.nio.file.Path) : void\l+main(java.lang.String[]) : void\l+registerObserver(problem.Observer) : void\l+removeObserver(problem.Observer) : void\l+notifyObservers() : void\l+getCurrentEventType() : java.lang.String\l+getCurrentFilePathString() : java.lang.String\l+addProcesses(java.lang.Process) : void\l}"
 ];
 n0->n2[arrowhead="onormal", style="dashed"];
-n9 [
+n8 [
 shape="record",
 label = "{problem.BackwardsTextPrinter|+update(problem.AppLauncher) : void\l}"
 ];
-n9->n3[arrowhead="onormal", style="dashed"];
-n8 [
+n8->n3[arrowhead="onormal", style="dashed"];
+n7 [
 shape="record",
 label = "{problem.FileNamePrinter|+update(problem.AppLauncher) : void\l}"
 ];
-n8->n3[arrowhead="onormal", style="dashed"];
+n7->n3[arrowhead="onormal", style="dashed"];
 n3 [
 shape="record",
 label = "{\<\<abstract\>\>\n\<\<interface\>\>\nproblem.Observer|+update(problem.AppLauncher) : void\l}"
@@ -25,27 +25,21 @@ n2 [
 shape="record",
 label = "{\<\<abstract\>\>\n\<\<interface\>\>\nproblem.Subject|+registerObserver(problem.Observer) : void\l+removeObserver(problem.Observer) : void\l+notifyObservers() : void\l}"
 ];
-n5 [
+n4 [
 shape="record",
 label = "{problem.TextLoader|+update(problem.AppLauncher) : void\l}"
+];
+n4->n3[arrowhead="onormal", style="dashed"];
+n5 [
+shape="record",
+label = "{problem.WebsiteLoader|+update(problem.AppLauncher) : void\l}"
 ];
 n5->n3[arrowhead="onormal", style="dashed"];
 n6 [
 shape="record",
-label = "{problem.WebsiteLoader|+update(problem.AppLauncher) : void\l}"
-];
-n6->n3[arrowhead="onormal", style="dashed"];
-n7 [
-shape="record",
 label = "{problem.WordLoader|+update(problem.AppLauncher) : void\l}"
 ];
-n7->n3[arrowhead="onormal", style="dashed"];
-n4 [
-shape="record",
-style = filled,
-fillcolor =yellow1,
-label = "{java.lang.String\n\<\<composite component\>\>|-value : char[]\l-hash : int\l-serialVersionUID : long\l-serialPersistentFields : java.io.ObjectStreamField[]\l-CASE_INSENSITIVE_ORDER : java.util.Comparator\l|+java.lang.String(java.lang.String) : void\l+java.lang.String(char[]) : void\l+java.lang.String(char[], int, int) : void\l+java.lang.String(int[], int, int) : void\l+java.lang.String(byte[], int, int, int) : void\l+java.lang.String(byte[], int) : void\l-checkBounds(byte[], int, int) : void\l+java.lang.String(byte[], int, int, java.lang.String) : void\l+java.lang.String(byte[], int, int, java.nio.charset.Charset) : void\l+java.lang.String(byte[], java.lang.String) : void\l+java.lang.String(byte[], java.nio.charset.Charset) : void\l+java.lang.String(byte[], int, int) : void\l+java.lang.String(byte[]) : void\l+java.lang.String(java.lang.StringBuffer) : void\l+java.lang.String(java.lang.StringBuilder) : void\l-java.lang.String(char[], boolean) : void\l+length() : int\l+isEmpty() : boolean\l+charAt(int) : char\l+codePointAt(int) : int\l+codePointBefore(int) : int\l+codePointCount(int, int) : int\l+offsetByCodePoints(int, int) : int\l-getChars(char[], int) : void\l+getChars(int, int, char[], int) : void\l+getBytes(int, int, byte[], int) : void\l+getBytes(java.lang.String) : byte[]\l+getBytes(java.nio.charset.Charset) : byte[]\l+getBytes() : byte[]\l+equals(java.lang.Object) : boolean\l+contentEquals(java.lang.StringBuffer) : boolean\l-nonSyncContentEquals(java.lang.AbstractStringBuilder) : boolean\l+contentEquals(java.lang.CharSequence) : boolean\l+equalsIgnoreCase(java.lang.String) : boolean\l+compareTo(java.lang.String) : int\l+compareToIgnoreCase(java.lang.String) : int\l+regionMatches(int, java.lang.String, int, int) : boolean\l+regionMatches(boolean, int, java.lang.String, int, int) : boolean\l+startsWith(java.lang.String, int) : boolean\l+startsWith(java.lang.String) : boolean\l+endsWith(java.lang.String) : boolean\l+hashCode() : int\l+indexOf(int) : int\l+indexOf(int, int) : int\l-indexOfSupplementary(int, int) : int\l+lastIndexOf(int) : int\l+lastIndexOf(int, int) : int\l-lastIndexOfSupplementary(int, int) : int\l+indexOf(java.lang.String) : int\l+indexOf(java.lang.String, int) : int\l-indexOf(char[], int, int, java.lang.String, int) : int\l-indexOf(char[], int, int, char[], int, int, int) : int\l+lastIndexOf(java.lang.String) : int\l+lastIndexOf(java.lang.String, int) : int\l-lastIndexOf(char[], int, int, java.lang.String, int) : int\l-lastIndexOf(char[], int, int, char[], int, int, int) : int\l+substring(int) : java.lang.String\l+substring(int, int) : java.lang.String\l+subSequence(int, int) : java.lang.CharSequence\l+concat(java.lang.String) : java.lang.String\l+replace(char, char) : java.lang.String\l+matches(java.lang.String) : boolean\l+contains(java.lang.CharSequence) : boolean\l+replaceFirst(java.lang.String, java.lang.String) : java.lang.String\l+replaceAll(java.lang.String, java.lang.String) : java.lang.String\l+replace(java.lang.CharSequence, java.lang.CharSequence) : java.lang.String\l+split(java.lang.String, int) : java.lang.String[]\l+split(java.lang.String) : java.lang.String[]\l+join(java.lang.CharSequence, java.lang.CharSequence[]) : java.lang.String\l+join(java.lang.CharSequence, java.lang.Iterable) : java.lang.String\l+toLowerCase(java.util.Locale) : java.lang.String\l+toLowerCase() : java.lang.String\l+toUpperCase(java.util.Locale) : java.lang.String\l+toUpperCase() : java.lang.String\l+trim() : java.lang.String\l+toString() : java.lang.String\l+toCharArray() : char[]\l+format(java.lang.String, java.lang.Object[]) : java.lang.String\l+format(java.util.Locale, java.lang.String, java.lang.Object[]) : java.lang.String\l+valueOf(java.lang.Object) : java.lang.String\l+valueOf(char[]) : java.lang.String\l+valueOf(char[], int, int) : java.lang.String\l+copyValueOf(char[], int, int) : java.lang.String\l+copyValueOf(char[]) : java.lang.String\l+valueOf(boolean) : java.lang.String\l+valueOf(char) : java.lang.String\l+valueOf(int) : java.lang.String\l+valueOf(long) : java.lang.String\l+valueOf(float) : java.lang.String\l+valueOf(double) : java.lang.String\l+intern() : java.lang.String\l+compareTo(java.lang.Object) : int\l}"
-];
+n6->n3[arrowhead="onormal", style="dashed"];
 n1[
 style = filled,
 fillcolor =firebrick2,
@@ -56,18 +50,12 @@ n0->n5[arrowhead="ovee", style="dashed"];
 n0->n6[arrowhead="ovee", style="dashed"];
 n0->n7[arrowhead="ovee", style="dashed"];
 n0->n8[arrowhead="ovee", style="dashed"];
-n0->n9[arrowhead="ovee", style="dashed"];
 n0->n0[arrowhead="ovee", style="dashed"];
 n0->n3[arrowhead="ovee", style="dashed"];
-n9->n0[arrowhead="ovee", style="dashed"];
-n9->n4[arrowhead="ovee", style="dashed"];
 n8->n0[arrowhead="ovee", style="dashed"];
-n5->n0[arrowhead="ovee", style="dashed"];
-n5->n4[arrowhead="ovee", style="dashed"];
-n6->n0[arrowhead="ovee", style="dashed"];
-n6->n4[arrowhead="ovee", style="dashed"];
 n7->n0[arrowhead="ovee", style="dashed"];
-n7->n4[arrowhead="ovee", style="dashed"];
-n4->n4[arrowhead="ovee", style="dashed"];
+n4->n0[arrowhead="ovee", style="dashed"];
+n5->n0[arrowhead="ovee", style="dashed"];
+n6->n0[arrowhead="ovee", style="dashed"];
 n0->n3[arrowhead="ovee", style="solid"];
 }
