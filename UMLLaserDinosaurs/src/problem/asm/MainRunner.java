@@ -11,10 +11,13 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 
 public class MainRunner {
 	
@@ -24,11 +27,18 @@ public class MainRunner {
 	static String dotPath;
 	static ArrayList<String> patterns;
 	
+	static JFrame configWindowField;
+	static JPanel configLoadPanelField;
+	static JButton loadButtonField;
+	
 	public static void main(String[] args)  {
 		
 		JFrame configWindow = new JFrame();
+		configWindowField = configWindow;
 		JPanel configLoadPanel = new JPanel();
+		configLoadPanelField = configLoadPanel;
 		JButton loadButton = new JButton("Load Config File");
+		loadButtonField = loadButton;
 		
 		loadButton.addActionListener(new ActionListener(){
 
@@ -40,7 +50,7 @@ public class MainRunner {
 		        if (returnVal == JFileChooser.APPROVE_OPTION) {
 		            File file = configSelector.getSelectedFile();
 		            try {
-						processConfig(file);
+						processConfig(file,loadButton);
 					} catch (Exception e1) {
 						e1.printStackTrace();
 					}
@@ -59,7 +69,30 @@ public class MainRunner {
 		configWindow.setVisible(true);
 	}
 	
-	private static void processConfig(File configFile) throws Exception{
+	private static void displayResults() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private static JProgressBar displayLoadingBar(JButton loadButton,String fileName) {
+		JProgressBar bar = new JProgressBar();
+		JLabel nameOfFile = new JLabel("Loading: "+fileName);
+		configLoadPanelField.remove(loadButton);
+		configLoadPanelField.setLayout(new BoxLayout(configLoadPanelField, BoxLayout.Y_AXIS));
+		configLoadPanelField.add(nameOfFile);
+		configLoadPanelField.add(bar);
+		configWindowField.pack();
+		configLoadPanelField.setVisible(true);
+		return bar;
+		
+		
+	}
+	
+	private static void processConfig(File configFile, JButton loadButton) throws Exception{
+		JProgressBar bar = displayLoadingBar(loadButton, configFile.getName());
+		
+		updateLoadBar(bar,25);
+		
 		parseConfiguration(configFile.getPath());
 		if (patterns == null || dotPath == null || (inputClasses == null && inputFolder == null)
 				|| outputDirectory == null) {
@@ -102,6 +135,11 @@ public class MainRunner {
 				.exec("cmd /c \"" + dotPath + "\" -Tpng " + inputFilePath + " > " + outputFilePath);
 	}
 	
+	private static void updateLoadBar(JProgressBar bar, int value) {
+		bar.setValue(value);
+		
+	}
+
 	private static void parseConfiguration(String fileName) throws Exception {
 		String line;
 		FileInputStream file = new FileInputStream(fileName);
