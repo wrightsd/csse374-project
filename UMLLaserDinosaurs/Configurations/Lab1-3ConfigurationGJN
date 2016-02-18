@@ -1,0 +1,5 @@
+input-folder:C:\EclipseWorkspaces\csse374\csse374-project\UMLLaserDinosaurs\Lab1-3ClassesToUML
+input-classes:java.lang.String
+output-directory:C:\EclipseWorkspaces\csse374\csse374-project\UMLLaserDinosaurs\output\Lab1-3\
+dot-path:C:\Program Files (x86)\Graphviz2.38\bin\dot
+patterns:adapter,decorator,singleton
