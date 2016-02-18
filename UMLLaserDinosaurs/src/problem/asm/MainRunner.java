@@ -1,29 +1,25 @@
 package problem.asm;
 
-import java.awt.Checkbox;
 import java.awt.Component;
-import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-import javax.imageio.ImageIO;
-import javax.imageio.stream.FileImageInputStream;
-import javax.imageio.stream.ImageInputStream;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
+import javax.swing.JSeparator;
+import javax.swing.SwingConstants;
 
 public class MainRunner {
 
@@ -81,30 +77,18 @@ public class MainRunner {
 		JPanel checkboxes = new JPanel();
 		checkboxes.setLayout(new BoxLayout(checkboxes, BoxLayout.Y_AXIS));
 		for (int i = 0; i < patterns.size(); i++) {
-			Checkbox cb = new Checkbox(patterns.get(i));
-			checkboxes.add(cb);
+			JLabel pattern = new JLabel(patterns.get(i));
+			checkboxes.add(pattern);
+			for (int j = 0; j < 3; j++) {
+				JCheckBox jcb = new JCheckBox("Sample " + patterns.get(i));
+				checkboxes.add(jcb);
+			}
 		}
 		configLoadPanelField.add(checkboxes);
-		//// JPanel image = new JPanel();
-		// BufferedImage bImage;
-		// File imageLocation = new File(outputDirectory + "output.png");
-		// ImageInputStream iis = new FileImageInputStream(imageLocation);
-		// bImage = ImageIO.read(iis);
-		// JLabel diagram = new JLabel(new ImageIcon(bImage));
-		boolean fileNotLoaded = true;
+		configLoadPanelField.add(new JSeparator(SwingConstants.VERTICAL));
 		String name = outputDirectory + "output.png";
 		name = name.replace('\\', '/');
 		ImageIcon icon;
-		while (fileNotLoaded) {
-			try {
-				File f = new File(name);
-				if (f != null) {
-					fileNotLoaded = false;
-				}
-			} catch (Exception e) {
-				fileNotLoaded = true;
-			}
-		}
 
 		icon = new ImageIcon(name);
 		JLabel diagram = new JLabel();
