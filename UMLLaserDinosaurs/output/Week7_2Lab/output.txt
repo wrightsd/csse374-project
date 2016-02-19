@@ -1,17 +1,5 @@
 digraph text{
 rankdir=BT;
-n0 [
-shape="record",
-label = "{client.AnimatorApp|+main(java.lang.String[]) : void\l}"
-];
-n2 [
-shape="record",
-label = "{graphics.AnimationPanel|-serialVersionUID : long\l-sprites : java.util.List\l-animating : boolean\l-sleepTime : long\l|+graphics.AnimationPanel(long) : void\l+add(sprites.ISprite) : void\l+getSize() : java.awt.Dimension\l+animate() : void\l+reset() : void\l#paintComponent(java.awt.Graphics) : void\l-access$0(graphics.AnimationPanel) : boolean\l-access$1(graphics.AnimationPanel) : java.util.List\l-access$2(graphics.AnimationPanel) : long\l}"
-];
-n1 [
-shape="record",
-label = "{graphics.MainWindow|-frame : javax.swing.JFrame\l-actionPanel : javax.swing.JPanel\l-animationPanel : graphics.AnimationPanel\l-moveButton : javax.swing.JButton\l-createButton : javax.swing.JButton\l-resetButton : javax.swing.JButton\l|+graphics.MainWindow(java.lang.String, long) : void\l-createWidgets(java.lang.String, long) : void\l-assignActions() : void\l+show() : void\l-access$0(graphics.MainWindow) : graphics.AnimationPanel\l-access$1(graphics.MainWindow) : javax.swing.JButton\l-access$2(graphics.MainWindow) : javax.swing.JButton\l}"
-];
 n4 [
 shape="record",
 style = filled,
@@ -19,11 +7,12 @@ fillcolor =yellow1,
 label = "{\<\<abstract\>\>\nsprites.AbstractSprite\n\<\<leaf\>\>|#dx : double\l#dy : double\l#shape : java.awt.Shape\l|+sprites.AbstractSprite(double, double, double, double) : void\l#computeNewBoundsAfterMoving(java.awt.Dimension) : java.awt.geom.Rectangle2D\l+getShape() : java.util.ArrayList\l+move(java.awt.Dimension) : void\l}"
 ];
 n4->n3[arrowhead="onormal", style="dashed"];
-n5 [
+n3 [
 shape="record",
-label = "{sprites.CircleSprite|+sprites.CircleSprite(double, double, double, double) : void\l+move(java.awt.Dimension) : void\l}"
+style = filled,
+fillcolor =yellow1,
+label = "{\<\<abstract\>\>\n\<\<interface\>\>\nsprites.ISprite\n\<\<composite component\>\>|+move(java.awt.Dimension) : void\l+getShape() : java.util.ArrayList\l+getChild(int) : sprites.ISprite\l+addSprite(sprites.ISprite) : void\l+removeSprite(sprites.ISprite) : void\l}"
 ];
-n5->n4[arrowhead="onormal", style="solid"];
 n6 [
 shape="record",
 style = filled,
@@ -31,44 +20,6 @@ fillcolor =yellow1,
 label = "{\<\<abstract\>\>\nsprites.CompositeSprite\n\<\<composite\>\>|#spriteList : java.util.ArrayList\l|+move(java.awt.Dimension) : void\l+getShape() : java.util.ArrayList\l+getChild(int) : sprites.ISprite\l+addSprite(sprites.ISprite) : void\l+removeSprite(sprites.ISprite) : void\l}"
 ];
 n6->n3[arrowhead="onormal", style="dashed"];
-n7 [
-shape="record",
-label = "{sprites.GuardedSnowmanSprite|+sprites.GuardedSnowmanSprite(double, double, double, double) : void\l}"
-];
-n7->n6[arrowhead="onormal", style="solid"];
-n3 [
-shape="record",
-style = filled,
-fillcolor =yellow1,
-label = "{\<\<abstract\>\>\n\<\<interface\>\>\nsprites.ISprite\n\<\<composite component\>\>|+move(java.awt.Dimension) : void\l+getShape() : java.util.ArrayList\l+getChild(int) : sprites.ISprite\l+addSprite(sprites.ISprite) : void\l+removeSprite(sprites.ISprite) : void\l}"
-];
-n9 [
-shape="record",
-label = "{sprites.RectangleSprite|+sprites.RectangleSprite(double, double, double, double) : void\l+move(java.awt.Dimension) : void\l}"
-];
-n9->n4[arrowhead="onormal", style="solid"];
-n8 [
-shape="record",
-label = "{sprites.SnowmanSprite|+sprites.SnowmanSprite(double, double, double, double) : void\l}"
-];
-n8->n6[arrowhead="onormal", style="solid"];
-n10 [
-shape="record",
-label = "{sprites.SpriteFactory|-DX : double\l-DY : double\l-WIDTH : double\l-HEIGHT : double\l-random : java.util.Random\l-sprites : java.util.List\l|+computeRandomLocation(java.awt.Dimension) : java.awt.geom.Point2D\l+createRandomSprite(java.awt.Dimension) : sprites.ISprite\l}"
-];
-n0->n1[arrowhead="ovee", style="dashed"];
-n2->n3[arrowhead="ovee", style="dashed"];
-n1->n2[arrowhead="ovee", style="dashed"];
-n5->n4[arrowhead="ovee", style="dashed"];
 n6->n3[arrowhead="ovee", style="dashed"];
-n7->n6[arrowhead="ovee", style="dashed"];
-n7->n8[arrowhead="ovee", style="dashed"];
-n7->n9[arrowhead="ovee", style="dashed"];
-n9->n4[arrowhead="ovee", style="dashed"];
-n8->n6[arrowhead="ovee", style="dashed"];
-n8->n5[arrowhead="ovee", style="dashed"];
-n10->n3[arrowhead="ovee", style="dashed"];
-n2->n3[arrowhead="ovee", style="solid"];
 n6->n3[arrowhead="ovee", style="solid"];
-n10->n3[arrowhead="ovee", style="solid"];
 }

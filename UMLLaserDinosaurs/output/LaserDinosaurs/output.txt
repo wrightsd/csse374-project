@@ -1,20 +1,13 @@
 digraph text{
 rankdir=BT;
-n8 [
+n0 [
 shape="record",
 style = filled,
 fillcolor =chartreuse,
-label = "{problem_asm.ClassAssociationVisitor\n\<\<decorator\>\>|-associatesList : java.util.ArrayList\l-usesList : java.util.ArrayList\l|+problem_asm.ClassAssociationVisitor(int, org.objectweb.asm.ClassVisitor, java.util.ArrayList, java.util.ArrayList) : void\l+problem_asm.ClassAssociationVisitor(int, java.util.ArrayList, java.util.ArrayList) : void\l+visitField(int, java.lang.String, java.lang.String, java.lang.String, java.lang.Object) : org.objectweb.asm.FieldVisitor\l+visitMethod(int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[]) : org.objectweb.asm.MethodVisitor\l-compileAggregation(java.lang.String) : void\l}"
+label = "{problem_asm.AdapterClassVisitor\n\<\<decorator\>\>|-checkMethods : java.util.ArrayList\l-superMethods : java.util.ArrayList\l-interfaceMethods : java.util.ArrayList\l-attemptedMethods : java.util.ArrayList\l-nameOfSuper : java.lang.String\l-interfaces : java.lang.String[]\l-param : java.lang.String\l-fieldList : java.util.ArrayList\l-reader : org.objectweb.asm.ClassReader\l-attemptedInterfaceMethods : java.util.ArrayList\l|+problem_asm.AdapterClassVisitor(int) : void\l+problem_asm.AdapterClassVisitor(int, org.objectweb.asm.ClassVisitor) : void\l+visit(int, int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[]) : void\l+visitField(int, java.lang.String, java.lang.String, java.lang.String, java.lang.Object) : org.objectweb.asm.FieldVisitor\l+visitMethod(int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[]) : org.objectweb.asm.MethodVisitor\l+verify(java.lang.String) : void\l+assignAdaption() : void\l}"
 ];
-n8->n24[arrowhead="onormal", style="solid"];
-n10 [
-shape="record",
-style = filled,
-fillcolor =chartreuse,
-label = "{problem_asm.ClassDeclarationVisitor\n\<\<decorator\>\>|-builder : java.lang.StringBuilder\l|+problem_asm.ClassDeclarationVisitor(int) : void\l+problem_asm.ClassDeclarationVisitor(int, java.lang.StringBuilder) : void\l+problem_asm.ClassDeclarationVisitor(int, org.objectweb.asm.ClassVisitor, java.lang.StringBuilder) : void\l+visit(int, int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[]) : void\l}"
-];
-n10->n24[arrowhead="onormal", style="solid"];
-n24 [
+n0->n35[arrowhead="onormal", style="solid"];
+n35 [
 shape="record",
 style = filled,
 fillcolor =chartreuse,
@@ -38,36 +31,7 @@ style = filled,
 fillcolor =chartreuse,
 label = "{\<\<abstract\>\>\norg.objectweb.asm.ClassVisitor\n\<\<component\>\>|-api : int\l#cv : org.objectweb.asm.ClassVisitor\l|+org.objectweb.asm.ClassVisitor(int) : void\l+org.objectweb.asm.ClassVisitor(int, org.objectweb.asm.ClassVisitor) : void\l+visit(int, int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[]) : void\l+visitSource(java.lang.String, java.lang.String) : void\l+visitOuterClass(java.lang.String, java.lang.String, java.lang.String) : void\l+visitAnnotation(java.lang.String, boolean) : org.objectweb.asm.AnnotationVisitor\l+visitTypeAnnotation(int, org.objectweb.asm.TypePath, java.lang.String, boolean) : org.objectweb.asm.AnnotationVisitor\l+visitAttribute(org.objectweb.asm.Attribute) : void\l+visitInnerClass(java.lang.String, java.lang.String, java.lang.String, int) : void\l+visitField(int, java.lang.String, java.lang.String, java.lang.String, java.lang.Object) : org.objectweb.asm.FieldVisitor\l+visitMethod(int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[]) : org.objectweb.asm.MethodVisitor\l+visitEnd() : void\l}"
 ];
-n24 [
-shape="record",
-style = filled,
-fillcolor =chartreuse,
-style = filled,
-fillcolor =chartreuse,
-style = filled,
-fillcolor =chartreuse,
-style = filled,
-fillcolor =chartreuse,
-style = filled,
-fillcolor =chartreuse,
-style = filled,
-fillcolor =chartreuse,
-style = filled,
-fillcolor =chartreuse,
-style = filled,
-fillcolor =chartreuse,
-style = filled,
-fillcolor =chartreuse,
-style = filled,
-fillcolor =chartreuse,
-label = "{\<\<abstract\>\>\norg.objectweb.asm.ClassVisitor\n\<\<component\>\>|-api : int\l#cv : org.objectweb.asm.ClassVisitor\l|+org.objectweb.asm.ClassVisitor(int) : void\l+org.objectweb.asm.ClassVisitor(int, org.objectweb.asm.ClassVisitor) : void\l+visit(int, int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[]) : void\l+visitSource(java.lang.String, java.lang.String) : void\l+visitOuterClass(java.lang.String, java.lang.String, java.lang.String) : void\l+visitAnnotation(java.lang.String, boolean) : org.objectweb.asm.AnnotationVisitor\l+visitTypeAnnotation(int, org.objectweb.asm.TypePath, java.lang.String, boolean) : org.objectweb.asm.AnnotationVisitor\l+visitAttribute(org.objectweb.asm.Attribute) : void\l+visitInnerClass(java.lang.String, java.lang.String, java.lang.String, int) : void\l+visitField(int, java.lang.String, java.lang.String, java.lang.String, java.lang.Object) : org.objectweb.asm.FieldVisitor\l+visitMethod(int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[]) : org.objectweb.asm.MethodVisitor\l+visitEnd() : void\l}"
-];
-n8->n24[arrowhead="normal", style="solid", label="\<\<decorates\>\>"];
-n8->n24[arrowhead="normal", style="solid", label="\<\<decorates\>\>"];
-n10->n24[arrowhead="normal", style="solid", label="\<\<decorates\>\>"];
-n10->n24[arrowhead="normal", style="solid", label="\<\<decorates\>\>"];
-n8->n24[arrowhead="normal", style="solid", label="\<\<decorates\>\>"];
-n10->n24[arrowhead="normal", style="solid", label="\<\<decorates\>\>"];
-n8->n24[arrowhead="ovee", style="dashed"];
-n10->n24[arrowhead="ovee", style="dashed"];
+n25->n34[arrowhead="normal", style="solid", label="\<\<adapts\>\>"];
+n0->n35[arrowhead="normal", style="solid", label="\<\<decorates\>\>"];
+n0->n35[arrowhead="ovee", style="dashed"];
 }

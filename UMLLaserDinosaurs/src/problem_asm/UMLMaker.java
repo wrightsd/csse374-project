@@ -15,14 +15,14 @@ import org.objectweb.asm.Opcodes;
 
 public class UMLMaker implements DiagramMaker {
 
-	private String currentClass;
+	private static String currentClass;
 	private ArrayList<String> classSet;
 	private static String[] myArgs;
 	private ArrayList<String> usesList;
 	private ArrayList<String> associatesList;
 	private HashMap<String, String> borderColorMap = new HashMap<String, String>();
 	private HashMap<String, String> fillColorMap = new HashMap<String, String>();
-	private HashMap<String, Class<? extends ClassVisitor>> patternMap = new HashMap<String, Class<? extends ClassVisitor>>();
+	private static HashMap<String, Class<? extends ClassVisitor>> patternMap = new HashMap<String, Class<? extends ClassVisitor>>();
 	private static HashMap<String, HashMap<String, StringBuilder>> classInfo = new HashMap<String, HashMap<String, StringBuilder>>();
 
 	private static ArrayList<String> nonIncludedClasses = new ArrayList<String>();
@@ -37,6 +37,7 @@ public class UMLMaker implements DiagramMaker {
 	private static HashMap<String, ArrayList<ArrayList<String>>> classMethodMap = new HashMap<String, ArrayList<ArrayList<String>>>();
 
 	private static HashMap<String, ClassVisitor> patternVisitors = new HashMap<String, ClassVisitor>();
+	private static HashMap<String, HashMap<String, String>> fieldIndicators = new HashMap<String, HashMap<String, String>>();
 
 	@Override
 	public StringBuilder generateDiagramText(String[] args) throws IOException {
@@ -265,6 +266,10 @@ public class UMLMaker implements DiagramMaker {
 		this.patternMap.put("composite", CompositeVisitor.class);
 	}
 
+	public static void addPatternToPatternMap(String pattern, Class<? extends ClassVisitor> cvClass) {
+		patternMap.put(pattern, cvClass);
+	}
+
 	private void setupBorderColorMap() {
 		this.addColorKey(this.borderColorMap, "singleton", "blue");
 	}
@@ -342,9 +347,12 @@ public class UMLMaker implements DiagramMaker {
 				if (pointerName.equals("null")) {
 					return;
 				}
-				labelledArrows.append(pointeeName + "->" + pointerName);
-				labelledArrows.append("[arrowhead=\"normal\", style=\"solid\"");
-				labelledArrows.append(", label=\"" + labelText + "\"];\n");
+				if (!labelledArrows.toString().contains(pointeeName + "->" + pointerName
+						+ "[arrowhead=\"normal\", style=\"solid\"" + ", label=\"" + labelText + "\"];\n")) {
+					labelledArrows.append(pointeeName + "->" + pointerName);
+					labelledArrows.append("[arrowhead=\"normal\", style=\"solid\"");
+					labelledArrows.append(", label=\"" + labelText + "\"];\n");
+				}
 			}
 		}
 	}
@@ -460,6 +468,19 @@ public class UMLMaker implements DiagramMaker {
 			}
 		}
 		return false;
+	}
+
+	public static HashMap<String, String> getFieldSelection(String string) {
+		return fieldIndicators.get("singleton");
+	}
+
+	public static void setFieldIndicator(String pattern, String field, String valueKey) {
+		HashMap<String, String> fieldValues = new HashMap<String, String>();
+		if (fieldIndicators.containsKey(pattern)) {
+			fieldValues = fieldIndicators.get(pattern);
+		}
+		fieldValues.put(field, valueKey);
+		fieldIndicators.put(pattern, fieldValues);
 	}
 
 }

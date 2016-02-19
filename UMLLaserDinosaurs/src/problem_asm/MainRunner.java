@@ -1,9 +1,12 @@
 package problem_asm;
 
 import java.awt.Component;
+import java.awt.Desktop;
+import java.awt.Dimension;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -20,6 +23,9 @@ import javax.swing.JCheckBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
@@ -38,19 +44,82 @@ public class MainRunner {
 	static JPanel configLoadPanelField;
 	static JPanel imageDisplayPane;
 	static JButton loadButtonField;
+	static JMenuBar menu;
 
 	static ArrayList<String[]> listOfSelectedClasses = new ArrayList<String[]>();
 	static HashMap<String, ArrayList<String[]>> patternLists;
+	private static JLabel diagram = new JLabel();
+	private static JScrollPane imageScrollPane;
+	private static JScrollPane scrollPane;
+	private static ImageIcon icon;
 
 	public static void main(String[] args) {
 
 		JFrame configWindow = new JFrame();
 		configWindowField = configWindow;
+		configWindowField.setBounds(0, 0, 1920, 1080);
+		configWindowField.setPreferredSize(new Dimension(1920, 1080));
 		JPanel configLoadPanel = new JPanel();
 		configLoadPanelField = configLoadPanel;
 		JButton loadButton = new JButton("Load Config File");
 		loadButtonField = loadButton;
+		
+		menu = new JMenuBar();
+		JMenu fileMenu = new JMenu("File");
+		JMenuItem restartItem = new JMenuItem("Restart");
+		restartItem.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				configWindow.dispose();
+				listOfSelectedClasses.clear();
+				patternLists.clear();
+				patterns.clear();
+				MainRunner.main(args);
+			}
+			
+		});
+		JMenu helpMenu = new JMenu("Help");
+		JMenuItem helpItem = new JMenuItem("Instructions");
+		helpItem.addActionListener(new ActionListener(){
 
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					if (Desktop.isDesktopSupported()) {
+						File pdf = new File("docs/projectAPI.pdf");
+						Desktop.getDesktop().open(pdf);
+					} else {
+						System.err.println("Error: Cannot open pdf file");
+					}
+				} catch (Exception x) {
+					x.printStackTrace();
+				}
+			}});
+		JMenuItem aboutItem = new JMenuItem("About");
+		aboutItem.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					if (Desktop.isDesktopSupported()) {
+						File pdf = new File("docs/About.pdf");
+						Desktop.getDesktop().open(pdf);
+					} else {
+						System.err.println("Error: Cannot open pdf file");
+					}
+				} catch (Exception x) {
+					x.printStackTrace();
+				}
+			}});
+
+		fileMenu.add(restartItem);
+		helpMenu.add(helpItem);
+		helpMenu.add(aboutItem);
+		menu.add(fileMenu);
+		menu.add(helpMenu);
+
+		configWindow.setJMenuBar(menu);
+		
 		loadButton.addActionListener(new ActionListener() {
 
 			@Override
@@ -81,13 +150,18 @@ public class MainRunner {
 	}
 
 	private static void displayResults() throws Exception {
-		configLoadPanelField.removeAll();
-		configLoadPanelField.setLayout(new BoxLayout(configLoadPanelField, BoxLayout.X_AXIS));
+		configWindowField.remove(configLoadPanelField);
+		configWindowField.revalidate();
+		configWindowField.repaint();
 		loadCheckBoxes();
 	}
 
 	private static void loadCheckBoxes() {
+		configWindowField.getContentPane().setLayout(new BoxLayout(configWindowField.getContentPane(), BoxLayout.X_AXIS));
+		
 		JPanel checkboxes = new JPanel();
+		checkboxes.setBounds(0, 0, configWindowField.getWidth()/4, configWindowField.getHeight());
+		checkboxes.setPreferredSize(new Dimension(configWindowField.getWidth()/4, configWindowField.getHeight()));
 		checkboxes.setLayout(new BoxLayout(checkboxes, BoxLayout.Y_AXIS));
 		for (int i = 0; i < patterns.size(); i++) {
 			JLabel pattern = new JLabel(patterns.get(i));
@@ -119,10 +193,10 @@ public class MainRunner {
 								}
 							}
 						}
-//						for (String[] arr : listOfSelectedClasses) {
-//							System.out.print(Arrays.toString(arr) + "\t");
-//						}
-//						System.out.println("");
+						// for (String[] arr : listOfSelectedClasses) {
+						// System.out.print(Arrays.toString(arr) + "\t");
+						// }
+						// System.out.println("");
 						try {
 							MainRunner.updateImage();
 						} catch (Exception e) {
@@ -133,33 +207,44 @@ public class MainRunner {
 				checkboxes.add(box);
 			}
 		}
-		configLoadPanelField.add(checkboxes);
-		configLoadPanelField.add(new JSeparator(SwingConstants.VERTICAL));
-		imageDisplayPane = new JPanel();
-		configLoadPanelField.add(imageDisplayPane);
+		JScrollPane checkboxScroll = new JScrollPane(checkboxes);
+		configWindowField.getContentPane().add(checkboxScroll);
+//		configWindowField.add(new JSeparator(SwingConstants.VERTICAL));
+
+		diagram.setIcon(null);
+		scrollPane = new JScrollPane(diagram);
+		configWindowField.getContentPane().add(scrollPane);
+
+		configWindowField.revalidate();
+		configWindowField.repaint();
+
 	}
 
 	private static void displayImage() {
+		
 		String name = outputDirectory + "output.png";
 		name = name.replace('\\', '/');
-		ImageIcon icon;
 
 		icon = new ImageIcon(name);
-		JLabel diagram = new JLabel();
+		diagram.setText("");
 		diagram.setIcon(icon);
-		imageDisplayPane.removeAll();
-		imageDisplayPane.revalidate();
-		imageDisplayPane.add(diagram);
-		imageDisplayPane.revalidate();
-		configWindowField.pack();
-		configLoadPanelField.setVisible(true);
-		imageDisplayPane.setVisible(true);
+		((ImageIcon) diagram.getIcon()).getImage().flush();
+		
+		imageScrollPane.revalidate();
+		imageScrollPane.repaint();
+
+		configWindowField.revalidate();
+		configWindowField.repaint();
 	}
 
 	protected static void updateImage() throws Exception {
-		imageDisplayPane.removeAll();
-		imageDisplayPane.revalidate();
-		imageDisplayPane.add(new JLabel("Now loading diagram"));
+		if (listOfSelectedClasses.size() < 1) {
+			diagram.setIcon(null);
+			diagram.setText("");
+			return;
+		}
+		diagram.setIcon(null);
+		diagram.setText("Now loading diagram");
 		ArrayList<String> arguments = new ArrayList<String>();
 		HashMap<String, ArrayList<String[]>> patternLists = UMLMaker.getPatternLists();
 		for (String key : patternLists.keySet()) {
@@ -281,10 +366,8 @@ public class MainRunner {
 					}
 				}
 			} else {
-				// System.out.println(line);
-				file.close();
-				br.close();
-				throw new UnsupportedOperationException();
+				String[] fieldSet = line.split("-");
+				UMLMaker.setFieldIndicator(fieldSet[0], fieldSet[1], fieldSet[2]);
 			}
 		}
 		file.close();
