@@ -151,7 +151,7 @@ public class MainRunner {
 		// "problem.Observer", "problem.Subject", "problem.TextLoader",
 		// "problem.WebsiteLoader",
 		// "problem.WordLoader" };
-		DesignParser.parse((String[]) arguments.toArray(new String[arguments.size()]), inputFilePath, "uml");
+		DesignParser.parse((String[]) arguments.toArray(new String[arguments.size()]), inputFilePath, "uml", patterns);
 
 		Runtime runTimeEnvironment = Runtime.getRuntime();
 		Process showingProcess = runTimeEnvironment

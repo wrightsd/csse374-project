@@ -8,13 +8,17 @@ import java.util.HashMap;
 public class DesignParser {
 
 	private static HashMap<String, DiagramMaker> diagramMap;
+	private static ArrayList<String> patternKeys;
 	private static DiagramMaker maker;
 
-	public static void parse(String[] args, String fileName, String diagramKey) throws IOException {
+	public static void parse(String[] args, String fileName, String diagramKey, ArrayList<String> inputPatterns) throws IOException {
 		setUpHashMap();
 		maker = new NoSuchDiagramMaker();
 		if(diagramMap.containsKey(diagramKey)){
 			maker = diagramMap.get(diagramKey);
+		}
+		if(inputPatterns != null){
+			patternKeys = inputPatterns;
 		}
 		StringBuilder completeBuilder = maker.generateDiagramText(args);
 		FileOutputStream writer = new FileOutputStream(fileName);
@@ -42,6 +46,10 @@ public class DesignParser {
 	
 	public static ArrayList<String> getArguments() {
 		return maker.getArguments();
+	}
+	
+	public static ArrayList<String> getPatterns() {
+		return patternKeys;
 	}
 
 }

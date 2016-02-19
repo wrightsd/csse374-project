@@ -1,6 +1,8 @@
 package problem.asm;
 
 import java.io.IOException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -18,6 +20,7 @@ public class UMLMaker implements DiagramMaker {
 	private ArrayList<String> associatesList;
 	private HashMap<String, String> borderColorMap = new HashMap<String, String>();
 	private HashMap<String, String> fillColorMap = new HashMap<String, String>();
+	private HashMap<String, Class<? extends ClassVisitor>> patternMap = new HashMap<String, Class<? extends ClassVisitor>>();
 	private static HashMap<String, HashMap<String, StringBuilder>> classInfo = new HashMap<String, HashMap<String, StringBuilder>>();
 
 	private static ArrayList<String> nonIncludedClasses = new ArrayList<String>();
@@ -38,6 +41,9 @@ public class UMLMaker implements DiagramMaker {
 		myArgs = args;
 		this.setupBorderColorMap();
 		this.setupFillColorMap();
+		this.setupPatternMap();
+
+		ArrayList<String> selectedPatterns = DesignParser.getPatterns();
 
 		StringBuilder completeBuilder = new StringBuilder();
 		completeBuilder.append("digraph text{\n");
@@ -60,9 +66,7 @@ public class UMLMaker implements DiagramMaker {
 			// make class declaration visitor to get superclass and interfaces
 			ClassVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, arrowBuilder);
 
-			ClassVisitor singletonVisitor = new SingletonClassVisitor(Opcodes.ASM5, declVisitor);
-
-			ClassVisitor interfaceVisitor = new InterfaceAbstractCheckVisitor(Opcodes.ASM5, singletonVisitor,
+			ClassVisitor interfaceVisitor = new InterfaceAbstractCheckVisitor(Opcodes.ASM5, declVisitor,
 					interfaceBuilder);
 			// DECORATE declaration visitor with field visitor
 			ClassVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, interfaceVisitor, fieldBuilder);
@@ -74,14 +78,23 @@ public class UMLMaker implements DiagramMaker {
 			ClassVisitor associationVisitor = new ClassAssociationVisitor(Opcodes.ASM5, methodVisitor, usesList,
 					associatesList);
 
-			ClassVisitor decoratorVisitor = new DecoratorClassVisitor(Opcodes.ASM5, associationVisitor);
+			ClassVisitor recentVisitor = methodVisitor;
+			for (String s : selectedPatterns) {
+				if (this.patternMap.containsKey(s)) {
+					try {
+						Constructor c = patternMap.get(s).getConstructor(int.class, ClassVisitor.class);
+						ClassVisitor cv = (ClassVisitor) c.newInstance(Opcodes.ASM5, recentVisitor);
+						recentVisitor = cv;
 
-			ClassVisitor adapterVisitor = new AdapterManagementVisitor(Opcodes.ASM5, decoratorVisitor);
+					} catch (Exception e) {}
+				} else {
+					throw new UnsupportedOperationException("Pattern Not Included");
+				}
+			}
 
-			ClassVisitor compositeComponentVisitor = new CompositeVisitor(Opcodes.ASM5, adapterVisitor,
+			ClassVisitor compositeComponentVisitor = new CompositeVisitor(Opcodes.ASM5, recentVisitor,
 					compositeComponents);
-			// Tell the Reader to use our (heavily decorated) ClassVisitor to
-			// visit the class
+
 			reader.accept(compositeComponentVisitor, ClassReader.EXPAND_FRAMES);
 
 			HashMap<String, StringBuilder> builderList = new HashMap<String, StringBuilder>();
@@ -224,11 +237,7 @@ public class UMLMaker implements DiagramMaker {
 			}
 		}
 
-		for (
-
-		String className : args)
-
-		{
+		for (String className : args) {
 
 			StringBuilder methodBuilder = classInfo.get(className).get("method");
 			StringBuilder fieldBuilder = classInfo.get(className).get("field");
@@ -351,6 +360,12 @@ public class UMLMaker implements DiagramMaker {
 	@Override
 	public String getCurrentClass() {
 		return currentClass;
+	}
+
+	private void setupPatternMap() {
+		this.patternMap.put("singleton", SingletonClassVisitor.class);
+		this.patternMap.put("adapter", AdapterManagementVisitor.class);
+		this.patternMap.put("decorator", DecoratorClassVisitor.class);
 	}
 
 	private void setupBorderColorMap() {

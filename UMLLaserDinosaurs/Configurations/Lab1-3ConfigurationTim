@@ -2,4 +2,4 @@ input-folder:C:\Users\anderst4\Documents\Courses\CSSE374\csse374-project\UMLLase
 input-classes:
 output-directory:C:\Users\anderst4\Documents\Courses\CSSE374\csse374-project\UMLLaserDinosaurs\output\Lab1-3\
 dot-path:C:/Program Files (x86)/Graphviz2.38/bin/dot
-patterns:adapter,decorator,singleton
+patterns:decorator,singleton
