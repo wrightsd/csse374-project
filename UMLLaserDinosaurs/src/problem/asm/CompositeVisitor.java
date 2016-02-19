@@ -25,7 +25,7 @@ public class CompositeVisitor extends ClassVisitor {
 			classNames.add(argTypes[i].getClassName());
 		}
 		if(classNames.contains(DesignParser.getCurrentClass()) && (access & Opcodes.ACC_PUBLIC) > 0){
-			UMLMaker.addPattern(DesignParser.getCurrentClass(), "composite component");
+			UMLMaker.addPattern(DesignParser.getCurrentClass(), "composite component", "composite", DesignParser.getCurrentClass());
 			ArrayList<String> newList = new ArrayList<String>();
 			newList.add(DesignParser.getCurrentClass());
 			this.compositeComponents.add(newList);

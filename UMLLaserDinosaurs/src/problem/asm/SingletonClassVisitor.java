@@ -8,6 +8,8 @@ import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 
+import sun.security.krb5.internal.crypto.Des;
+
 public class SingletonClassVisitor extends ClassVisitor {
 
 	private boolean fieldSingletonCriteria;
@@ -27,7 +29,7 @@ public class SingletonClassVisitor extends ClassVisitor {
 			if (Type.getType(desc).getClassName().equals(DesignParser.getCurrentClass())) {
 				this.fieldSingletonCriteria = true;
 				if (this.methodSingletonCriteria) {
-					UMLMaker.addPattern(DesignParser.getCurrentClass(),"Singleton");
+					UMLMaker.addPattern(DesignParser.getCurrentClass(),"Singleton", "Singleton", DesignParser.getCurrentClass());
 				}
 			}
 		}
@@ -44,7 +46,7 @@ public class SingletonClassVisitor extends ClassVisitor {
 				if (Type.getReturnType(desc).getClassName().equals(DesignParser.getCurrentClass())) {
 					this.methodSingletonCriteria = true;
 					if (this.fieldSingletonCriteria) {
-						UMLMaker.addPattern(DesignParser.getCurrentClass(),"Singleton");
+						UMLMaker.addPattern(DesignParser.getCurrentClass(),"Singleton", "Singleton", DesignParser.getCurrentClass());
 					}
 				}
 			}

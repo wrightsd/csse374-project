@@ -115,9 +115,12 @@ public class AdapterClassVisitor extends ClassVisitor {
 		}
 		if (interfaceTarget) {
 			if (!interfaces[0].replaceAll("/", ".").equals(this.param.replaceAll("/", "."))) {
-				UMLMaker.addPattern(interfaces[0].replaceAll("/", "."), "target");
-				UMLMaker.addPattern(DesignParser.getCurrentClass(), "adapter");
-				UMLMaker.addPattern(this.param.replaceAll("/", "."), "adaptee");
+				UMLMaker.addPattern(interfaces[0].replaceAll("/", "."), "target", "adapter",
+						DesignParser.getCurrentClass());
+				UMLMaker.addPattern(DesignParser.getCurrentClass(), "adapter", "adapter",
+						DesignParser.getCurrentClass());
+				UMLMaker.addPattern(this.param.replaceAll("/", "."), "adaptee", "adapter",
+						DesignParser.getCurrentClass());
 				UMLMaker.addLabelledArrow(DesignParser.getCurrentClass(), interfaces[0].replaceAll("/", "."),
 						"\\<\\<adapts\\>\\>");
 			}
@@ -135,9 +138,10 @@ public class AdapterClassVisitor extends ClassVisitor {
 			}
 			if (superTarget) {
 				if (!this.nameOfSuper.equals(this.param.replaceAll("/", "."))) {
-					UMLMaker.addPattern(this.nameOfSuper, "target");
-					UMLMaker.addPattern(DesignParser.getCurrentClass(), "adapter");
-					UMLMaker.addPattern(this.param, "adaptee");
+					UMLMaker.addPattern(this.nameOfSuper, "target", "adapter", DesignParser.getCurrentClass());
+					UMLMaker.addPattern(DesignParser.getCurrentClass(), "adapter", "adapter",
+							DesignParser.getCurrentClass());
+					UMLMaker.addPattern(this.param, "adaptee", "adapter", DesignParser.getCurrentClass());
 					UMLMaker.addLabelledArrow(DesignParser.getCurrentClass(), this.nameOfSuper, "\\<\\<adapts\\>\\>");
 				}
 			}

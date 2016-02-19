@@ -66,8 +66,8 @@ public class DecoratorClassVisitor extends ClassVisitor {
 						Type[] args = Type.getArgumentTypes(desc);
 						for (int k = 0; k < args.length; k++) {
 							if (interfaceName.equals(args[k].getClassName())) {
-								UMLMaker.addPattern(DesignParser.getCurrentClass(), "decorator");
-								UMLMaker.addPattern(args[k].getClassName(), "component");
+								UMLMaker.addPattern(DesignParser.getCurrentClass(), "decorator", "decorator", DesignParser.getCurrentClass());
+								UMLMaker.addPattern(args[k].getClassName(), "component", "decorator", DesignParser.getCurrentClass());
 								UMLMaker.addLabelledArrow(DesignParser.getCurrentClass(), args[k].getClassName(),
 										"\\<\\<decorates\\>\\>");
 							}
@@ -83,8 +83,8 @@ public class DecoratorClassVisitor extends ClassVisitor {
 					Type[] args = Type.getArgumentTypes(desc);
 					for (int i = 0; i < args.length; i++) {
 						if (this.superName.equals(args[i].getClassName())) {
-							UMLMaker.addPattern(DesignParser.getCurrentClass(), "decorator");
-							UMLMaker.addPattern(args[i].getClassName(), "component");
+							UMLMaker.addPattern(DesignParser.getCurrentClass(), "decorator", "decorator", DesignParser.getCurrentClass());
+							UMLMaker.addPattern(args[i].getClassName(), "component", "decorator", DesignParser.getCurrentClass());
 							UMLMaker.addLabelledArrow(DesignParser.getCurrentClass(), args[i].getClassName(),
 									"\\<\\<decorates\\>\\>");
 						} else if (!this.superName.equals("java.lang.Object")) {

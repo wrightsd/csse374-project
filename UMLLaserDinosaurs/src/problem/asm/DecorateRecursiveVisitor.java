@@ -39,13 +39,13 @@ public class DecorateRecursiveVisitor extends ClassVisitor {
 					}
 					if (!blacklistedCheck) {
 						for (int j = 0; j < this.subclasses.size(); j++) {
-							UMLMaker.addPattern(this.subclasses.get(j), "decorator");
+							UMLMaker.addPattern(this.subclasses.get(j), "decorator","decorator",DesignParser.getCurrentClass());
 						}
 						for (int j = 2; j < this.subclasses.size(); j++) {
 							UMLMaker.addExtendsArrow(this.subclasses.get(j - 1), this.subclasses.get(j));
 						}
 						UMLMaker.addImplementsArrow(name.replaceAll("/", "."), superName);
-						UMLMaker.addPattern(superName, "component");
+						UMLMaker.addPattern(superName, "component", "decorator", DesignParser.getCurrentClass());
 						UMLMaker.addLabelledArrow(name.replaceAll("/", "."), superName, "\\<\\<decorates\\>\\>");
 					}
 
@@ -66,13 +66,13 @@ public class DecorateRecursiveVisitor extends ClassVisitor {
 				if (superValid) {
 					if (superName.equals(this.classNameToCheck)) {
 						for (int i = 0; i < this.subclasses.size(); i++) {
-							UMLMaker.addPattern(this.subclasses.get(i), "decorator");
+							UMLMaker.addPattern(this.subclasses.get(i), "decorator", "decorator", DesignParser.getCurrentClass());
 						}
 						for (int i = 2; i < this.subclasses.size(); i++) {
 							UMLMaker.addExtendsArrow(this.subclasses.get(i - 1), this.subclasses.get(i));
 						}
 						UMLMaker.addExtendsArrow(name.replaceAll("/", "."), superName);
-						UMLMaker.addPattern(superName, "component");
+						UMLMaker.addPattern(superName, "component", "decorator", DesignParser.getCurrentClass());
 						UMLMaker.addLabelledArrow(name.replaceAll("/", "."), superName, "\\<\\<decorates\\>\\>");
 					} else if (!superName.equals("java.lang.Object")) {
 						this.checkDecorates(superName);
