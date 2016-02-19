@@ -270,7 +270,7 @@ public class UMLMaker implements DiagramMaker {
 		patternMap.put(pattern, cvClass);
 	}
 
-	private void setupBorderColorMap() {
+	public void setupBorderColorMap() {
 		this.addColorKey(this.borderColorMap, "singleton", "blue");
 	}
 
@@ -285,7 +285,7 @@ public class UMLMaker implements DiagramMaker {
 		this.addColorKey(this.fillColorMap, "leaf", "yellow1");
 	}
 
-	private void addColorKey(HashMap<String, String> colorMap, String patternString, String colorString) {
+	public void addColorKey(HashMap<String, String> colorMap, String patternString, String colorString) {
 		colorMap.put(patternString, colorString);
 	}
 
