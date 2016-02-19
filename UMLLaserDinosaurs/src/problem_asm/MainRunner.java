@@ -34,6 +34,8 @@ public class MainRunner {
 	static JFrame configWindowField;
 	static JPanel configLoadPanelField;
 	static JButton loadButtonField;
+	
+	static ArrayList<String[]> listOfSelectedClasses = new ArrayList<String[]>();
 
 	public static void main(String[] args) {
 
@@ -91,6 +93,32 @@ public class MainRunner {
 			}
 			for (String s : patternsDetected) {
 				JCheckBox box = new JCheckBox(s);
+				box.setName(s+","+patterns.get(i));
+				 box.addActionListener(new ActionListener() {
+
+					@Override
+					public void actionPerformed(ActionEvent arg0) {
+						String[] list = box.getName().split(",");
+						if(box.isSelected()){
+							listOfSelectedClasses.add(list);
+						}
+						else{
+							for(int i=0;i<listOfSelectedClasses.size();i++){
+								String[] current = listOfSelectedClasses.get(i);
+								if (current[0].equals(list[0]) && current[1].equals(list[1])) {
+									listOfSelectedClasses.remove(i);
+									break;
+								}
+							}
+						}
+						for (String[] arr : listOfSelectedClasses) {
+							System.out.print(Arrays.toString(arr) + "\t");
+						}
+						System.out.println("");
+						MainRunner.updateImage();
+					}
+						 
+				 });
 				checkboxes.add(box);
 			}
 		}
@@ -106,6 +134,11 @@ public class MainRunner {
 		configLoadPanelField.add(diagram);
 		configWindowField.pack();
 		configLoadPanelField.setVisible(true);
+	}
+
+	protected static void updateImage() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	private static JProgressBar displayLoadingBar(JButton loadButton, String fileName) {
