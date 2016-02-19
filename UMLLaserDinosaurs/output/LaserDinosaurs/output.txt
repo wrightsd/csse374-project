@@ -1,9 +1,73 @@
 digraph text{
 rankdir=BT;
-n0 [
+n8 [
 shape="record",
-color =blue,
-label = "{problem_asm.ArbitraryNodeNames\n\<\<singleton\>\>|-names : problem_asm.ArbitraryNodeNames\l-nameMap : java.util.HashMap\l-nodeNumber : int\l|-problem_asm.ArbitraryNodeNames() : void\l+getInstance() : problem_asm.ArbitraryNodeNames\l+addNewNode(java.lang.String) : void\l+getNodeName(java.lang.String) : java.lang.String\l}"
+style = filled,
+fillcolor =chartreuse,
+label = "{problem_asm.ClassAssociationVisitor\n\<\<decorator\>\>|-associatesList : java.util.ArrayList\l-usesList : java.util.ArrayList\l|+problem_asm.ClassAssociationVisitor(int, org.objectweb.asm.ClassVisitor, java.util.ArrayList, java.util.ArrayList) : void\l+problem_asm.ClassAssociationVisitor(int, java.util.ArrayList, java.util.ArrayList) : void\l+visitField(int, java.lang.String, java.lang.String, java.lang.String, java.lang.Object) : org.objectweb.asm.FieldVisitor\l+visitMethod(int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[]) : org.objectweb.asm.MethodVisitor\l-compileAggregation(java.lang.String) : void\l}"
 ];
-n0->n0[arrowhead="ovee", style="dashed"];
+n8->n24[arrowhead="onormal", style="solid"];
+n10 [
+shape="record",
+style = filled,
+fillcolor =chartreuse,
+label = "{problem_asm.ClassDeclarationVisitor\n\<\<decorator\>\>|-builder : java.lang.StringBuilder\l|+problem_asm.ClassDeclarationVisitor(int) : void\l+problem_asm.ClassDeclarationVisitor(int, java.lang.StringBuilder) : void\l+problem_asm.ClassDeclarationVisitor(int, org.objectweb.asm.ClassVisitor, java.lang.StringBuilder) : void\l+visit(int, int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[]) : void\l}"
+];
+n10->n24[arrowhead="onormal", style="solid"];
+n24 [
+shape="record",
+style = filled,
+fillcolor =chartreuse,
+style = filled,
+fillcolor =chartreuse,
+style = filled,
+fillcolor =chartreuse,
+style = filled,
+fillcolor =chartreuse,
+style = filled,
+fillcolor =chartreuse,
+style = filled,
+fillcolor =chartreuse,
+style = filled,
+fillcolor =chartreuse,
+style = filled,
+fillcolor =chartreuse,
+style = filled,
+fillcolor =chartreuse,
+style = filled,
+fillcolor =chartreuse,
+label = "{\<\<abstract\>\>\norg.objectweb.asm.ClassVisitor\n\<\<component\>\>|-api : int\l#cv : org.objectweb.asm.ClassVisitor\l|+org.objectweb.asm.ClassVisitor(int) : void\l+org.objectweb.asm.ClassVisitor(int, org.objectweb.asm.ClassVisitor) : void\l+visit(int, int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[]) : void\l+visitSource(java.lang.String, java.lang.String) : void\l+visitOuterClass(java.lang.String, java.lang.String, java.lang.String) : void\l+visitAnnotation(java.lang.String, boolean) : org.objectweb.asm.AnnotationVisitor\l+visitTypeAnnotation(int, org.objectweb.asm.TypePath, java.lang.String, boolean) : org.objectweb.asm.AnnotationVisitor\l+visitAttribute(org.objectweb.asm.Attribute) : void\l+visitInnerClass(java.lang.String, java.lang.String, java.lang.String, int) : void\l+visitField(int, java.lang.String, java.lang.String, java.lang.String, java.lang.Object) : org.objectweb.asm.FieldVisitor\l+visitMethod(int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[]) : org.objectweb.asm.MethodVisitor\l+visitEnd() : void\l}"
+];
+n24 [
+shape="record",
+style = filled,
+fillcolor =chartreuse,
+style = filled,
+fillcolor =chartreuse,
+style = filled,
+fillcolor =chartreuse,
+style = filled,
+fillcolor =chartreuse,
+style = filled,
+fillcolor =chartreuse,
+style = filled,
+fillcolor =chartreuse,
+style = filled,
+fillcolor =chartreuse,
+style = filled,
+fillcolor =chartreuse,
+style = filled,
+fillcolor =chartreuse,
+style = filled,
+fillcolor =chartreuse,
+label = "{\<\<abstract\>\>\norg.objectweb.asm.ClassVisitor\n\<\<component\>\>|-api : int\l#cv : org.objectweb.asm.ClassVisitor\l|+org.objectweb.asm.ClassVisitor(int) : void\l+org.objectweb.asm.ClassVisitor(int, org.objectweb.asm.ClassVisitor) : void\l+visit(int, int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[]) : void\l+visitSource(java.lang.String, java.lang.String) : void\l+visitOuterClass(java.lang.String, java.lang.String, java.lang.String) : void\l+visitAnnotation(java.lang.String, boolean) : org.objectweb.asm.AnnotationVisitor\l+visitTypeAnnotation(int, org.objectweb.asm.TypePath, java.lang.String, boolean) : org.objectweb.asm.AnnotationVisitor\l+visitAttribute(org.objectweb.asm.Attribute) : void\l+visitInnerClass(java.lang.String, java.lang.String, java.lang.String, int) : void\l+visitField(int, java.lang.String, java.lang.String, java.lang.String, java.lang.Object) : org.objectweb.asm.FieldVisitor\l+visitMethod(int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[]) : org.objectweb.asm.MethodVisitor\l+visitEnd() : void\l}"
+];
+n8->n24[arrowhead="normal", style="solid", label="\<\<decorates\>\>"];
+n8->n24[arrowhead="normal", style="solid", label="\<\<decorates\>\>"];
+n10->n24[arrowhead="normal", style="solid", label="\<\<decorates\>\>"];
+n10->n24[arrowhead="normal", style="solid", label="\<\<decorates\>\>"];
+n8->n24[arrowhead="normal", style="solid", label="\<\<decorates\>\>"];
+n10->n24[arrowhead="normal", style="solid", label="\<\<decorates\>\>"];
+n8->n24[arrowhead="ovee", style="dashed"];
+n10->n24[arrowhead="ovee", style="dashed"];
 }

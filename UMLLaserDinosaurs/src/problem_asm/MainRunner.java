@@ -1,6 +1,7 @@
 package problem_asm;
 
 import java.awt.Component;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -21,6 +22,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
+import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 
@@ -34,6 +36,7 @@ public class MainRunner {
 
 	static JFrame configWindowField;
 	static JPanel configLoadPanelField;
+	static JPanel imageDisplayPane;
 	static JButton loadButtonField;
 
 	static ArrayList<String[]> listOfSelectedClasses = new ArrayList<String[]>();
@@ -116,10 +119,10 @@ public class MainRunner {
 								}
 							}
 						}
-						for (String[] arr : listOfSelectedClasses) {
-							System.out.print(Arrays.toString(arr) + "\t");
-						}
-						System.out.println("");
+//						for (String[] arr : listOfSelectedClasses) {
+//							System.out.print(Arrays.toString(arr) + "\t");
+//						}
+//						System.out.println("");
 						try {
 							MainRunner.updateImage();
 						} catch (Exception e) {
@@ -132,13 +135,11 @@ public class MainRunner {
 		}
 		configLoadPanelField.add(checkboxes);
 		configLoadPanelField.add(new JSeparator(SwingConstants.VERTICAL));
-		System.out.println(configLoadPanelField.getComponentCount());
+		imageDisplayPane = new JPanel();
+		configLoadPanelField.add(imageDisplayPane);
 	}
 
 	private static void displayImage() {
-		while (configLoadPanelField.getComponentCount() > 2) {
-			configLoadPanelField.remove(2);
-		}
 		String name = outputDirectory + "output.png";
 		name = name.replace('\\', '/');
 		ImageIcon icon;
@@ -146,16 +147,19 @@ public class MainRunner {
 		icon = new ImageIcon(name);
 		JLabel diagram = new JLabel();
 		diagram.setIcon(icon);
-		configLoadPanelField.add(diagram);
+		imageDisplayPane.removeAll();
+		imageDisplayPane.revalidate();
+		imageDisplayPane.add(diagram);
+		imageDisplayPane.revalidate();
 		configWindowField.pack();
 		configLoadPanelField.setVisible(true);
+		imageDisplayPane.setVisible(true);
 	}
 
 	protected static void updateImage() throws Exception {
-		if (configLoadPanelField.getComponentCount() > 2) {
-			configLoadPanelField.remove(2);
-		}
-		configLoadPanelField.add(new JLabel("Now loading diagram"));
+		imageDisplayPane.removeAll();
+		imageDisplayPane.revalidate();
+		imageDisplayPane.add(new JLabel("Now loading diagram"));
 		ArrayList<String> arguments = new ArrayList<String>();
 		HashMap<String, ArrayList<String[]>> patternLists = UMLMaker.getPatternLists();
 		for (String key : patternLists.keySet()) {

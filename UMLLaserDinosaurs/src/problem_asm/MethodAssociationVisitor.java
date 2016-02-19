@@ -116,6 +116,7 @@ public class MethodAssociationVisitor extends MethodVisitor {
 							if (!parameterValid) {
 								return;
 							}
+
 							ArbitraryNodeNames.getInstance().addNewNode(parameterStringName);
 							String parameterNodeName = ArbitraryNodeNames.getInstance()
 									.getNodeName(parameterStringName);
@@ -206,33 +207,34 @@ public class MethodAssociationVisitor extends MethodVisitor {
 		String ownerNodeName = ArbitraryNodeNames.getInstance().getNodeName(owner);
 
 		String typeCheck = type.replaceAll("/", ".");
-		boolean typeValid = false;
-		for (String s : DesignParser.getArguments()) {
-			if (s.equals(typeCheck)) {
-				typeValid = true;
-				break;
+		if (UMLMaker.isArgument(typeCheck)) {
+			boolean typeValid = false;
+			for (String s : DesignParser.getArguments()) {
+				if (s.equals(typeCheck)) {
+					typeValid = true;
+					break;
+				}
 			}
-		}
-		if (!typeValid) {
-			return;
-		}
-
-		ArbitraryNodeNames.getInstance().addNewNode(typeCheck);
-		String typeNodeName = ArbitraryNodeNames.getInstance().getNodeName(typeCheck);
-
-		boolean contains = false;
-		for (String s : usesList) {
-			if (s.equals(ownerNodeName + "->" + typeNodeName)) {
-				contains = true;
-				break;
+			if (!typeValid) {
+				return;
 			}
-		}
-		if (!contains) {
-			usesList.add(ownerNodeName + "->" + typeNodeName);
+			ArbitraryNodeNames.getInstance().addNewNode(typeCheck);
+			String typeNodeName = ArbitraryNodeNames.getInstance().getNodeName(typeCheck);
 
-			// if (!DesignParser.getArguments().contains(typeCheck)) {
-			// UMLMaker.addNonIncludedClass(typeCheck);
-			// }
+			boolean contains = false;
+			for (String s : usesList) {
+				if (s.equals(ownerNodeName + "->" + typeNodeName)) {
+					contains = true;
+					break;
+				}
+			}
+			if (!contains) {
+				usesList.add(ownerNodeName + "->" + typeNodeName);
+
+				// if (!DesignParser.getArguments().contains(typeCheck)) {
+				// UMLMaker.addNonIncludedClass(typeCheck);
+				// }
+			}
 		}
 	}
 

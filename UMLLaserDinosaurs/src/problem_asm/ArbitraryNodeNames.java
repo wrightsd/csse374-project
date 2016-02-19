@@ -1,5 +1,6 @@
 package problem_asm;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 public class ArbitraryNodeNames {
@@ -28,6 +29,9 @@ public class ArbitraryNodeNames {
 	}
 
 	public String getNodeName(String className) {
+		if(!UMLMaker.isArgument(className)){
+			return null;
+		}
 		return this.nameMap.get(className);
 	}
 
