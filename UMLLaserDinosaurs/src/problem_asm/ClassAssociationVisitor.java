@@ -1,20 +1,16 @@
 package problem_asm;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.FieldVisitor;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
-import org.objectweb.asm.Type;
 import org.objectweb.asm.signature.SignatureReader;
 import org.objectweb.asm.signature.SignatureVisitor;
 
 public class ClassAssociationVisitor extends ClassVisitor {
 
-	private StringBuilder builder;
 	private ArrayList<String> associatesList;
 	private ArrayList<String> usesList;
 
@@ -64,7 +60,7 @@ public class ClassAssociationVisitor extends ClassVisitor {
 			for (String str : types) {
 				str = str.replaceAll("/", ".");
 
-				if (!UMLMaker.isBlacklisted(str)) {
+				if (UMLMaker.isArgument(str)) {
 					ArbitraryNodeNames.getInstance().addNewNode(str);
 					String strNodeName = ArbitraryNodeNames.getInstance().getNodeName(str);
 
@@ -83,9 +79,9 @@ public class ClassAssociationVisitor extends ClassVisitor {
 					if (add) {
 						associatesList.add(toAdd);
 
-						if (!DesignParser.getArguments().contains(str)) {
-							UMLMaker.addNonIncludedClass(str);
-						}
+//						if (!DesignParser.getArguments().contains(str)) {
+//							UMLMaker.addNonIncludedClass(str);
+//						}
 					}
 				}
 			}

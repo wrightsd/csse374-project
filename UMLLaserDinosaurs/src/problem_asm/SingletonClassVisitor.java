@@ -29,7 +29,7 @@ public class SingletonClassVisitor extends ClassVisitor {
 			if (Type.getType(desc).getClassName().equals(DesignParser.getCurrentClass())) {
 				this.fieldSingletonCriteria = true;
 				if (this.methodSingletonCriteria) {
-					UMLMaker.addPattern(DesignParser.getCurrentClass(),"Singleton", "Singleton", DesignParser.getCurrentClass());
+					UMLMaker.addPattern(DesignParser.getCurrentClass(),"singleton", "singleton", DesignParser.getCurrentClass());
 				}
 			}
 		}
@@ -46,7 +46,7 @@ public class SingletonClassVisitor extends ClassVisitor {
 				if (Type.getReturnType(desc).getClassName().equals(DesignParser.getCurrentClass())) {
 					this.methodSingletonCriteria = true;
 					if (this.fieldSingletonCriteria) {
-						UMLMaker.addPattern(DesignParser.getCurrentClass(),"Singleton", "Singleton", DesignParser.getCurrentClass());
+						UMLMaker.addPattern(DesignParser.getCurrentClass(),"singleton", "singleton", DesignParser.getCurrentClass());
 					}
 				}
 			}

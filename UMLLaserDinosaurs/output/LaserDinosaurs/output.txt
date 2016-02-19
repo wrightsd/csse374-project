@@ -1,57 +1,9 @@
 digraph text{
 rankdir=BT;
-n1[
-style = filled,
-fillcolor =chartreuse,
-style = filled,
-fillcolor =chartreuse,
-style = filled,
-fillcolor =chartreuse,
-style = filled,
-fillcolor =chartreuse,
-style = filled,
-fillcolor =chartreuse,
-style = filled,
-fillcolor =chartreuse,
-style = filled,
-fillcolor =chartreuse,
-style = filled,
-fillcolor =chartreuse,
-style = filled,
-fillcolor =chartreuse,
-style = filled,
-fillcolor =chartreuse,
-label = "org.objectweb.asm.ClassVisitor\n\<\<component\>\>\n\<\<component\>\>\n\<\<component\>\>\n\<\<component\>\>\n\<\<component\>\>\n\<\<component\>\>\n\<\<component\>\>\n\<\<component\>\>\n\<\<component\>\>\n\<\<component\>\>"];
-n2[
-label = "org.objectweb.asm.ClassReader"];
-n4[
-label = "org.objectweb.asm.Type"];
-n9[
-style = filled,
-fillcolor =chartreuse,
-style = filled,
-fillcolor =chartreuse,
-style = filled,
-fillcolor =chartreuse,
-label = "org.objectweb.asm.MethodVisitor\n\<\<component\>\>\n\<\<component\>\>\n\<\<component\>\>"];
-n14[
-label = "org.objectweb.asm.signature.SignatureReader"];
-n0->n1[arrowhead="normal", style="solid", label="\<\<decorates\>\>"];
-n8->n1[arrowhead="normal", style="solid", label="\<\<decorates\>\>"];
-n5->n9[arrowhead="normal", style="solid", label="\<\<decorates\>\>"];
-n12->n1[arrowhead="normal", style="solid", label="\<\<decorates\>\>"];
-n15->n1[arrowhead="normal", style="solid", label="\<\<decorates\>\>"];
-n16->n1[arrowhead="normal", style="solid", label="\<\<decorates\>\>"];
-n16->n1[arrowhead="normal", style="solid", label="\<\<decorates\>\>"];
-n17->n1[arrowhead="normal", style="solid", label="\<\<decorates\>\>"];
-n17->n1[arrowhead="normal", style="solid", label="\<\<decorates\>\>"];
-n20->n1[arrowhead="normal", style="solid", label="\<\<decorates\>\>"];
-n22->n1[arrowhead="normal", style="solid", label="\<\<decorates\>\>"];
-n26->n1[arrowhead="normal", style="solid", label="\<\<decorates\>\>"];
-n13->n9[arrowhead="normal", style="solid", label="\<\<decorates\>\>"];
-n19->n9[arrowhead="normal", style="solid", label="\<\<decorates\>\>"];
-n28->n1[arrowhead="normal", style="solid", label="\<\<decorates\>\>"];
-n0->n1[arrowhead="normal", style="solid", label="\<\<decorates\>\>"];
-n12->n1[arrowhead="normal", style="solid", label="\<\<decorates\>\>"];
-n5->n9[arrowhead="normal", style="solid", label="\<\<decorates\>\>"];
+n0 [
+shape="record",
+color =blue,
+label = "{problem_asm.ArbitraryNodeNames\n\<\<singleton\>\>|-names : problem_asm.ArbitraryNodeNames\l-nameMap : java.util.HashMap\l-nodeNumber : int\l|-problem_asm.ArbitraryNodeNames() : void\l+getInstance() : problem_asm.ArbitraryNodeNames\l+addNewNode(java.lang.String) : void\l+getNodeName(java.lang.String) : java.lang.String\l}"
+];
+n0->n0[arrowhead="ovee", style="dashed"];
 }

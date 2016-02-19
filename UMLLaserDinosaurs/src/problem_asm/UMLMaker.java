@@ -17,7 +17,7 @@ public class UMLMaker implements DiagramMaker {
 
 	private String currentClass;
 	private ArrayList<String> classSet;
-	private String[] myArgs;
+	private static String[] myArgs;
 	private ArrayList<String> usesList;
 	private ArrayList<String> associatesList;
 	private HashMap<String, String> borderColorMap = new HashMap<String, String>();
@@ -174,37 +174,37 @@ public class UMLMaker implements DiagramMaker {
 			completeBuilder.append(arrowBuilder.toString());
 		}
 
-		for (String s : nonIncludedClasses) {
-			StringBuilder nonIncludedBuilder = new StringBuilder();
-			nonIncludedBuilder.append(ArbitraryNodeNames.getInstance().getNodeName(s) + "[\n");
-			ArrayList<String[]> patternBuilder = patternLists.get(s);
-			if (patternBuilder != null) {
-				for (String[] array : patternBuilder) {
-					String pattern = array[0];
-
-					if (borderColorMap.containsKey(pattern)) {
-						nonIncludedBuilder.append("color =" + borderColorMap.get(pattern));
-						nonIncludedBuilder.append(",\n");
-					}
-					if (fillColorMap.containsKey(pattern)) {
-						nonIncludedBuilder.append("style = filled,\n");
-						nonIncludedBuilder.append("fillcolor =" + fillColorMap.get(pattern));
-						nonIncludedBuilder.append(",\n");
-					}
-				}
-			}
-
-			nonIncludedBuilder.append("label = \"" + s);
-			ArrayList<String[]> patterns = patternLists.get(s);
-			if (patterns != null) {
-				for (String[] pattern : patternLists.get(s)) {
-					nonIncludedBuilder.append("\\n\\<\\<" + pattern[0] + "\\>\\>");
-				}
-			}
-			nonIncludedBuilder.append("\"];");
-
-			completeBuilder.append(nonIncludedBuilder.toString() + "\n");
-		}
+//		for (String s : nonIncludedClasses) {
+//			StringBuilder nonIncludedBuilder = new StringBuilder();
+//			nonIncludedBuilder.append(ArbitraryNodeNames.getInstance().getNodeName(s) + "[\n");
+//			ArrayList<String[]> patternBuilder = patternLists.get(s);
+//			if (patternBuilder != null) {
+//				for (String[] array : patternBuilder) {
+//					String pattern = array[0];
+//
+//					if (borderColorMap.containsKey(pattern)) {
+//						nonIncludedBuilder.append("color =" + borderColorMap.get(pattern));
+//						nonIncludedBuilder.append(",\n");
+//					}
+//					if (fillColorMap.containsKey(pattern)) {
+//						nonIncludedBuilder.append("style = filled,\n");
+//						nonIncludedBuilder.append("fillcolor =" + fillColorMap.get(pattern));
+//						nonIncludedBuilder.append(",\n");
+//					}
+//				}
+//			}
+//
+//			nonIncludedBuilder.append("label = \"" + s);
+//			ArrayList<String[]> patterns = patternLists.get(s);
+//			if (patterns != null) {
+//				for (String[] pattern : patternLists.get(s)) {
+//					nonIncludedBuilder.append("\\n\\<\\<" + pattern[0] + "\\>\\>");
+//				}
+//			}
+//			nonIncludedBuilder.append("\"];");
+//
+//			completeBuilder.append(nonIncludedBuilder.toString() + "\n");
+//		}
 
 		drawUsesArrows(usesList, associatesList, associationBuilder);
 		completeBuilder.append(labelledArrows.toString());
@@ -261,7 +261,7 @@ public class UMLMaker implements DiagramMaker {
 	}
 
 	private void setupBorderColorMap() {
-		this.addColorKey(this.borderColorMap, "Singleton", "blue");
+		this.addColorKey(this.borderColorMap, "singleton", "blue");
 	}
 
 	private void setupFillColorMap() {
@@ -279,11 +279,11 @@ public class UMLMaker implements DiagramMaker {
 		colorMap.put(patternString, colorString);
 	}
 
-	public static void addNonIncludedClass(String className) {
-		if (!nonIncludedClasses.contains(className)) {
-			nonIncludedClasses.add(className);
-		}
-	}
+//	public static void addNonIncludedClass(String className) {
+//		if (!nonIncludedClasses.contains(className)) {
+//			nonIncludedClasses.add(className);
+//		}
+//	}
 
 	public static void addPattern(String classString, String patternString, String patternType,
 			String specificPatternName) {
@@ -319,54 +319,60 @@ public class UMLMaker implements DiagramMaker {
 
 	public static void addLabelledArrow(String pointee, String pointer, String labelText) {
 		String pointeeName = ArbitraryNodeNames.getInstance().getNodeName(pointee);
-		if (pointeeName == null) {
-			ArbitraryNodeNames.getInstance().addNewNode(pointee);
-			addNonIncludedClass(pointee);
-			pointeeName = ArbitraryNodeNames.getInstance().getNodeName(pointee);
-		}
+//		if (pointeeName == null) {
+//			ArbitraryNodeNames.getInstance().addNewNode(pointee);
+//			addNonIncludedClass(pointee);
+//			pointeeName = ArbitraryNodeNames.getInstance().getNodeName(pointee);
+//		}
 		String pointerName = ArbitraryNodeNames.getInstance().getNodeName(pointer);
-		if (pointerName == null) {
-			ArbitraryNodeNames.getInstance().addNewNode(pointer);
-			addNonIncludedClass(pointer);
-			pointerName = ArbitraryNodeNames.getInstance().getNodeName(pointer);
-		}
+//		if (pointerName == null) {
+//			ArbitraryNodeNames.getInstance().addNewNode(pointer);
+//			addNonIncludedClass(pointer);
+//			pointerName = ArbitraryNodeNames.getInstance().getNodeName(pointer);
+//		}
+		if(pointeeName != null && pointerName != null){
 		labelledArrows.append(pointeeName + "->" + pointerName);
 		labelledArrows.append("[arrowhead=\"normal\", style=\"solid\"");
 		labelledArrows.append(", label=\"" + labelText + "\"];\n");
+		}
 	}
 
 	public static void addExtendsArrow(String pointee, String pointer) {
 		String pointeeName = ArbitraryNodeNames.getInstance().getNodeName(pointee);
-		if (pointeeName == null) {
-			ArbitraryNodeNames.getInstance().addNewNode(pointee);
-			addNonIncludedClass(pointee);
-			pointeeName = ArbitraryNodeNames.getInstance().getNodeName(pointee);
-		}
+//		if (pointeeName == null) {
+//			ArbitraryNodeNames.getInstance().addNewNode(pointee);
+//			addNonIncludedClass(pointee);
+//			pointeeName = ArbitraryNodeNames.getInstance().getNodeName(pointee);
+//		}
 		String pointerName = ArbitraryNodeNames.getInstance().getNodeName(pointer);
-		if (pointerName == null) {
-			ArbitraryNodeNames.getInstance().addNewNode(pointer);
-			addNonIncludedClass(pointer);
-			pointerName = ArbitraryNodeNames.getInstance().getNodeName(pointer);
-		}
+//		if (pointerName == null) {
+//			ArbitraryNodeNames.getInstance().addNewNode(pointer);
+//			addNonIncludedClass(pointer);
+//			pointerName = ArbitraryNodeNames.getInstance().getNodeName(pointer);
+//		}
+		if(pointeeName != null && pointerName != null){
 		labelledArrows.append(pointeeName + "->" + pointerName);
 		labelledArrows.append("[arrowhead=\"onormal\", style=\"solid\"]\n");
+		}
 	}
 
 	public static void addImplementsArrow(String pointee, String pointer) {
 		String pointeeName = ArbitraryNodeNames.getInstance().getNodeName(pointee);
-		if (pointeeName == null) {
-			ArbitraryNodeNames.getInstance().addNewNode(pointee);
-			addNonIncludedClass(pointee);
-			pointeeName = ArbitraryNodeNames.getInstance().getNodeName(pointee);
-		}
+//		if (pointeeName == null) {
+//			ArbitraryNodeNames.getInstance().addNewNode(pointee);
+//			addNonIncludedClass(pointee);
+//			pointeeName = ArbitraryNodeNames.getInstance().getNodeName(pointee);
+//		}
 		String pointerName = ArbitraryNodeNames.getInstance().getNodeName(pointer);
-		if (pointerName == null) {
-			ArbitraryNodeNames.getInstance().addNewNode(pointer);
-			addNonIncludedClass(pointer);
-			pointerName = ArbitraryNodeNames.getInstance().getNodeName(pointer);
-		}
+//		if (pointerName == null) {
+//			ArbitraryNodeNames.getInstance().addNewNode(pointer);
+//			addNonIncludedClass(pointer);
+//			pointerName = ArbitraryNodeNames.getInstance().getNodeName(pointer);
+//		}
+		if(pointeeName != null && pointerName != null){
 		labelledArrows.append(pointeeName + "->" + pointerName);
 		labelledArrows.append("[arrowhead=\"onormal\", style=\"dashed\"]\n");
+		}
 	}
 
 	public static void addClassExtensionMapping(String classString, String extensionClass) {
@@ -419,6 +425,15 @@ public class UMLMaker implements DiagramMaker {
 	
 	public static HashMap<String, ArrayList<ArrayList<String>>> getClassMethodMap(){
 		return classMethodMap;
+	}
+
+	public static boolean isArgument(String superName) {
+		for(String s: myArgs){
+			if(s.equals(superName)){
+				return true;
+			}
+		}
+		return false;
 	}
 
 }
