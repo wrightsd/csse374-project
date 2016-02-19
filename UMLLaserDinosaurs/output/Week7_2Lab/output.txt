@@ -8,160 +8,67 @@ n2 [
 shape="record",
 label = "{graphics.AnimationPanel|-serialVersionUID : long\l-sprites : java.util.List\l-animating : boolean\l-sleepTime : long\l|+graphics.AnimationPanel(long) : void\l+add(sprites.ISprite) : void\l+getSize() : java.awt.Dimension\l+animate() : void\l+reset() : void\l#paintComponent(java.awt.Graphics) : void\l-access$0(graphics.AnimationPanel) : boolean\l-access$1(graphics.AnimationPanel) : java.util.List\l-access$2(graphics.AnimationPanel) : long\l}"
 ];
-n2->n3[arrowhead="onormal", style="solid"];
 n1 [
 shape="record",
 label = "{graphics.MainWindow|-frame : javax.swing.JFrame\l-actionPanel : javax.swing.JPanel\l-animationPanel : graphics.AnimationPanel\l-moveButton : javax.swing.JButton\l-createButton : javax.swing.JButton\l-resetButton : javax.swing.JButton\l|+graphics.MainWindow(java.lang.String, long) : void\l-createWidgets(java.lang.String, long) : void\l-assignActions() : void\l+show() : void\l-access$0(graphics.MainWindow) : graphics.AnimationPanel\l-access$1(graphics.MainWindow) : javax.swing.JButton\l-access$2(graphics.MainWindow) : javax.swing.JButton\l}"
 ];
-n18 [
+n4 [
 shape="record",
 style = filled,
 fillcolor =yellow1,
 label = "{\<\<abstract\>\>\nsprites.AbstractSprite\n\<\<leaf\>\>|#dx : double\l#dy : double\l#shape : java.awt.Shape\l|+sprites.AbstractSprite(double, double, double, double) : void\l#computeNewBoundsAfterMoving(java.awt.Dimension) : java.awt.geom.Rectangle2D\l+getShape() : java.util.ArrayList\l+move(java.awt.Dimension) : void\l}"
 ];
-n18->n4[arrowhead="onormal", style="dashed"];
-n23 [
+n4->n3[arrowhead="onormal", style="dashed"];
+n5 [
 shape="record",
 label = "{sprites.CircleSprite|+sprites.CircleSprite(double, double, double, double) : void\l+move(java.awt.Dimension) : void\l}"
 ];
-n23->n18[arrowhead="onormal", style="solid"];
-n25 [
+n5->n4[arrowhead="onormal", style="solid"];
+n6 [
 shape="record",
 style = filled,
 fillcolor =yellow1,
 label = "{\<\<abstract\>\>\nsprites.CompositeSprite\n\<\<composite\>\>|#spriteList : java.util.ArrayList\l|+move(java.awt.Dimension) : void\l+getShape() : java.util.ArrayList\l+getChild(int) : sprites.ISprite\l+addSprite(sprites.ISprite) : void\l+removeSprite(sprites.ISprite) : void\l}"
 ];
-n25->n4[arrowhead="onormal", style="dashed"];
-n26 [
+n6->n3[arrowhead="onormal", style="dashed"];
+n7 [
 shape="record",
 label = "{sprites.GuardedSnowmanSprite|+sprites.GuardedSnowmanSprite(double, double, double, double) : void\l}"
 ];
-n26->n25[arrowhead="onormal", style="solid"];
-n4 [
+n7->n6[arrowhead="onormal", style="solid"];
+n3 [
 shape="record",
 style = filled,
 fillcolor =yellow1,
 label = "{\<\<abstract\>\>\n\<\<interface\>\>\nsprites.ISprite\n\<\<composite component\>\>|+move(java.awt.Dimension) : void\l+getShape() : java.util.ArrayList\l+getChild(int) : sprites.ISprite\l+addSprite(sprites.ISprite) : void\l+removeSprite(sprites.ISprite) : void\l}"
 ];
-n28 [
+n9 [
 shape="record",
 label = "{sprites.RectangleSprite|+sprites.RectangleSprite(double, double, double, double) : void\l+move(java.awt.Dimension) : void\l}"
 ];
-n28->n18[arrowhead="onormal", style="solid"];
-n27 [
+n9->n4[arrowhead="onormal", style="solid"];
+n8 [
 shape="record",
 label = "{sprites.SnowmanSprite|+sprites.SnowmanSprite(double, double, double, double) : void\l}"
 ];
-n27->n25[arrowhead="onormal", style="solid"];
-n30 [
+n8->n6[arrowhead="onormal", style="solid"];
+n10 [
 shape="record",
 label = "{sprites.SpriteFactory|-DX : double\l-DY : double\l-WIDTH : double\l-HEIGHT : double\l-random : java.util.Random\l-sprites : java.util.List\l|+computeRandomLocation(java.awt.Dimension) : java.awt.geom.Point2D\l+createRandomSprite(java.awt.Dimension) : sprites.ISprite\l}"
 ];
-n3[
-label = "javax.swing.JPanel"];
-n5[
-label = "java.util.ArrayList"];
-n6[
-label = "java.util.Collections"];
-n7[
-label = "java.util.List"];
-n8[
-label = "graphics.AnimationPanel$1"];
-n9[
-label = "java.lang.Thread"];
-n10[
-label = "java.util.Iterator"];
-n11[
-label = "java.awt.Graphics2D"];
-n12[
-label = "javax.swing.JFrame"];
-n13[
-label = "javax.swing.BorderFactory"];
-n14[
-label = "javax.swing.JButton"];
-n15[
-label = "graphics.MainWindow$1"];
-n16[
-label = "graphics.MainWindow$2"];
-n17[
-label = "graphics.MainWindow$3"];
-n19[
-label = "java.awt.Shape"];
-n20[
-label = "java.awt.geom.Rectangle2D"];
-n21[
-label = "java.awt.Dimension"];
-n22[
-label = "java.awt.geom.Rectangle2D$Double"];
-n24[
-label = "java.awt.geom.Ellipse2D$Double"];
-n29[
-label = "java.lang.UnsupportedOperationException"];
-n31[
-label = "java.lang.Class"];
-n32[
-label = "java.util.Random"];
-n33[
-label = "java.awt.geom.Point2D$Double"];
-n34[
-label = "java.awt.geom.Point2D"];
-n35[
-label = "java.lang.Double"];
-n36[
-label = "java.lang.reflect.Constructor"];
 n0->n1[arrowhead="ovee", style="dashed"];
 n2->n3[arrowhead="ovee", style="dashed"];
-n2->n5[arrowhead="ovee", style="dashed"];
-n2->n6[arrowhead="ovee", style="dashed"];
-n2->n7[arrowhead="ovee", style="dashed"];
-n2->n8[arrowhead="ovee", style="dashed"];
-n2->n9[arrowhead="ovee", style="dashed"];
-n2->n10[arrowhead="ovee", style="dashed"];
-n2->n4[arrowhead="ovee", style="dashed"];
-n2->n11[arrowhead="ovee", style="dashed"];
-n1->n12[arrowhead="ovee", style="dashed"];
-n1->n3[arrowhead="ovee", style="dashed"];
-n1->n13[arrowhead="ovee", style="dashed"];
-n1->n14[arrowhead="ovee", style="dashed"];
 n1->n2[arrowhead="ovee", style="dashed"];
-n1->n15[arrowhead="ovee", style="dashed"];
-n1->n16[arrowhead="ovee", style="dashed"];
-n1->n17[arrowhead="ovee", style="dashed"];
-n18->n19[arrowhead="ovee", style="dashed"];
-n18->n20[arrowhead="ovee", style="dashed"];
-n18->n21[arrowhead="ovee", style="dashed"];
-n18->n22[arrowhead="ovee", style="dashed"];
-n18->n5[arrowhead="ovee", style="dashed"];
-n23->n18[arrowhead="ovee", style="dashed"];
-n23->n24[arrowhead="ovee", style="dashed"];
-n23->n20[arrowhead="ovee", style="dashed"];
-n25->n5[arrowhead="ovee", style="dashed"];
-n25->n4[arrowhead="ovee", style="dashed"];
-n26->n25[arrowhead="ovee", style="dashed"];
-n26->n5[arrowhead="ovee", style="dashed"];
-n26->n27[arrowhead="ovee", style="dashed"];
-n26->n28[arrowhead="ovee", style="dashed"];
-n4->n29[arrowhead="ovee", style="dashed"];
-n28->n18[arrowhead="ovee", style="dashed"];
-n28->n22[arrowhead="ovee", style="dashed"];
-n28->n20[arrowhead="ovee", style="dashed"];
-n27->n25[arrowhead="ovee", style="dashed"];
-n27->n5[arrowhead="ovee", style="dashed"];
-n27->n23[arrowhead="ovee", style="dashed"];
-n30->n32[arrowhead="ovee", style="dashed"];
-n30->n5[arrowhead="ovee", style="dashed"];
-n30->n7[arrowhead="ovee", style="dashed"];
-n30->n33[arrowhead="ovee", style="dashed"];
-n30->n31[arrowhead="ovee", style="dashed"];
-n30->n34[arrowhead="ovee", style="dashed"];
-n30->n35[arrowhead="ovee", style="dashed"];
-n30->n36[arrowhead="ovee", style="dashed"];
-n30->n4[arrowhead="ovee", style="dashed"];
-n2->n4[arrowhead="ovee", style="solid"];
-n18->n19[arrowhead="ovee", style="solid"];
-n25->n4[arrowhead="ovee", style="solid"];
-n25->n19[arrowhead="ovee", style="solid"];
-n4->n19[arrowhead="ovee", style="solid"];
-n30->n31[arrowhead="ovee", style="solid"];
-n30->n4[arrowhead="ovee", style="solid"];
+n5->n4[arrowhead="ovee", style="dashed"];
+n6->n3[arrowhead="ovee", style="dashed"];
+n7->n6[arrowhead="ovee", style="dashed"];
+n7->n8[arrowhead="ovee", style="dashed"];
+n7->n9[arrowhead="ovee", style="dashed"];
+n9->n4[arrowhead="ovee", style="dashed"];
+n8->n6[arrowhead="ovee", style="dashed"];
+n8->n5[arrowhead="ovee", style="dashed"];
+n10->n3[arrowhead="ovee", style="dashed"];
+n2->n3[arrowhead="ovee", style="solid"];
+n6->n3[arrowhead="ovee", style="solid"];
+n10->n3[arrowhead="ovee", style="solid"];
 }

@@ -9,6 +9,7 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 
 import javax.swing.BoxLayout;
@@ -34,8 +35,9 @@ public class MainRunner {
 	static JFrame configWindowField;
 	static JPanel configLoadPanelField;
 	static JButton loadButtonField;
-	
+
 	static ArrayList<String[]> listOfSelectedClasses = new ArrayList<String[]>();
+	static HashMap<String, ArrayList<String[]>> patternLists;
 
 	public static void main(String[] args) {
 
@@ -78,14 +80,18 @@ public class MainRunner {
 	private static void displayResults() throws Exception {
 		configLoadPanelField.removeAll();
 		configLoadPanelField.setLayout(new BoxLayout(configLoadPanelField, BoxLayout.X_AXIS));
+		loadCheckBoxes();
+	}
+
+	private static void loadCheckBoxes() {
 		JPanel checkboxes = new JPanel();
 		checkboxes.setLayout(new BoxLayout(checkboxes, BoxLayout.Y_AXIS));
 		for (int i = 0; i < patterns.size(); i++) {
 			JLabel pattern = new JLabel(patterns.get(i));
 			checkboxes.add(pattern);
 			HashSet<String> patternsDetected = new HashSet<String>();
-			for (String className : UMLMaker.getPatternLists().keySet()) {
-				for (String[] classPatterns : UMLMaker.getPatternLists().get(className)) {
+			for (String className : patternLists.keySet()) {
+				for (String[] classPatterns : patternLists.get(className)) {
 					if (classPatterns[1].compareToIgnoreCase(patterns.get(i)) == 0) {
 						patternsDetected.add(classPatterns[2]);
 					}
@@ -93,17 +99,16 @@ public class MainRunner {
 			}
 			for (String s : patternsDetected) {
 				JCheckBox box = new JCheckBox(s);
-				box.setName(s+","+patterns.get(i));
-				 box.addActionListener(new ActionListener() {
+				box.setName(s + "," + patterns.get(i));
+				box.addActionListener(new ActionListener() {
 
 					@Override
 					public void actionPerformed(ActionEvent arg0) {
 						String[] list = box.getName().split(",");
-						if(box.isSelected()){
+						if (box.isSelected()) {
 							listOfSelectedClasses.add(list);
-						}
-						else{
-							for(int i=0;i<listOfSelectedClasses.size();i++){
+						} else {
+							for (int i = 0; i < listOfSelectedClasses.size(); i++) {
 								String[] current = listOfSelectedClasses.get(i);
 								if (current[0].equals(list[0]) && current[1].equals(list[1])) {
 									listOfSelectedClasses.remove(i);
@@ -115,15 +120,25 @@ public class MainRunner {
 							System.out.print(Arrays.toString(arr) + "\t");
 						}
 						System.out.println("");
-						MainRunner.updateImage();
+						try {
+							MainRunner.updateImage();
+						} catch (Exception e) {
+						}
 					}
-						 
-				 });
+
+				});
 				checkboxes.add(box);
 			}
 		}
 		configLoadPanelField.add(checkboxes);
 		configLoadPanelField.add(new JSeparator(SwingConstants.VERTICAL));
+		System.out.println(configLoadPanelField.getComponentCount());
+	}
+
+	private static void displayImage() {
+		while (configLoadPanelField.getComponentCount() > 2) {
+			configLoadPanelField.remove(2);
+		}
 		String name = outputDirectory + "output.png";
 		name = name.replace('\\', '/');
 		ImageIcon icon;
@@ -136,9 +151,34 @@ public class MainRunner {
 		configLoadPanelField.setVisible(true);
 	}
 
-	protected static void updateImage() {
-		// TODO Auto-generated method stub
-		
+	protected static void updateImage() throws Exception {
+		if (configLoadPanelField.getComponentCount() > 2) {
+			configLoadPanelField.remove(2);
+		}
+		configLoadPanelField.add(new JLabel("Now loading diagram"));
+		ArrayList<String> arguments = new ArrayList<String>();
+		HashMap<String, ArrayList<String[]>> patternLists = UMLMaker.getPatternLists();
+		for (String key : patternLists.keySet()) {
+			for (String[] arr : patternLists.get(key)) {
+				for (String[] selected : listOfSelectedClasses) {
+					if (arr[1].equals(selected[1]) && arr[2].equals(selected[0])) {
+						arguments.add(key);
+					}
+				}
+			}
+		}
+
+		String inputFilePath = outputDirectory + "output.txt";
+		String outputFilePath = outputDirectory + "output.png";
+
+		DesignParser.parse((String[]) arguments.toArray(new String[arguments.size()]), inputFilePath, "uml", patterns);
+
+		Runtime runTimeEnvironment = Runtime.getRuntime();
+		Process showingProcess = runTimeEnvironment
+				.exec("cmd /c \"" + dotPath + "\" -Tpng " + inputFilePath + " > " + outputFilePath);
+
+		showingProcess.waitFor();
+		displayImage();
 	}
 
 	private static JProgressBar displayLoadingBar(JButton loadButton, String fileName) {
@@ -196,11 +236,8 @@ public class MainRunner {
 		// "problem.WordLoader" };
 		DesignParser.parse((String[]) arguments.toArray(new String[arguments.size()]), inputFilePath, "uml", patterns);
 
-		Runtime runTimeEnvironment = Runtime.getRuntime();
-		Process showingProcess = runTimeEnvironment
-				.exec("cmd /c \"" + dotPath + "\" -Tpng " + inputFilePath + " > " + outputFilePath);
+		patternLists = UMLMaker.getPatternLists();
 
-		showingProcess.waitFor();
 		displayResults();
 	}
 

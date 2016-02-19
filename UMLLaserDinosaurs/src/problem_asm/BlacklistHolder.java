@@ -9,11 +9,9 @@ public class BlacklistHolder {
 	public static ArrayList<String> getInstance(){
 		if(blacklist == null){
 			blacklist = new ArrayList<String>();
-			blacklist.add("java.lang.Object");
-			blacklist.add("java.lang.String");
-//		    blacklist.add("java.");
-//		    blacklist.add("javax");
-//		    blacklist.add("$");
+		    blacklist.add("java.");
+		    blacklist.add("javax");
+		    blacklist.add("$");
 		}
 		return blacklist;
 	}
