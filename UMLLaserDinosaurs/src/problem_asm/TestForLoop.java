@@ -1,4 +1,4 @@
-package problem.asm;
+package problem_asm;
 
 import java.util.ArrayList;
 import java.util.List;

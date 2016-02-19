@@ -1,4 +1,4 @@
-package problem.asm;
+package problem_asm;
 
 import java.awt.Component;
 import java.awt.event.ActionEvent;
@@ -8,6 +8,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -79,9 +81,17 @@ public class MainRunner {
 		for (int i = 0; i < patterns.size(); i++) {
 			JLabel pattern = new JLabel(patterns.get(i));
 			checkboxes.add(pattern);
-			for (int j = 0; j < 3; j++) {
-				JCheckBox jcb = new JCheckBox("Sample " + patterns.get(i));
-				checkboxes.add(jcb);
+			HashSet<String> patternsDetected = new HashSet<String>();
+			for (String className : UMLMaker.getPatternLists().keySet()) {
+				for (String[] classPatterns : UMLMaker.getPatternLists().get(className)) {
+					if (classPatterns[1].compareToIgnoreCase(patterns.get(i)) == 0) {
+						patternsDetected.add(classPatterns[2]);
+					}
+				}
+			}
+			for (String s : patternsDetected) {
+				JCheckBox box = new JCheckBox(s);
+				checkboxes.add(box);
 			}
 		}
 		configLoadPanelField.add(checkboxes);

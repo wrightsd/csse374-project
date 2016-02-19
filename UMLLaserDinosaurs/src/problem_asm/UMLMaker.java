@@ -1,4 +1,4 @@
-package problem.asm;
+package problem_asm;
 
 import java.io.IOException;
 import java.lang.reflect.Array;
@@ -79,7 +79,7 @@ public class UMLMaker implements DiagramMaker {
 			ClassVisitor associationVisitor = new ClassAssociationVisitor(Opcodes.ASM5, methodVisitor, usesList,
 					associatesList);
 
-			ClassVisitor recentVisitor = methodVisitor;
+			ClassVisitor recentVisitor = associationVisitor;
 			for (String s : selectedPatterns) {
 				if (this.patternMap.containsKey(s)) {
 					try {
@@ -335,12 +335,12 @@ public class UMLMaker implements DiagramMaker {
 		completeBuilder.append(associationBuilder.toString());
 		completeBuilder.append("}");
 
-		for (String s : patternLists.keySet()) {
-			System.out.println("Key: " + s);
-			for (String[] arr : patternLists.get(s)) {
-				System.out.println("\t + " + Arrays.toString(arr));
-			}
-		}
+//		for (String s : patternLists.keySet()) {
+//			System.out.println("Key: " + s);
+//			for (String[] arr : patternLists.get(s)) {
+//				System.out.println("\t + " + Arrays.toString(arr));
+//			}
+//		}
 		
 		return completeBuilder;
 	}
@@ -526,6 +526,10 @@ public class UMLMaker implements DiagramMaker {
 			newestList.add(listToAdd);
 			classMethodMap.put(classKey, newestList);
 		}
+	}
+	
+	public static HashMap<String, ArrayList<String[]>> getPatternLists() {
+		return patternLists;
 	}
 
 }

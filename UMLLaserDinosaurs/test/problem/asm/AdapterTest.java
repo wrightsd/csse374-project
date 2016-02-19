@@ -8,6 +8,8 @@ import java.io.IOException;
 import org.junit.Before;
 import org.junit.Test;
 
+import problem_asm.DesignParser;
+
 public class AdapterTest {
 	public String contents;
 	public String contents2;

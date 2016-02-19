@@ -10,6 +10,8 @@ import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Opcodes;
 
+import problem_asm.ClassFieldVisitor;
+
 public class ClassFieldVisitorTest {
 
 	StringBuilder testBuilder;

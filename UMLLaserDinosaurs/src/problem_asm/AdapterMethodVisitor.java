@@ -1,4 +1,4 @@
-package problem.asm;
+package problem_asm;
 
 import org.objectweb.asm.MethodVisitor;
 
