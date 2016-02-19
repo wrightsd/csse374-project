@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -30,13 +31,13 @@ public class UMLMaker implements DiagramMaker {
 
 	private static StringBuilder labelledArrows = new StringBuilder();
 
-	private static ArrayList<ArrayList<String>> compositeComponents = new ArrayList<ArrayList<String>>();
-
 	private static HashMap<String, ArrayList<String>> classExtensions = new HashMap<String, ArrayList<String>>();
 	private static HashMap<String, ArrayList<String>> interfaceExtensions = new HashMap<String, ArrayList<String>>();
 
 	private static HashMap<String, ArrayList<ArrayList<String>>> classMethodMap = new HashMap<String, ArrayList<ArrayList<String>>>();
-
+	
+	private static HashMap<String, ClassVisitor> patternVisitors = new HashMap<String,ClassVisitor>();
+	
 	@Override
 	public StringBuilder generateDiagramText(String[] args) throws IOException {
 		myArgs = args;
@@ -86,7 +87,7 @@ public class UMLMaker implements DiagramMaker {
 						Constructor c = patternMap.get(s).getConstructor(int.class, ClassVisitor.class);
 						ClassVisitor cv = (ClassVisitor) c.newInstance(Opcodes.ASM5, recentVisitor);
 						recentVisitor = cv;
-
+						patternVisitors.put(s, cv);
 					} catch (Exception e) {
 					}
 				} else {
@@ -94,10 +95,7 @@ public class UMLMaker implements DiagramMaker {
 				}
 			}
 
-			ClassVisitor compositeComponentVisitor = new CompositeVisitor(Opcodes.ASM5, recentVisitor,
-					compositeComponents);
-
-			reader.accept(compositeComponentVisitor, ClassReader.EXPAND_FRAMES);
+			reader.accept(recentVisitor, ClassReader.EXPAND_FRAMES);
 
 			HashMap<String, StringBuilder> builderList = new HashMap<String, StringBuilder>();
 			builderList.put("field", fieldBuilder);
@@ -107,143 +105,21 @@ public class UMLMaker implements DiagramMaker {
 
 			classInfo.put(className, builderList);
 		}
-
-		boolean loop = true;
-		while (loop) {
-			ArrayList<Integer> tempCompositesSize = new ArrayList<Integer>();
-			for (int i = 0; i < compositeComponents.size(); i++) {
-				tempCompositesSize.add(compositeComponents.get(i).size());
-			}
-			loop = false;
-			for (String s : classExtensions.keySet()) {
-				String mainComposite = "";
-				ArrayList<String> extendedClasses = classExtensions.get(s);
-				for (String e : extendedClasses) {
-					ArrayList<String[]> patternList = patternLists.get(e);
-					if (patternList != null) {
-						for (int j = 0; j < patternList.size(); j++) {
-							if (patternList.get(j)[0].equals("composite component")) {
-								ArrayList<ArrayList<String>> listOfLists = classMethodMap.get(s);
-								ArrayList<ArrayList<String>> parentList = classMethodMap.get(e);
-								boolean leaf = true;
-								for (int i = 0; i < listOfLists.size(); i++) {
-									String params = listOfLists.get(i).get(1);
-									if (params.contains(e)) {
-										for (ArrayList<String> list : parentList) {
-											if (list.get(0).equals(listOfLists.get(i).get(0))
-													&& list.get(1).equals(listOfLists.get(i).get(1))
-													&& list.get(2).equals(listOfLists.get(i).get(2))) {
-												UMLMaker.addPattern(s, "composite", "composite", s);
-												mainComposite = s;
-												leaf = false;
-											}
-										}
-									}
-								}
-								if (leaf) {
-									UMLMaker.addPattern(s, "leaf", "composite", mainComposite);
-								}
-								for (ArrayList<String> list : compositeComponents) {
-									if (list.contains(e)) {
-										if (!list.contains(s)) {
-											list.add(s);
-										}
-									}
-								}
-							} else if (patternList.contains("composite")) {
-								UMLMaker.addPattern(s, "composite", "composite", mainComposite);
-								for (ArrayList<String> list : compositeComponents) {
-									if (list.contains(e)) {
-										if (!list.contains(s)) {
-											list.add(s);
-										}
-									}
-								}
-							} else if (patternList.contains("leaf")) {
-								UMLMaker.addPattern(s, "leaf", "composite", mainComposite);
-								for (ArrayList<String> list : compositeComponents) {
-									if (list.contains(e)) {
-										if (!list.contains(s)) {
-											list.add(s);
-										}
-									}
-								}
-							}
-						}
+		
+		for (String s : selectedPatterns) {
+			if (this.patternMap.containsKey(s)) {
+				try {
+					
+					try{
+						Method m = this.patternMap.get(s).getMethod("finishPatternFinder", null);
+						m.invoke(patternVisitors.get(s), null);
 					}
+					catch(Exception e){}
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
-			}
-
-			for (int i = 0; i < tempCompositesSize.size(); i++) {
-				if (tempCompositesSize.get(i) != compositeComponents.get(i).size()) {
-					loop = true;
-					break;
-				}
-			}
-
-			for (String s : interfaceExtensions.keySet()) {
-				String mainComposite = "";
-				ArrayList<String> extendedClasses = interfaceExtensions.get(s);
-				for (String e : extendedClasses) {
-					// ArrayList<String[]> patternList = patternLists.get(e);
-					if (patternLists != null && patternLists.get(e) != null) {
-						for (int j = 0; j < patternLists.get(e).size(); j++) {
-							if (patternLists.get(e).get(j)[0].equals("composite component")) {
-								ArrayList<ArrayList<String>> listOfLists = classMethodMap.get(s);
-								ArrayList<ArrayList<String>> parentList = classMethodMap.get(e);
-								boolean leaf = true;
-								for (int i = 0; i < listOfLists.size(); i++) {
-									String params = listOfLists.get(i).get(1);
-									if (params.contains(e)) {
-										for (ArrayList<String> list : parentList) {
-											if (list.get(0).equals(listOfLists.get(i).get(0))
-													&& list.get(1).equals(listOfLists.get(i).get(1))
-													&& list.get(2).equals(listOfLists.get(i).get(2))) {
-												UMLMaker.addPattern(s, "composite", "composite", s);
-												mainComposite = s;
-												leaf = false;
-											}
-										}
-									}
-								}
-								if (leaf) {
-									UMLMaker.addPattern(s, "leaf", "composite", mainComposite);
-								}
-								for (ArrayList<String> list : compositeComponents) {
-									if (list.contains(e)) {
-										if (!list.contains(s)) {
-											list.add(s);
-										}
-									}
-								}
-							} else if (patternLists.get(e).get(j)[0].contains("composite")) {
-								UMLMaker.addPattern(s, "composite", "composite", mainComposite);
-								for (ArrayList<String> list : compositeComponents) {
-									if (list.contains(e)) {
-										if (!list.contains(s)) {
-											list.add(s);
-										}
-									}
-								}
-							} else if (patternLists.get(e).get(j)[0].contains("leaf")) {
-								UMLMaker.addPattern(s, "leaf", "composite", mainComposite);
-								for (ArrayList<String> list : compositeComponents) {
-									if (list.contains(e)) {
-										if (!list.contains(s)) {
-											list.add(s);
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-			for (int i = 0; i < tempCompositesSize.size(); i++) {
-				if (tempCompositesSize.get(i) != compositeComponents.get(i).size()) {
-					loop = true;
-					break;
-				}
+			} else {
+				throw new UnsupportedOperationException("Pattern Not Included");
 			}
 		}
 
@@ -381,6 +257,7 @@ public class UMLMaker implements DiagramMaker {
 		this.patternMap.put("singleton", SingletonClassVisitor.class);
 		this.patternMap.put("adapter", AdapterManagementVisitor.class);
 		this.patternMap.put("decorator", DecoratorClassVisitor.class);
+		this.patternMap.put("composite", CompositeVisitor.class);
 	}
 
 	private void setupBorderColorMap() {
@@ -530,6 +407,18 @@ public class UMLMaker implements DiagramMaker {
 	
 	public static HashMap<String, ArrayList<String[]>> getPatternLists() {
 		return patternLists;
+	}
+	
+	public static HashMap<String, ArrayList<String>> getInterfaceExtensions(){
+		return interfaceExtensions;
+	}
+	
+	public static HashMap<String, ArrayList<String>> getClassExtensions(){
+		return classExtensions;
+	}
+	
+	public static HashMap<String, ArrayList<ArrayList<String>>> getClassMethodMap(){
+		return classMethodMap;
 	}
 
 }

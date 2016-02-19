@@ -1,0 +1,5 @@
+input-folder:C:\Users\anderst4\Documents\Courses\CSSE374\csse374-project\UMLLaserDinosaurs\Week7_2Lab
+input-classes:
+output-directory:C:\Users\anderst4\Documents\Courses\CSSE374\csse374-project\UMLLaserDinosaurs\output\Week7_2Lab\
+dot-path:C:/Program Files (x86)/Graphviz2.38/bin/dot
+patterns:decorator,singleton,adapter,composite
